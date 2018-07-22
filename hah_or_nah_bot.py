@@ -16,6 +16,7 @@ class HahOrNahBot:
         start_handler = CommandHandler('start', self.start)
         self.dispatcher.add_handler(start_handler)
         joke_handler = CommandHandler('joke', self.joke)
+        self.dispatcher.add_handler(joke_handler)
 
         self.db_connection = psycopg2.connect(self.database_url, ssl_mode='require')
         self.cursor = self.db_connection.cursor()
