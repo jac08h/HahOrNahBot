@@ -2,7 +2,6 @@ from telegram.ext import Updater, CommandHandler
 import os
 from sys import exit
 import psycopg2
-from sqlalchemy import create_engine
 from random import choice
 
 
@@ -36,7 +35,6 @@ class HahOrNahBot:
 
         bot.send_message(chat_id=update.message.chat_id, text = random_joke_string)
 
-
     def start_webhook(self, url, port):
         self.updater.start_webhook(listen="0.0.0.0",
                                    port=port,
@@ -59,10 +57,7 @@ if __name__=='__main__':
         print('Missing database url. You did not provide the DATABASE_URL environment variable.')
         exit()
 
-    engine = create_engine(database_url)
-    print(engine)
     port = int(os.environ.get('PORT', 8443))
 
     bot = HahOrNahBot(token, database_url)
     bot.start_webhook("https://hah-or-nah-bot.herokuapp.com/", port)
-
