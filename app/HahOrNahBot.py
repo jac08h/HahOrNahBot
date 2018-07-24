@@ -1,6 +1,4 @@
 from telegram.ext import Updater, CommandHandler
-import os
-from sys import exit
 import psycopg2
 from random import choice
 
@@ -35,6 +33,7 @@ class HahOrNahBot:
         random_joke_string = random_joke[1]
 
         bot.send_message(chat_id=update.message.chat_id, text = random_joke_string)
+        return
 
     def start_webhook(self, url, port):
         self.updater.start_webhook(listen="0.0.0.0",
@@ -43,22 +42,3 @@ class HahOrNahBot:
         self.updater.bot.set_webhook(url + self.token)
         self.updater.idle()
         return
-
-
-if __name__=='__main__':
-    try:
-        token = os.environ['HAH_OR_NAH_TOKEN']
-    except KeyError:
-        print('Missing token. You did not provide the HAH_OR_NAH_TOKEN environment variable.')
-        exit()
-
-    try:
-        database_url = os.environ['DATABASE_URL']
-    except KeyError:
-        print('Missing database url. You did not provide the DATABASE_URL environment variable.')
-        exit()
-
-    port = int(os.environ.get('PORT', 8443))
-
-    bot = HahOrNahBot(token, database_url)
-    bot.start_webhook("https://hah-or-nah-bot.herokuapp.com/", port)
