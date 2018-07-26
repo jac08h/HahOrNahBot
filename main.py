@@ -1,7 +1,15 @@
 import os
+import logging
+
 from app.HahOrNahBot import HahOrNahBot
 
-if __name__=='__main__':
+if __name__ == '__main__':
+    logging.basicConfig(level=logging.INFO,
+                        format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+                        handlers=[logging.FileHandler('hah_or_nah_bot.log'),
+                                  logging.StreamHandler()
+                                  ]
+                        )
     try:
         token = os.environ['TELEGRAM_TOKEN']
     except KeyError:
@@ -17,4 +25,4 @@ if __name__=='__main__':
     port = int(os.environ.get('PORT', 8443))
 
     bot = HahOrNahBot(token, database_url)
-    bot.start_webhook("https://hah-or-nah-bot.herokuapp.com/", port)
+    bot.start_local()

@@ -1,6 +1,7 @@
 from sqlalchemy import Column, Integer, String, Table, ForeignKey
 from sqlalchemy.orm import relationship
 from sqlalchemy.ext.declarative import declarative_base
+import logging
 
 Base = declarative_base()
 
@@ -9,6 +10,12 @@ association_table = Table('association', Base.metadata,
                           Column('users_id', Integer, ForeignKey('users.id')),
                           Column('jokes_id', Integer, ForeignKey('jokes.id'))
                           )
+
+logger = logging.getLogger(__name__)
+
+
+class InvalidVoteException(Exception):
+    pass
 
 
 class User(Base):
@@ -29,11 +36,32 @@ class User(Base):
     def get_jokes_voted_for(self):
         return self.jokes_voted_for
 
-    def vote_for_joke(self, joke):
-        self.jokes_voted_for.append(joke)
+    def vote_for_joke(self, joke, positive):
+        """
+        Registers user's vote.
+
+        Adds joke to jokes_voted_for attribute of self and calls vote method of joke object.
+
+        Args:
+            joke: Joke instance
+            positive: bool which is True for positive vote, False for negative vote
+
+        Returns:
+            None
+
+        Raises:
+            InvalidVoteException: User has already voted.
+        """
+        if joke not in self.jokes_voted_for:
+            self.jokes_voted_for.append(joke)
+            joke.vote(self, positive=positive)
+        else:
+            error_string = 'Duplicated vote. Joke ID={joke_id} User ID={user_id}'.format(joke_id=joke.get_id(), user_id=self.get_id())
+            logger.error(error_string)
+            raise InvalidVoteException(error_string)
 
     def __repr__(self):
-        return '[{id}] User: {username}'.format(id=self.id, username=self.username)
+        return 'USER:\n id: {id}   username: {username}\njokes voted for: {jokes}'.format(id=self.id, username=self.username, jokes=[joke.id for joke in self.jokes_voted_for])
 
 
 class Joke(Base):
@@ -58,9 +86,41 @@ class Joke(Base):
     def get_users_voted(self):
         return self.users_voted
 
-    def register_vote(self, user):
-        self.users_voted.append(user)
+    def increment_vote_count(self):
+        try:
+            self.vote_count += 1
+        except TypeError:
+            self.vote_count = 1
 
+    def decrement_vote_count(self):
+        try:
+            self.vote_count -= 1
+        except TypeError:
+            self.vote_count = -1
+
+    def add_user(self, user):
+        if user not in self.users:
+            self.users_voted.append(user)
+
+    def register_vote(self, user, positive):
+        """
+        Register vote for joke.
+
+        Increments/decrements vote_count, adds user to user_voted.
+
+        Args:
+            user: instance of User class who voted for the joke
+            positive: bool which is True for positive vote, False for negative vote
+
+        Returns:
+            None
+        """
+        if positive:
+            self.increment_vote_count()
+        else:
+            self.decrement_vote_count()
+
+        self.add_user(user)
 
     def __repr__(self):
-        return '[{id}] Joke: {body}'.format(id=self.id, body=self.body)
+        return 'JOKE:\n id: {id}   body: {body}\n user voted: {users}'.format(id=self.id, body=self.body, vote_count=self.vote_count, users=[user.id for user in self.users_voted])
