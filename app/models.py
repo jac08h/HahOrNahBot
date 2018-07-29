@@ -26,6 +26,7 @@ class User(Base):
     jokes_voted_for = relationship('Joke',
                                    secondary=association_table,
                                    back_populates='users_voted')
+    jokes_submitted = relationship('Joke', backref='author')
 
     def get_id(self):
         return self.id
@@ -73,6 +74,7 @@ class Joke(Base):
     users_voted = relationship('User',
                                secondary=association_table,
                                back_populates='jokes_voted_for')
+    user_id = Column(Integer, ForeignKey('users.id'))
 
     def get_id(self):
         return self.id
@@ -123,4 +125,6 @@ class Joke(Base):
         self.add_user(user)
 
     def __repr__(self):
-        return 'JOKE:\n id: {id}   body: {body}\n user voted: {users}'.format(id=self.id, body=self.body, vote_count=self.vote_count, users=[user.id for user in self.users_voted])
+        joke_info =  """id: {id}\nbody: {body}\nvotes: {vote_count}\nauthor: {author}""".format(id=self.id, body=self.body, vote_count=self.vote_count, author=self.author.username)
+        # For some reason the formatting is off when using multiline string
+        return joke_info
