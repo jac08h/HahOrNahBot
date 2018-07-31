@@ -11,3 +11,4 @@ Telegram bot to display random jokes.
 | /joke | Show random joke |
 | /add **@joke_text**  | Add joke to database |
 | /show **@joke_id** | Show joke information |
+| /me | Show information about user|

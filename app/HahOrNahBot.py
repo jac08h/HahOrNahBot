@@ -8,7 +8,7 @@ import sqlalchemy.orm.exc as sql_errors
 import logging
 from random import randint
 
-from app.models import Joke, User, InvalidVoteException
+from app.models import Joke, User, DuplicatedVoteException, VoteForOwnJokeException
 
 logger = logging.getLogger(__name__)
 
@@ -27,12 +27,14 @@ class HahOrNahBot:
         self.dispatcher.add_handler(help_handler)
         joke_handler = CommandHandler('joke', self.joke, pass_chat_data=True)
         self.dispatcher.add_handler(joke_handler)
+        vote_handler = CommandHandler(['hah', 'nah'], self.vote, pass_chat_data=True)
+        self.dispatcher.add_handler(vote_handler)
         add_handler = CommandHandler('add', self.add, pass_args=True)
         self.dispatcher.add_handler(add_handler)
         show_handler = CommandHandler('show', self.show, pass_args=True)
         self.dispatcher.add_handler(show_handler)
-        vote_handler = CommandHandler(['hah', 'nah'], self.vote, pass_chat_data=True)
-        self.dispatcher.add_handler(vote_handler)
+        me_handler = CommandHandler('me', self.me)
+        self.dispatcher.add_handler(me_handler)
 
         engine = create_engine(database_url, echo=True)
         Session = sessionmaker(bind=engine)
@@ -74,7 +76,7 @@ class HahOrNahBot:
 
         random_joke = all_jokes.pop(random_joke_index)
 
-        while random_joke in user.jokes_voted_for:
+        while random_joke in user.jokes_voted_for or random_joke in user.jokes_submitted:
             try:
                 random_joke_index = randint(0, len(all_jokes)-1)
             except ValueError:
@@ -115,17 +117,23 @@ class HahOrNahBot:
 
             self.session.add(user, joke)
             self.session.commit()
+
+            bot.send_message(chat_id=update.message.chat_id,
+                             text='Vote submitted.')
+
             del chat_data['last_joke_displayed']
             return
 
-        except InvalidVoteException:
+        except DuplicatedVoteException:
             update.message.reply_text('You already voted for this joke.')
+
+        except VoteForOwnJokeException:
+            update.message.reply_text("You can't vote for your own joke.")
 
         finally:
             # Clear vote buttons
             remove_vote_options_markup = telegram.ReplyKeyboardRemove()
             bot.send_message(chat_id=update.message.chat_id,
-                             text='Vote submitted.',
                              reply_markup=remove_vote_options_markup)
             return
 
@@ -188,6 +196,18 @@ class HahOrNahBot:
 
         return
 
+    def me(self, bot, update):
+        telegram_id = update.message.chat_id
+        telegram_username = update.message.from_user.username
+        user = self.__get_user(telegram_id, telegram_username)
+
+        all_users = self.session.query(User).order_by(User.score).all()
+        user_rank = all_users.index(user) + 1
+
+        user_info = str(user) + '\nrank: {}'.format(user_rank)
+        update.message.reply_text(user_info)
+        return
+
     def __get_user(self, id, username):
         """
         Get user by id if the user is in database, create new database record otherwise.
@@ -201,7 +221,7 @@ class HahOrNahBot:
         if user is None:
             # If not, create one
             telegram_username = username
-            user = User(id=id, username=telegram_username)
+            user = User(id=id, username=telegram_username, score=0)
             self.session.add(user)
             self.session.commit()
 

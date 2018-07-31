@@ -17,6 +17,12 @@ logger = logging.getLogger(__name__)
 class InvalidVoteException(Exception):
     pass
 
+class DuplicatedVoteException(InvalidVoteException):
+    pass
+
+class VoteForOwnJokeException(InvalidVoteException):
+    pass
+
 
 class User(Base):
     __tablename__ = 'users'
@@ -27,6 +33,7 @@ class User(Base):
                                    secondary=association_table,
                                    back_populates='users_voted')
     jokes_submitted = relationship('Joke', backref='author')
+    score = Column('score', Integer, default=0)
 
     def get_id(self):
         return self.id
@@ -36,6 +43,10 @@ class User(Base):
 
     def get_jokes_voted_for(self):
         return self.jokes_voted_for
+
+    def get_score(self):
+        assert self.score is not None
+        return self.score
 
     def vote_for_joke(self, joke, positive):
         """
@@ -51,18 +62,30 @@ class User(Base):
             None
 
         Raises:
-            InvalidVoteException: User has already voted.
+            InvalidVoteException: User has already voted for the joke.
+            VoteForOwnJokeException: User is trying to vote for his own joke.
         """
-        if joke not in self.jokes_voted_for:
-            self.jokes_voted_for.append(joke)
-            joke.register_vote(user=self, positive=positive)
-        else:
+        if joke.author.id == self.id:
+            error_string = "Can't vote for your own joke. Joke ID={joke_id} User ID={user_id}".format(joke_id=joke.get_id(), user_id=self.get_id())
+            logger.error(error_string)
+            raise VoteForOwnJokeException(error_string)
+
+        if joke in self.jokes_voted_for:
             error_string = 'Duplicated vote. Joke ID={joke_id} User ID={user_id}'.format(joke_id=joke.get_id(), user_id=self.get_id())
             logger.error(error_string)
-            raise InvalidVoteException(error_string)
+            raise DuplicatedVoteException(error_string)
+
+        else:
+            if positive:
+                self.score += 1
+            else:
+                self.score -= 1
+
+            self.jokes_voted_for.append(joke)
+            joke.register_vote(user=self, positive=positive)
 
     def __repr__(self):
-        return 'USER:\n id: {id}   username: {username}\njokes voted for: {jokes}'.format(id=self.id, username=self.username, jokes=[joke.id for joke in self.jokes_voted_for])
+        return 'id: {id}\nscore: {score}\njokes submitted: {jokes_submitted}'.format(id=self.id, score=self.get_score(), jokes_submitted=len(self.jokes_submitted))
 
 
 class Joke(Base):
@@ -88,18 +111,6 @@ class Joke(Base):
     def get_users_voted(self):
         return self.users_voted
 
-    def increment_vote_count(self):
-        try:
-            self.vote_count += 1
-        except TypeError:
-            self.vote_count = 1
-
-    def decrement_vote_count(self):
-        try:
-            self.vote_count -= 1
-        except TypeError:
-            self.vote_count = -1
-
     def add_user(self, user):
         if user not in self.users_voted:
             self.users_voted.append(user)
@@ -118,9 +129,9 @@ class Joke(Base):
             None
         """
         if positive:
-            self.increment_vote_count()
+            self.vote_count += 1
         else:
-            self.decrement_vote_count()
+            self.vote_count -= 1
 
         self.add_user(user)
 
