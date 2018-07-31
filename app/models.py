@@ -55,7 +55,7 @@ class User(Base):
         """
         if joke not in self.jokes_voted_for:
             self.jokes_voted_for.append(joke)
-            joke.vote(self, positive=positive)
+            joke.register_vote(user=self, positive=positive)
         else:
             error_string = 'Duplicated vote. Joke ID={joke_id} User ID={user_id}'.format(joke_id=joke.get_id(), user_id=self.get_id())
             logger.error(error_string)
@@ -101,7 +101,7 @@ class Joke(Base):
             self.vote_count = -1
 
     def add_user(self, user):
-        if user not in self.users:
+        if user not in self.users_voted:
             self.users_voted.append(user)
 
     def register_vote(self, user, positive):

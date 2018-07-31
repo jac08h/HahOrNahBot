@@ -1,13 +1,12 @@
 from telegram.ext import Updater, CommandHandler
 import telegram
-from time import sleep
 
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 import sqlalchemy.orm.exc as sql_errors
 
 import logging
-from random import choice
+from random import randint
 
 from app.models import Joke, User, InvalidVoteException
 
@@ -43,16 +42,15 @@ class HahOrNahBot:
 
         self.help_text = """
         *Commands*
-        /joke - return random joke
+        /joke - show random joke
         /add JOKE TEXT - add joke
-        /show JOKE ID - show joke informatin by id
+        /show JOKE ID - show joke information by id
         /help - show this message
         """
 
-        return
-
     def start(self, bot, update):
-        bot.send_message(chat_id=update.message.chat_id, text='Hey.')
+        update.message.reply_text('Welcome to HahOrNah bot - bot that displays random jokes, allows you to vote for jokes or even add some yourself!')
+        update.message.reply_markdown(self.help_text)
         return
 
     def help(self, bot, update):
@@ -63,7 +61,27 @@ class HahOrNahBot:
         Return random joke
         """
         all_jokes = self.session.query(Joke).all()
-        random_joke = choice(all_jokes)
+
+        telegram_id = update.message.chat_id
+        telegram_username = update.message.from_user.username
+        user = self.__get_user(telegram_id, telegram_username)
+
+        try:
+            random_joke_index = randint(0, len(all_jokes)-1)
+        except ValueError:
+            update.message.reply_text("There are currently no jokes in database. Use /add command to add your joke")
+            return
+
+        random_joke = all_jokes.pop(random_joke_index)
+
+        while random_joke in user.jokes_voted_for:
+            try:
+                random_joke_index = randint(0, len(all_jokes)-1)
+            except ValueError:
+                update.message.reply_text("You have seen all the jokes. Use /add command to add a new joke!")
+                return
+
+            random_joke = all_jokes.pop(random_joke_index)
 
         vote_options = [['/hah', '/nah']]
         show_vote_options_markup = telegram.ReplyKeyboardMarkup(vote_options)
@@ -94,13 +112,16 @@ class HahOrNahBot:
                 user.vote_for_joke(joke, positive=True)
             else:
                 user.vote_for_joke(joke, positive=False)
+
             self.session.add(user, joke)
             self.session.commit()
+            del chat_data['last_joke_displayed']
+            return
+
         except InvalidVoteException:
             update.message.reply_text('You already voted for this joke.')
-            return
+
         finally:
-            del chat_data['last_joke_displayed']
             # Clear vote buttons
             remove_vote_options_markup = telegram.ReplyKeyboardRemove()
             bot.send_message(chat_id=update.message.chat_id,
@@ -123,10 +144,13 @@ class HahOrNahBot:
             return
 
         all_jokes = self.session.query(Joke).order_by(Joke.id).all()
-        last_joke = all_jokes[-1]
-        last_joke_id = last_joke.get_id()
+        try:
+            last_joke = all_jokes[-1]
+            last_joke_id = last_joke.get_id()
+            new_joke_id = last_joke_id + 1
+        except IndexError:  # no jokes in database
+            new_joke_id = 0
 
-        new_joke_id = last_joke_id + 1
         new_joke = Joke(id=new_joke_id, body=new_joke_body, vote_count=0, author=user)
 
         update.message.reply_text("Thanks for submitting your joke. Your joke's ID is {}.".format(new_joke_id))
@@ -156,8 +180,12 @@ class HahOrNahBot:
             update.message.reply_text('No joke with this ID ({})'.format(joke_id))
             return
 
-        joke_info = str(joke)
-        update.message.reply_text(joke_info)
+        try:
+            joke_info = str(joke)
+            update.message.reply_text(joke_info)
+        except AttributeError:
+            logger.debug('Joke data corrupted ({})'.format(joke_id))
+
         return
 
     def __get_user(self, id, username):
