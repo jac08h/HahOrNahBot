@@ -31,10 +31,10 @@ class HahOrNahBot:
         self.dispatcher.add_handler(vote_handler)
         add_handler = CommandHandler('add', self.add, pass_args=True)
         self.dispatcher.add_handler(add_handler)
-        show_handler = CommandHandler('show', self.show, pass_args=True)
-        self.dispatcher.add_handler(show_handler)
         me_handler = CommandHandler('me', self.me)
         self.dispatcher.add_handler(me_handler)
+        top10_handler = CommandHandler('top10', self.top10)
+        self.dispatcher.add_handler(top10_handler)
 
         engine = create_engine(database_url, echo=True)
         Session = sessionmaker(bind=engine)
@@ -46,8 +46,8 @@ class HahOrNahBot:
         *Commands*
         /joke - show random joke
         /add JOKE TEXT - add joke
-        /show JOKE ID - show joke information by id
         /help - show this message
+        /top10 - show top 10 users
         """
 
     def start(self, bot, update):
@@ -166,37 +166,10 @@ class HahOrNahBot:
         self.session.commit()
         return
 
-    def show(self, bot, update, args):
-        """
-        Show information about joke by id.
-        """
-        try:
-            joke_id = args[0]
-        except IndexError:
-            update.message.reply_text('Please provide joke ID.')
-            return
-
-        try:
-            joke_id = int(joke_id)
-        except ValueError:
-            update.message.reply_text('Invalid joke ID format ({})'.format(joke_id))
-            return
-
-        try:
-            joke = self.session.query(Joke).filter(Joke.id == joke_id).one()
-        except sql_errors.NoResultFound:
-            update.message.reply_text('No joke with this ID ({})'.format(joke_id))
-            return
-
-        try:
-            joke_info = str(joke)
-            update.message.reply_text(joke_info)
-        except AttributeError:
-            logger.debug('Joke data corrupted ({})'.format(joke_id))
-
-        return
-
     def me(self, bot, update):
+        """
+        Show information about user.
+        """
         telegram_id = update.message.chat_id
         telegram_username = update.message.from_user.username
         user = self.__get_user(telegram_id, telegram_username)
@@ -206,6 +179,24 @@ class HahOrNahBot:
 
         user_info = str(user) + '\nrank: {}'.format(user_rank)
         update.message.reply_text(user_info)
+        return
+
+    def top10(self, bot, update):
+        """
+        Show top 10 users by score.
+        """
+        telegram_id = update.message.chat_id
+        telegram_username = update.message.from_user.username
+        user = self.__get_user(telegram_id, telegram_username)
+
+        all_users = self.session.query(User).order_by(User.score).all()
+        top_10_users = all_users[:10]
+        telegram_message = ''
+        for index, user in enumerate(top_10_users):
+            rank = index + 1
+            telegram_message += '{rank}. {username} - score: {score}\n'.format(rank=rank, username=user.get_username(), score=user.get_score())
+
+        update.message.reply_text(telegram_message)
         return
 
     def __get_user(self, id, username):
