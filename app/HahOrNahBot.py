@@ -1,12 +1,12 @@
-from telegram.ext import Updater, CommandHandler
-import telegram
+from telegram.ext import Updater, CommandHandler, ConversationHandler, CallbackQueryHandler
+from telegram import InlineKeyboardMarkup, InlineKeyboardButton, ReplyKeyboardRemove
 
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 import sqlalchemy.orm.exc as sql_errors
 
 import logging
-from random import randint
+from random import randint, choice
 
 from app.models import Joke, User, DuplicatedVoteException, VoteForOwnJokeException
 
@@ -21,22 +21,28 @@ class HahOrNahBot:
         self.updater = Updater(token=token)
         self.dispatcher = self.updater.dispatcher
 
-        start_handler = CommandHandler('start', self.start)
+        start_handler = CommandHandler('start', self.start_command)
         self.dispatcher.add_handler(start_handler)
-        help_handler = CommandHandler('help', self.help)
+
+        help_handler = CommandHandler('help', self.help_command)
         self.dispatcher.add_handler(help_handler)
-        joke_handler = CommandHandler('joke', self.joke, pass_chat_data=True)
+
+        joke_handler = CommandHandler('joke', self.joke_command, pass_chat_data=True)
         self.dispatcher.add_handler(joke_handler)
-        vote_handler = CommandHandler(['hah', 'nah'], self.vote, pass_chat_data=True)
-        self.dispatcher.add_handler(vote_handler)
+
         add_handler = CommandHandler('add', self.add, pass_args=True)
         self.dispatcher.add_handler(add_handler)
-        me_handler = CommandHandler('me', self.me)
+
+        me_handler = CommandHandler('me', self.me_command)
         self.dispatcher.add_handler(me_handler)
-        top10_handler = CommandHandler('top10', self.top10)
+
+        top10_handler = CommandHandler('top10', self.top10_command)
         self.dispatcher.add_handler(top10_handler)
 
-        engine = create_engine(database_url, echo=True)
+        callback_handler = CallbackQueryHandler(self.callback_eval, pass_chat_data=True)
+        self.dispatcher.add_handler(callback_handler)
+
+        engine = create_engine(database_url)
         Session = sessionmaker(bind=engine)
         self.session = Session()
 
@@ -50,15 +56,34 @@ class HahOrNahBot:
         /top10 - show top 10 users
         """
 
-    def start(self, bot, update):
+    # Commands
+    def callback_eval(self, bot, update, chat_data):
+        logger.info('entering callback eval')
+        logger.info(update)
+        query_data = update.callback_query.data
+
+        if 'vote' in query_data:
+            try:
+                joke = chat_data['last_joke']
+            except KeyError:
+                update.callback_query.message.reply_text("Wait, what? I wasn't telling anything!")
+                return
+
+            del chat_data['last_joke']
+            if 'positive' in query_data:
+                self.vote(bot, update, joke, positive_vote=True)
+            else:
+                self.vote(bot, update, joke, positive_vote=False)
+
+    def start_command(self, bot, update):
         update.message.reply_text('Welcome to HahOrNah bot - bot that displays random jokes, allows you to vote for jokes or even add some yourself!')
         update.message.reply_markdown(self.help_text)
         return
 
-    def help(self, bot, update):
+    def help_command(self, bot, update):
         update.message.reply_markdown(self.help_text)
 
-    def joke(self, bot, update, chat_data):
+    def joke_command(self, bot, update, chat_data):
         """
         Return random joke
         """
@@ -75,8 +100,10 @@ class HahOrNahBot:
             return
 
         random_joke = all_jokes.pop(random_joke_index)
+        voted_already = random_joke in user.jokes_voted_for
+        user_is_author = random_joke in user.jokes_submitted
 
-        while random_joke in user.jokes_voted_for or random_joke in user.jokes_submitted:
+        while False:
             try:
                 random_joke_index = randint(0, len(all_jokes)-1)
             except ValueError:
@@ -85,32 +112,34 @@ class HahOrNahBot:
 
             random_joke = all_jokes.pop(random_joke_index)
 
-        vote_options = [['/hah', '/nah']]
-        show_vote_options_markup = telegram.ReplyKeyboardMarkup(vote_options)
+        vote_options = [
+            [InlineKeyboardButton(text='Hah!', callback_data='positive_vote')],
+            [InlineKeyboardButton(text='Nah.', callback_data='negative_vote')]
+        ]
+
+        vote_options_keyboard = InlineKeyboardMarkup(vote_options, one_time_keyboard=True)
+
+        chat_data['last_joke'] = random_joke
         bot.send_message(chat_id=update.message.chat_id,
                          text=random_joke.get_body(),
-                         reply_markup=show_vote_options_markup)
+                         reply_markup=vote_options_keyboard)
 
-        chat_data['last_joke_displayed'] = random_joke
         return
 
-    def vote(self, bot, update, chat_data):
+    def vote(self, bot, update, joke, positive_vote):
         """
         Register user's vote for joke. Can't be called directly, only after `/joke` command.
-        """
-        try:
-            joke = chat_data['last_joke_displayed']
-        except KeyError:
-            update.message.reply_markdown('No joke to vote for. Use `/joke` command to get random joke.')
-            return
 
-        telegram_id = update.message.chat_id
-        telegram_username = update.message.from_user.username
+        Arguments:
+            positive_vote: bool, True for positive vote
+        """
+        telegram_id = update.callback_query.message.chat.id
+        telegram_username = update.callback_query.message.chat.username
+        chat_id = update.callback_query.message.chat.id
         user = self.__get_user(telegram_id, telegram_username)
 
         try:
-            # Register vote
-            if 'hah' in update.message.text:
+            if positive_vote:
                 user.vote_for_joke(joke, positive=True)
             else:
                 user.vote_for_joke(joke, positive=False)
@@ -118,24 +147,23 @@ class HahOrNahBot:
             self.session.add(user, joke)
             self.session.commit()
 
-            bot.send_message(chat_id=update.message.chat_id,
-                             text='Vote submitted.')
-
-            del chat_data['last_joke_displayed']
-            return
+            remove_vote_options = ReplyKeyboardRemove()
+            bot.send_message(chat_id=chat_id,
+                             text='Vote submitted.',
+                             reply_markup=remove_vote_options)
 
         except DuplicatedVoteException:
-            update.message.reply_text('You already voted for this joke.')
+            remove_vote_options = ReplyKeyboardRemove()
+            bot.send_message(chat_id=chat_id,
+                             text='duplivated',
+                             reply_markup=remove_vote_options)
 
         except VoteForOwnJokeException:
-            update.message.reply_text("You can't vote for your own joke.")
-
-        finally:
-            # Clear vote buttons
-            remove_vote_options_markup = telegram.ReplyKeyboardRemove()
-            bot.send_message(chat_id=update.message.chat_id,
-                             reply_markup=remove_vote_options_markup)
-            return
+            remove_vote_options = ReplyKeyboardRemove()
+            bot.send_message(chat_id=chat_id,
+                             text='own',
+                             reply_markup=remove_vote_options)
+        return
 
     def add(self, bot, update, args):
         """
@@ -166,7 +194,7 @@ class HahOrNahBot:
         self.session.commit()
         return
 
-    def me(self, bot, update):
+    def me_command(self, bot, update):
         """
         Show information about user.
         """
@@ -181,7 +209,7 @@ class HahOrNahBot:
         update.message.reply_text(user_info)
         return
 
-    def top10(self, bot, update):
+    def top10_command(self, bot, update):
         """
         Show top 10 users by score.
         """
