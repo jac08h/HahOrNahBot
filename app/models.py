@@ -48,6 +48,9 @@ class User(Base):
         assert self.score is not None
         return self.score
 
+    def set_username(self, username):
+        self.username = username
+
     def vote_for_joke(self, joke, positive):
         """
         Registers user's vote.
@@ -85,7 +88,7 @@ class User(Base):
             joke.register_vote(user=self, positive=positive)
 
     def __repr__(self):
-        return 'id: {id}\nscore: {score}\njokes submitted: {jokes_submitted}'.format(id=self.id, score=self.get_score(), jokes_submitted=len(self.jokes_submitted))
+        return 'username: {username} id: {id}\nscore: {score}\njokes submitted: {jokes_submitted}'.format(username=self.get_username(), id=self.get_id(), score=self.get_score(), jokes_submitted=len(self.jokes_submitted))
 
 
 class Joke(Base):
