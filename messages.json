@@ -1,0 +1,50 @@
+{
+    "user_not_registered" : [
+      "UNR #1",
+      "UNR #1"
+    ],
+    "no_current_joke" : [
+      "NCJ #1",
+      "NCJ #2"
+    ],
+    "add_joke" : [
+      "NCJ #2",
+      "NCJ #1"
+    ],
+    "too_short_joke" : [
+      "NCJ #2",
+      "NCJ #1"
+    ],
+    "submitted_joke" : [
+      "NCJ #2",
+      "NCJ #1"
+    ],
+    "menu" : [
+      "MCJ #2",
+      "NCJ #1"
+    ],
+    "empty_database" : [
+      "MCJ #2",
+      "NCJ #1"
+    ],
+    "user_registered" : [
+      "MCJ #2",
+      "NCJ #1"
+    ],
+    "no_new_jokes" : [
+      "MCJ #2",
+      "NCJ #1"
+    ],
+    "hah_or_nah" : [
+      "MCJ #2",
+      "NCJ #1"
+    ],
+    "positive_vote" : [
+      "MCJ #2",
+      "NCJ #1"
+    ],
+    "negative_vote" : [
+    "MCJ #2",
+    "NCJ #1"
+  ]
+}
