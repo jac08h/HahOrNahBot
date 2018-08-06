@@ -208,7 +208,7 @@ class HahOrNahBot:
         voted_already = random_joke in user.jokes_voted_for
         user_is_author = random_joke in user.jokes_submitted
 
-        while False:
+        while voted_already or user_is_author:
             try:
                 random_joke_index = randint(0, len(all_jokes)-1)
             except ValueError:
