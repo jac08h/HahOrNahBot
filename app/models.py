@@ -1,8 +1,9 @@
 from sqlalchemy import Column, Integer, String, Table, ForeignKey
 from sqlalchemy.orm import relationship
 from sqlalchemy.ext.declarative import declarative_base
-import logging
 
+import logging
+from string import ascii_letters, digits
 Base = declarative_base()
 
 
@@ -23,6 +24,14 @@ class DuplicatedVoteException(InvalidVoteException):
 class VoteForOwnJokeException(InvalidVoteException):
     pass
 
+class InvalidUsernameException(Exception):
+    pass
+
+class ForbiddenCharacters(InvalidUsernameException):
+    pass
+
+class InvalidLength(InvalidUsernameException):
+    pass
 
 class User(Base):
     __tablename__ = 'users'
@@ -48,8 +57,18 @@ class User(Base):
         assert self.score is not None
         return self.score
 
-    def set_username(self, username):
-        self.username = username
+    def get_jokes_submitted(self):
+        return self.jokes_submitted
+
+    def get_average_score(self):
+        jokes_submitted_count = len(self.get_jokes_submitted())
+        score = self.get_score()
+
+        try:
+            average_score = jokes_submitted_count / score
+            return average_score
+        except ZeroDivisionError:
+            return 0
 
     def vote_for_joke(self, joke, positive):
         """
@@ -88,7 +107,7 @@ class User(Base):
             joke.register_vote(user=self, positive=positive)
 
     def __repr__(self):
-        return 'username: {username} id: {id}\nscore: {score}\njokes submitted: {jokes_submitted}'.format(username=self.get_username(), id=self.get_id(), score=self.get_score(), jokes_submitted=len(self.jokes_submitted))
+        return 'username: {username} \nid: {id}\nscore: {score}\njokes submitted: {jokes_submitted}'.format(username=self.get_username(), id=self.get_id(), score=self.get_score(), jokes_submitted=len(self.jokes_submitted))
 
 
 class Joke(Base):
@@ -142,3 +161,7 @@ class Joke(Base):
         joke_info =  """id: {id}\nbody: {body}\nvotes: {vote_count}\nauthor: {author}""".format(id=self.id, body=self.body, vote_count=self.vote_count, author=self.author.username)
         # For some reason the formatting is off when using multiline string
         return joke_info
+
+if __name__ == '__main__':
+    a = User(username='asdf', id=0)
+    a.set_username('fasdljkfsadlfjda', 21039)
