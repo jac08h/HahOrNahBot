@@ -12,7 +12,8 @@ import json
 from sys import exit
 from string import ascii_letters, digits
 
-from app.models import Joke, User, InvalidVoteException
+from app.models import Joke, User
+from app.exceptions import InvalidVote, UserDoesNotExist
 
 logger = logging.getLogger(__name__)
 
@@ -59,7 +60,6 @@ class HahOrNahBot:
         Returns:
             dict
         """
-
         try:
             with open(messages_file, 'r') as fp:
                 messages = json.load(fp)
@@ -79,43 +79,48 @@ class HahOrNahBot:
         try:
             assert state in self.messages.keys()  # should be called only with states defined in self.MESSAGES_FILE
         except AssertionError:
-            logger.info(state)
+            logger.info('No message found for ' + state)
+            logger.info(self.messages.keys())
             exit()
 
         message = choice(self.messages[state])
         return message
 
-    def private_get_user(self, message):
+    def private_get_user(self, message, chat_data):
         """
         Get user by id if the user is in database, create new database record otherwise.
 
         Returns:
             instance of User class if user exists, None otherwise
-
         """
-        user_id = message.chat.id
+        try:
+            user = chat_data['current_user']
+            return user
+        except KeyError:
+            pass
+
         # Check if user is in database
-
+        user_id = message.chat.id
         user = self.session.query(User).filter(User.id == user_id).first()
-        if not user:
-            reply_message = self.private_get_random_message('user_not_registered\n')
-            reply_message += 'Use `/register YOUR_NAME` to introduce yourself!'
-            message.reply_text(reply_message)
-            return None
+        if user is None:
+            reply_message = self.private_get_random_message('user_not_registered')
+            message.reply_markdown(reply_message)
+            raise UserDoesNotExist
 
-        return user
+        else:
+            chat_data['current_user'] = user
+            return user
+
 
     def callback_eval(self, bot, update, chat_data):
         query_data = update.callback_query.data
         message = update.callback_query.message
 
-        current_user = self.private_get_user(message)
-        chat_data['current_user'] = current_user
-
-        message = update.callback_query.message
-
-        if 'joke_show' in query_data:
+        if 'joke_show_random' in query_data:
             self.show_random_joke(message, bot, chat_data)
+
+        if 'joke_show_favorite' in query_data:
+            self.show_random_joke_from_favorites(message, chat_data)
 
         elif 'vote' in query_data:
             try:
@@ -144,7 +149,8 @@ class HahOrNahBot:
 
     def command_menu(self, bot, update):
         menu_options = [
-            [InlineKeyboardButton(text='Show random joke', callback_data='joke_show')],
+            [InlineKeyboardButton(text='Show random joke', callback_data='joke_show_random')],
+            [InlineKeyboardButton(text='Show random favorite joke', callback_data='joke_show_favorite')],
             [InlineKeyboardButton(text='Add joke', callback_data='joke_add')],
             [InlineKeyboardButton(text='Profile', callback_data='profile')],
             [InlineKeyboardButton(text='Top 10', callback_data='top10')],
@@ -193,7 +199,11 @@ class HahOrNahBot:
         """
         Return random joke
         """
-        user = self.private_get_user(message)
+        try:
+            user = self.private_get_user(message, chat_data)
+        except UserDoesNotExist:
+            return
+
         chat_id = message.chat.id
 
         all_jokes = self.session.query(Joke).all()
@@ -201,7 +211,7 @@ class HahOrNahBot:
         try:
             random_joke_index = randint(0, len(all_jokes)-1)
         except ValueError:
-            message.reply_text(self.private_get_random_message('empty_database'))
+            message.reply_text(self.private_get_random_message('no_new_jokes'))
             return
 
         random_joke = all_jokes.pop(random_joke_index)
@@ -232,6 +242,25 @@ class HahOrNahBot:
                          reply_markup=vote_options_keyboard)
         return
 
+    def show_random_joke_from_favorites(self, message, chat_data):
+        """
+        Return random joke from jokes user marked as funny.
+        """
+        try:
+            user = self.private_get_user(message, chat_data)
+        except UserDoesNotExist:
+            return
+
+        all_favorite_jokes = user.get_jokes_voted_positive()
+        try:
+            random_joke = choice(all_favorite_jokes)
+        except IndexError:
+            message.reply_text(self.private_get_random_message('joke_no_favorite'))
+            return
+
+        message.reply_text(random_joke.get_body())
+        return
+
     def vote_for_joke(self, message, chat_data, joke, positive_vote):
         """
         Register user's vote for joke.
@@ -240,7 +269,10 @@ class HahOrNahBot:
         Arguments:
             positive_vote: bool, True for positive vote
         """
-        user = chat_data['current_user']
+        try:
+            user = self.private_get_user(message, chat_data)
+        except UserDoesNotExist:
+            return
 
         try:
             if positive_vote:
@@ -253,7 +285,7 @@ class HahOrNahBot:
             self.session.add(user, joke)
             self.session.commit()
 
-        except InvalidVoteException as e:
+        except InvalidVote as e:
             logger.error(e)
 
         return
@@ -264,9 +296,9 @@ class HahOrNahBot:
         """
         message = update.message
         try:
-            user = chat_data['current_user']
-        except KeyError:
-            user = self.private_get_user(message)
+            user = self.private_get_user(message, chat_data)
+        except UserDoesNotExist:
+            return
 
         text = message.text
         joke_body = text.replace('+', '').strip()
@@ -298,7 +330,10 @@ class HahOrNahBot:
         """
         Show information about user.
         """
-        user = chat_data['current_user']
+        try:
+            user = self.private_get_user(message, chat_data)
+        except UserDoesNotExist:
+            return
 
         all_users = self.session.query(User).order_by(User.score).all()
         user_rank = all_users.index(user) + 1

@@ -2,6 +2,8 @@ from sqlalchemy import Column, Integer, String, Table, ForeignKey
 from sqlalchemy.orm import relationship
 from sqlalchemy.ext.declarative import declarative_base
 
+from app.exceptions import InvalidVote
+
 import logging
 from string import ascii_letters, digits
 Base = declarative_base()
@@ -14,25 +16,6 @@ association_table = Table('association', Base.metadata,
 
 logger = logging.getLogger(__name__)
 
-
-class InvalidVoteException(Exception):
-    pass
-
-class DuplicatedVoteException(InvalidVoteException):
-    pass
-
-class VoteForOwnJokeException(InvalidVoteException):
-    pass
-
-class InvalidUsernameException(Exception):
-    pass
-
-class ForbiddenCharacters(InvalidUsernameException):
-    pass
-
-class InvalidLength(InvalidUsernameException):
-    pass
-
 class User(Base):
     __tablename__ = 'users'
 
@@ -41,6 +24,9 @@ class User(Base):
     jokes_voted_for = relationship('Joke',
                                    secondary=association_table,
                                    back_populates='users_voted')
+    jokes_voted_positive = relationship('Joke',
+                                        secondary=association_table,
+                                        back_populates='users_voted_positive')
     jokes_submitted = relationship('Joke', backref='author')
     score = Column('score', Integer, default=0)
 
@@ -59,6 +45,9 @@ class User(Base):
 
     def get_jokes_submitted(self):
         return self.jokes_submitted
+
+    def get_jokes_voted_positive(self):
+        return self.jokes_voted_positive
 
     def get_average_score(self):
         jokes_submitted_count = len(self.get_jokes_submitted())
@@ -90,16 +79,17 @@ class User(Base):
         if joke.author.id == self.id:
             error_string = "Can't vote for your own joke. Joke ID={joke_id} User ID={user_id}".format(joke_id=joke.get_id(), user_id=self.get_id())
             logger.error(error_string)
-            raise VoteForOwnJokeException(error_string)
+            raise InvalidVote(error_string)
 
         if joke in self.jokes_voted_for:
             error_string = 'Duplicated vote. Joke ID={joke_id} User ID={user_id}'.format(joke_id=joke.get_id(), user_id=self.get_id())
             logger.error(error_string)
-            raise DuplicatedVoteException(error_string)
+            raise InvalidVote(error_string)
 
         else:
             if positive:
                 self.score += 1
+                self.jokes_voted_positive.append(joke)
             else:
                 self.score -= 1
 
@@ -119,6 +109,9 @@ class Joke(Base):
     users_voted = relationship('User',
                                secondary=association_table,
                                back_populates='jokes_voted_for')
+    users_voted_positive = relationship('User',
+                                        secondary=association_table,
+                                        back_populates='jokes_voted_positive')
     user_id = Column(Integer, ForeignKey('users.id'))
 
     def get_id(self):
@@ -132,10 +125,6 @@ class Joke(Base):
 
     def get_users_voted(self):
         return self.users_voted
-
-    def add_user(self, user):
-        if user not in self.users_voted:
-            self.users_voted.append(user)
 
     def register_vote(self, user, positive):
         """
@@ -152,10 +141,11 @@ class Joke(Base):
         """
         if positive:
             self.vote_count += 1
+            self.users_voted_positive.append(user)
         else:
             self.vote_count -= 1
 
-        self.add_user(user)
+        self.users_voted.append(user)
 
     def __repr__(self):
         joke_info =  """id: {id}\nbody: {body}\nvotes: {vote_count}\nauthor: {author}""".format(id=self.id, body=self.body, vote_count=self.vote_count, author=self.author.username)

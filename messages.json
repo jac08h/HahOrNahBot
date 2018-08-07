@@ -33,6 +33,11 @@
       "That's weird, I didn't say nothing!"
     ],
 
+    "joke_no_favorite" : [
+    "As much as I hate to admit it, you have never laughed on my joke. And that's kind of sad, when you think about it.",
+    "That won't be possible. You don't find my jokes funny 😔"
+    ],
+
     "joke_add" : [
       "Go ahead! Add '+' sign to the beginning of your message and I'll remember it as a joke."
     ],
