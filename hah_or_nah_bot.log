@@ -1,0 +1,976 @@
+2018-08-09 17:18:25,262 - app.HahOrNahBot - INFO - Messages file bot_responses.json not found. Exiting
+2018-08-09 17:18:34,692 - app.HahOrNahBot - INFO - Messages file config/bot_responses.json not found. Exiting
+2018-08-09 17:19:03,819 - app.HahOrNahBot - INFO - Responses file config/bot_responses.json not found. Exiting
+2018-08-09 17:19:52,923 - app.HahOrNahBot - INFO - Responses file bot_responses.json not found. Exiting
+2018-08-09 17:21:08,386 - app.HahOrNahBot - INFO - Responses file bot_responses.json not found. Exiting
+2018-08-09 17:21:14,704 - app.HahOrNahBot - INFO - Responses file bot_responses.json not found. Exiting
+2018-08-09 17:21:14,704 - app.HahOrNahBot - INFO - ['responses_file', 'self']
+2018-08-09 17:22:55,418 - app.HahOrNahBot - INFO - Responses file bot/responses/bot_responses.json not found. Exiting
+2018-08-09 17:24:19,467 - telegram.ext.dispatcher - ERROR - An uncaught error was raised while processing the update
+Traceback (most recent call last):
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/telegram/ext/dispatcher.py", line 278, in process_update
+    for handler in (x for x in self.handlers[group] if x.check_update(update)):
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/telegram/ext/dispatcher.py", line 278, in <genexpr>
+    for handler in (x for x in self.handlers[group] if x.check_update(update)):
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/telegram/ext/conversationhandler.py", line 264, in check_update
+    if entry_point.check_update(update):
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/telegram/ext/regexhandler.py", line 152, in check_update
+    match = re.match(self.pattern, update.effective_message.text)
+  File "/usr/lib/python3.7/re.py", line 173, in match
+    return _compile(pattern, flags).match(string)
+  File "/usr/lib/python3.7/re.py", line 276, in _compile
+    return _cache[type(pattern), pattern, flags]
+TypeError: unhashable type: 'list'
+2018-08-09 17:25:24,032 - telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+2018-08-09 17:25:24,176 - telegram.ext.updater - WARNING - Exiting immediately!
+2018-08-09 17:25:25,477 - app.HahOrNahBot - INFO - ['Introduce yourself!']
+2018-08-09 17:25:26,560 - telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+2018-08-09 17:27:52,428 - telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+2018-08-09 17:27:52,604 - telegram.ext.updater - WARNING - Exiting immediately!
+2018-08-09 17:34:47,146 - telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+2018-08-09 17:34:47,298 - telegram.ext.updater - WARNING - Exiting immediately!
+2018-08-09 17:34:53,455 - telegram.ext.dispatcher - ERROR - An uncaught error was raised while processing the update
+Traceback (most recent call last):
+  File "/home/jh/programming/HahOrNahBot/app/HahOrNahBot.py", line 190, in menu
+    user = self.private_get_user(message, user_data)
+  File "/home/jh/programming/HahOrNahBot/app/HahOrNahBot.py", line 142, in private_get_user
+    raise UserDoesNotExist
+app.exceptions.UserDoesNotExist
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/telegram/ext/dispatcher.py", line 279, in process_update
+    handler.handle_update(update, self)
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/telegram/ext/regexhandler.py", line 173, in handle_update
+    return self.callback(dispatcher.bot, update, **optional_args)
+  File "/home/jh/programming/HahOrNahBot/app/HahOrNahBot.py", line 195, in menu
+    reply_markup=ReplyKeyboardMarkup(KeyboardButton, one_time_keyboard=True))
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/telegram/bot.py", line 60, in decorator
+    result = func(self, *args, **kwargs)
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/telegram/bot.py", line 81, in decorator
+    data['reply_markup'] = reply_markup.to_json()
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/telegram/base.py", line 57, in to_json
+    return json.dumps(self.to_dict())
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/telegram/replykeyboardmarkup.py", line 76, in to_dict
+    data = super(ReplyKeyboardMarkup, self).to_dict()
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/telegram/base.py", line 69, in to_dict
+    data[key] = value.to_dict()
+TypeError: to_dict() missing 1 required positional argument: 'self'
+2018-08-09 17:35:26,609 - telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+2018-08-09 17:35:26,777 - telegram.ext.updater - WARNING - Exiting immediately!
+2018-08-09 17:35:31,297 - telegram.ext.dispatcher - ERROR - An uncaught error was raised while processing the update
+Traceback (most recent call last):
+  File "/home/jh/programming/HahOrNahBot/app/HahOrNahBot.py", line 190, in menu
+    user = self.private_get_user(message, user_data)
+  File "/home/jh/programming/HahOrNahBot/app/HahOrNahBot.py", line 142, in private_get_user
+    raise UserDoesNotExist
+app.exceptions.UserDoesNotExist
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/telegram/ext/dispatcher.py", line 279, in process_update
+    handler.handle_update(update, self)
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/telegram/ext/regexhandler.py", line 173, in handle_update
+    return self.callback(dispatcher.bot, update, **optional_args)
+  File "/home/jh/programming/HahOrNahBot/app/HahOrNahBot.py", line 195, in menu
+    reply_markup=ReplyKeyboardMarkup([KeyboardButton], one_time_keyboard=True))
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/telegram/bot.py", line 60, in decorator
+    result = func(self, *args, **kwargs)
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/telegram/bot.py", line 81, in decorator
+    data['reply_markup'] = reply_markup.to_json()
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/telegram/base.py", line 57, in to_json
+    return json.dumps(self.to_dict())
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/telegram/replykeyboardmarkup.py", line 81, in to_dict
+    for button in row:
+TypeError: 'type' object is not iterable
+2018-08-09 17:35:51,728 - telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+2018-08-09 17:35:51,888 - telegram.ext.updater - WARNING - Exiting immediately!
+2018-08-09 17:35:55,127 - telegram.ext.dispatcher - ERROR - An uncaught error was raised while processing the update
+Traceback (most recent call last):
+  File "/home/jh/programming/HahOrNahBot/app/HahOrNahBot.py", line 190, in menu
+    user = self.private_get_user(message, user_data)
+  File "/home/jh/programming/HahOrNahBot/app/HahOrNahBot.py", line 142, in private_get_user
+    raise UserDoesNotExist
+app.exceptions.UserDoesNotExist
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/telegram/ext/dispatcher.py", line 279, in process_update
+    handler.handle_update(update, self)
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/telegram/ext/regexhandler.py", line 173, in handle_update
+    return self.callback(dispatcher.bot, update, **optional_args)
+  File "/home/jh/programming/HahOrNahBot/app/HahOrNahBot.py", line 195, in menu
+    reply_markup=ReplyKeyboardMarkup([[KeyboardButton]], one_time_keyboard=True))
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/telegram/bot.py", line 60, in decorator
+    result = func(self, *args, **kwargs)
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/telegram/bot.py", line 81, in decorator
+    data['reply_markup'] = reply_markup.to_json()
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/telegram/base.py", line 57, in to_json
+    return json.dumps(self.to_dict())
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/telegram/replykeyboardmarkup.py", line 83, in to_dict
+    r.append(button.to_dict())  # telegram.KeyboardButton
+TypeError: to_dict() missing 1 required positional argument: 'self'
+2018-08-09 17:36:09,599 - telegram.ext.dispatcher - ERROR - An uncaught error was raised while processing the update
+Traceback (most recent call last):
+  File "/home/jh/programming/HahOrNahBot/app/HahOrNahBot.py", line 190, in menu
+    user = self.private_get_user(message, user_data)
+  File "/home/jh/programming/HahOrNahBot/app/HahOrNahBot.py", line 142, in private_get_user
+    raise UserDoesNotExist
+app.exceptions.UserDoesNotExist
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/telegram/ext/dispatcher.py", line 279, in process_update
+    handler.handle_update(update, self)
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/telegram/ext/regexhandler.py", line 173, in handle_update
+    return self.callback(dispatcher.bot, update, **optional_args)
+  File "/home/jh/programming/HahOrNahBot/app/HahOrNahBot.py", line 195, in menu
+    reply_markup=ReplyKeyboardMarkup([[KeyboardButton]], one_time_keyboard=True))
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/telegram/bot.py", line 60, in decorator
+    result = func(self, *args, **kwargs)
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/telegram/bot.py", line 81, in decorator
+    data['reply_markup'] = reply_markup.to_json()
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/telegram/base.py", line 57, in to_json
+    return json.dumps(self.to_dict())
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/telegram/replykeyboardmarkup.py", line 83, in to_dict
+    r.append(button.to_dict())  # telegram.KeyboardButton
+TypeError: to_dict() missing 1 required positional argument: 'self'
+2018-08-09 17:36:49,503 - telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+2018-08-09 17:36:49,711 - telegram.ext.updater - WARNING - Exiting immediately!
+2018-08-09 17:36:52,685 - telegram.ext.dispatcher - ERROR - An uncaught error was raised while processing the update
+Traceback (most recent call last):
+  File "/home/jh/programming/HahOrNahBot/app/HahOrNahBot.py", line 190, in menu
+    user = self.private_get_user(message, user_data)
+  File "/home/jh/programming/HahOrNahBot/app/HahOrNahBot.py", line 142, in private_get_user
+    raise UserDoesNotExist
+app.exceptions.UserDoesNotExist
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/telegram/ext/dispatcher.py", line 279, in process_update
+    handler.handle_update(update, self)
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/telegram/ext/regexhandler.py", line 173, in handle_update
+    return self.callback(dispatcher.bot, update, **optional_args)
+  File "/home/jh/programming/HahOrNahBot/app/HahOrNahBot.py", line 195, in menu
+    reply_markup=ReplyKeyboardMarkup(KeyboardButton, one_time_keyboard=True))
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/telegram/bot.py", line 60, in decorator
+    result = func(self, *args, **kwargs)
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/telegram/bot.py", line 81, in decorator
+    data['reply_markup'] = reply_markup.to_json()
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/telegram/base.py", line 57, in to_json
+    return json.dumps(self.to_dict())
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/telegram/replykeyboardmarkup.py", line 76, in to_dict
+    data = super(ReplyKeyboardMarkup, self).to_dict()
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/telegram/base.py", line 69, in to_dict
+    data[key] = value.to_dict()
+TypeError: to_dict() missing 1 required positional argument: 'self'
+2018-08-09 17:37:35,326 - telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+2018-08-09 17:37:35,510 - telegram.ext.updater - WARNING - Exiting immediately!
+2018-08-09 17:38:46,756 - telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+2018-08-09 17:38:46,941 - telegram.ext.updater - WARNING - Exiting immediately!
+2018-08-09 17:39:12,244 - telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+2018-08-09 17:39:12,436 - telegram.ext.updater - WARNING - Exiting immediately!
+2018-08-09 17:41:06,521 - telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+2018-08-09 17:41:06,690 - telegram.ext.updater - WARNING - Exiting immediately!
+2018-08-09 17:42:10,696 - telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+2018-08-09 17:42:10,840 - telegram.ext.updater - WARNING - Exiting immediately!
+2018-08-09 17:42:21,850 - app.HahOrNahBot - INFO - a
+2018-08-09 17:42:41,789 - app.HahOrNahBot - INFO - a
+2018-08-09 17:43:07,511 - telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+2018-08-09 17:43:07,687 - telegram.ext.updater - WARNING - Exiting immediately!
+2018-08-09 17:44:39,749 - telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+2018-08-09 17:44:39,901 - telegram.ext.updater - WARNING - Exiting immediately!
+2018-08-09 17:46:21,731 - telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+2018-08-09 17:46:21,915 - telegram.ext.updater - WARNING - Exiting immediately!
+2018-08-09 17:47:35,593 - telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+2018-08-09 17:47:35,777 - telegram.ext.updater - WARNING - Exiting immediately!
+2018-08-09 17:47:51,713 - telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+2018-08-09 17:47:51,873 - telegram.ext.updater - WARNING - Exiting immediately!
+2018-08-09 17:48:00,499 - telegram.ext.dispatcher - ERROR - An uncaught error was raised while processing the update
+Traceback (most recent call last):
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/telegram/ext/dispatcher.py", line 279, in process_update
+    handler.handle_update(update, self)
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/telegram/ext/conversationhandler.py", line 305, in handle_update
+    new_state = self.current_handler.handle_update(update, dispatcher)
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/telegram/ext/messagehandler.py", line 169, in handle_update
+    return self.callback(dispatcher.bot, update, **optional_args)
+TypeError: new_user_ask_for_username() got an unexpected keyword argument 'user_data'
+2018-08-09 17:48:01,673 - telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+2018-08-09 17:48:01,929 - telegram.ext.updater - WARNING - Exiting immediately!
+2018-08-09 17:51:54,740 - telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+2018-08-09 17:51:54,892 - telegram.ext.updater - WARNING - Exiting immediately!
+2018-08-09 17:55:16,007 - telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+2018-08-09 17:55:16,175 - telegram.ext.updater - WARNING - Exiting immediately!
+2018-08-09 17:55:33,714 - app.HahOrNahBot - INFO - returning
+2018-08-09 17:55:38,999 - telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+2018-08-09 17:55:39,159 - telegram.ext.updater - WARNING - Exiting immediately!
+2018-08-09 17:56:15,494 - telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+2018-08-09 17:56:15,654 - telegram.ext.updater - WARNING - Exiting immediately!
+2018-08-09 17:56:25,566 - telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+2018-08-09 17:56:25,710 - telegram.ext.updater - WARNING - Exiting immediately!
+2018-08-09 17:58:35,587 - telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+2018-08-09 17:58:35,731 - telegram.ext.updater - WARNING - Exiting immediately!
+2018-08-09 17:58:47,108 - app.HahOrNahBot - INFO - a
+2018-08-09 18:00:43,728 - telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+2018-08-09 18:00:43,896 - telegram.ext.updater - WARNING - Exiting immediately!
+2018-08-09 18:00:51,289 - app.HahOrNahBot - INFO - fdasfdasfdasfdasfdasfdasfdasfdasfdasfdasfdasfdasfdasfdasfdasfdasfdasfdasfdas
+2018-08-09 18:00:51,291 - app.HahOrNahBot - INFO - True
+2018-08-09 18:01:08,984 - app.HahOrNahBot - INFO - fdasfdasfdasfdasfdasfdasfdasfdasfdasfdasfdasfdasfdasfdasfdasfdasfdasfdasfdas
+2018-08-09 18:01:08,985 - app.HahOrNahBot - INFO - True
+2018-08-09 18:01:16,221 - app.HahOrNahBot - INFO - fdasfdasfdasfdasfdasfdasfdasfdasfdasfdasfdasfdasfdasfdasfdasfdasfdasfdasfdas
+2018-08-09 18:01:16,224 - app.HahOrNahBot - INFO - True
+2018-08-09 18:02:01,382 - telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+2018-08-09 18:02:01,574 - telegram.ext.updater - WARNING - Exiting immediately!
+2018-08-09 18:02:08,447 - app.HahOrNahBot - INFO - 😞
+2018-08-09 18:02:08,449 - app.HahOrNahBot - INFO - False
+2018-08-09 18:02:19,614 - telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+2018-08-09 18:02:19,990 - telegram.ext.updater - WARNING - Exiting immediately!
+2018-08-09 18:30:39,950 - telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+2018-08-09 18:30:40,126 - telegram.ext.updater - WARNING - Exiting immediately!
+2018-08-09 18:31:05,590 - app.HahOrNahBot - INFO - fads
+2018-08-09 18:31:05,592 - app.HahOrNahBot - INFO - False
+2018-08-09 18:31:09,967 - app.HahOrNahBot - INFO - as
+2018-08-09 18:31:09,968 - app.HahOrNahBot - INFO - False
+2018-08-09 18:31:17,071 - app.HahOrNahBot - INFO - 😁
+2018-08-09 18:31:17,073 - app.HahOrNahBot - INFO - False
+2018-08-09 18:31:57,581 - app.HahOrNahBot - INFO - htrs
+2018-08-09 18:31:57,582 - app.HahOrNahBot - INFO - False
+2018-08-09 18:32:02,996 - app.HahOrNahBot - INFO - 😍
+2018-08-09 18:32:02,998 - app.HahOrNahBot - INFO - False
+2018-08-09 18:36:05,863 - telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+2018-08-09 18:36:06,391 - telegram.ext.updater - WARNING - Exiting immediately!
+2018-08-09 18:38:25,550 - app.HahOrNahBot - INFO - False
+2018-08-09 18:38:25,619 - app.HahOrNahBot - INFO - False
+2018-08-09 18:38:25,710 - app.HahOrNahBot - INFO - False
+2018-08-09 18:38:25,783 - app.HahOrNahBot - INFO - False
+2018-08-09 18:38:25,860 - app.HahOrNahBot - INFO - False
+2018-08-09 18:38:25,965 - app.HahOrNahBot - INFO - False
+2018-08-09 18:38:26,054 - app.HahOrNahBot - INFO - False
+2018-08-09 18:38:26,145 - app.HahOrNahBot - INFO - False
+2018-08-09 18:38:26,244 - app.HahOrNahBot - INFO - False
+2018-08-09 18:38:26,341 - app.HahOrNahBot - INFO - False
+2018-08-09 18:38:26,507 - app.HahOrNahBot - INFO - False
+2018-08-09 18:38:26,588 - app.HahOrNahBot - INFO - False
+2018-08-09 18:38:26,674 - app.HahOrNahBot - INFO - False
+2018-08-09 18:38:26,773 - app.HahOrNahBot - INFO - False
+2018-08-09 18:38:26,844 - app.HahOrNahBot - INFO - False
+2018-08-09 18:38:26,932 - app.HahOrNahBot - INFO - False
+2018-08-09 18:38:27,020 - app.HahOrNahBot - INFO - False
+2018-08-09 18:38:27,107 - app.HahOrNahBot - INFO - False
+2018-08-09 18:38:27,194 - app.HahOrNahBot - INFO - False
+2018-08-09 18:38:27,292 - app.HahOrNahBot - INFO - False
+2018-08-09 18:38:27,412 - app.HahOrNahBot - INFO - False
+2018-08-09 18:38:27,536 - app.HahOrNahBot - INFO - False
+2018-08-09 18:38:27,658 - app.HahOrNahBot - INFO - False
+2018-08-09 18:38:27,759 - app.HahOrNahBot - INFO - False
+2018-08-09 18:38:27,851 - app.HahOrNahBot - INFO - False
+2018-08-09 18:38:27,952 - app.HahOrNahBot - INFO - False
+2018-08-09 18:38:28,028 - telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+2018-08-09 18:38:28,033 - app.HahOrNahBot - INFO - False
+2018-08-09 18:38:28,104 - app.HahOrNahBot - INFO - False
+2018-08-09 18:38:28,176 - app.HahOrNahBot - INFO - False
+2018-08-09 18:38:28,268 - telegram.ext.updater - WARNING - Exiting immediately!
+2018-08-09 18:43:25,149 - telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+2018-08-09 18:43:25,533 - telegram.ext.updater - WARNING - Exiting immediately!
+2018-08-09 18:44:29,560 - app.HahOrNahBot - INFO - a
+2018-08-09 18:44:43,147 - telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+2018-08-09 18:44:43,339 - telegram.ext.updater - WARNING - Exiting immediately!
+2018-08-09 18:44:55,219 - telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+2018-08-09 18:44:55,387 - telegram.ext.updater - WARNING - Exiting immediately!
+2018-08-09 18:45:19,254 - app.HahOrNahBot - INFO - a
+2018-08-09 18:45:21,256 - app.HahOrNahBot - INFO - a
+2018-08-09 18:45:23,258 - app.HahOrNahBot - INFO - a
+2018-08-09 18:45:25,259 - app.HahOrNahBot - INFO - a
+2018-08-09 18:45:27,262 - app.HahOrNahBot - INFO - a
+2018-08-09 18:45:29,263 - app.HahOrNahBot - INFO - a
+2018-08-09 18:45:31,265 - app.HahOrNahBot - INFO - a
+2018-08-09 18:45:33,267 - app.HahOrNahBot - INFO - a
+2018-08-09 18:45:35,269 - app.HahOrNahBot - INFO - a
+2018-08-09 18:45:37,272 - app.HahOrNahBot - INFO - a
+2018-08-09 18:45:39,274 - app.HahOrNahBot - INFO - a
+2018-08-09 18:45:40,730 - telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+2018-08-09 18:45:41,276 - app.HahOrNahBot - INFO - a
+2018-08-09 18:45:41,522 - telegram.ext.updater - WARNING - Exiting immediately!
+2018-08-09 18:48:46,475 - telegram.ext.dispatcher - ERROR - An uncaught error was raised while processing the update
+Traceback (most recent call last):
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 1193, in _execute_context
+    context)
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/sqlalchemy/engine/default.py", line 509, in do_execute
+    cursor.execute(statement, parameters)
+psycopg2.ProgrammingError: can't adapt type 'Chat'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/telegram/ext/dispatcher.py", line 279, in process_update
+    handler.handle_update(update, self)
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/telegram/ext/conversationhandler.py", line 305, in handle_update
+    new_state = self.current_handler.handle_update(update, dispatcher)
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/telegram/ext/messagehandler.py", line 169, in handle_update
+    return self.callback(dispatcher.bot, update, **optional_args)
+  File "/home/jh/programming/HahOrNahBot/app/HahOrNahBot.py", line 231, in new_user_received_username
+    user = self.private_register_user(user_id, username)
+  File "/home/jh/programming/HahOrNahBot/app/HahOrNahBot.py", line 165, in private_register_user
+    user = self.session.query(User).filter(User.id==user_id).first()
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/sqlalchemy/orm/query.py", line 2888, in first
+    ret = list(self[0:1])
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/sqlalchemy/orm/query.py", line 2680, in __getitem__
+    return list(res)
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/sqlalchemy/orm/query.py", line 2988, in __iter__
+    return self._execute_and_instances(context)
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/sqlalchemy/orm/query.py", line 3011, in _execute_and_instances
+    result = conn.execute(querycontext.statement, self._params)
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 948, in execute
+    return meth(self, multiparams, params)
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/sqlalchemy/sql/elements.py", line 269, in _execute_on_connection
+    return connection._execute_clauseelement(self, multiparams, params)
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 1060, in _execute_clauseelement
+    compiled_sql, distilled_params
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 1200, in _execute_context
+    context)
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 1413, in _handle_dbapi_exception
+    exc_info
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/sqlalchemy/util/compat.py", line 265, in raise_from_cause
+    reraise(type(exception), exception, tb=exc_tb, cause=cause)
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/sqlalchemy/util/compat.py", line 248, in reraise
+    raise value.with_traceback(tb)
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 1193, in _execute_context
+    context)
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/sqlalchemy/engine/default.py", line 509, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.ProgrammingError: (psycopg2.ProgrammingError) can't adapt type 'Chat' [SQL: 'SELECT users.id AS users_id, users.username AS users_username, users.score AS users_score \nFROM users \nWHERE users.id = %(id_1)s \n LIMIT %(param_1)s'] [parameters: {'id_1': <telegram.chat.Chat object at 0x7fcba69babe0>, 'param_1': 1}] (Background on this error at: http://sqlalche.me/e/f405)
+2018-08-09 18:49:01,253 - telegram.ext.dispatcher - ERROR - An uncaught error was raised while processing the update
+Traceback (most recent call last):
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 1193, in _execute_context
+    context)
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/sqlalchemy/engine/default.py", line 509, in do_execute
+    cursor.execute(statement, parameters)
+psycopg2.ProgrammingError: can't adapt type 'Chat'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/telegram/ext/dispatcher.py", line 279, in process_update
+    handler.handle_update(update, self)
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/telegram/ext/conversationhandler.py", line 305, in handle_update
+    new_state = self.current_handler.handle_update(update, dispatcher)
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/telegram/ext/messagehandler.py", line 169, in handle_update
+    return self.callback(dispatcher.bot, update, **optional_args)
+  File "/home/jh/programming/HahOrNahBot/app/HahOrNahBot.py", line 231, in new_user_received_username
+    user = self.private_register_user(user_id, username)
+  File "/home/jh/programming/HahOrNahBot/app/HahOrNahBot.py", line 165, in private_register_user
+    user = self.session.query(User).filter(User.id==user_id).first()
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/sqlalchemy/orm/query.py", line 2888, in first
+    ret = list(self[0:1])
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/sqlalchemy/orm/query.py", line 2680, in __getitem__
+    return list(res)
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/sqlalchemy/orm/query.py", line 2988, in __iter__
+    return self._execute_and_instances(context)
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/sqlalchemy/orm/query.py", line 3011, in _execute_and_instances
+    result = conn.execute(querycontext.statement, self._params)
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 948, in execute
+    return meth(self, multiparams, params)
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/sqlalchemy/sql/elements.py", line 269, in _execute_on_connection
+    return connection._execute_clauseelement(self, multiparams, params)
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 1060, in _execute_clauseelement
+    compiled_sql, distilled_params
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 1200, in _execute_context
+    context)
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 1413, in _handle_dbapi_exception
+    exc_info
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/sqlalchemy/util/compat.py", line 265, in raise_from_cause
+    reraise(type(exception), exception, tb=exc_tb, cause=cause)
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/sqlalchemy/util/compat.py", line 248, in reraise
+    raise value.with_traceback(tb)
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 1193, in _execute_context
+    context)
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/sqlalchemy/engine/default.py", line 509, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.ProgrammingError: (psycopg2.ProgrammingError) can't adapt type 'Chat' [SQL: 'SELECT users.id AS users_id, users.username AS users_username, users.score AS users_score \nFROM users \nWHERE users.id = %(id_1)s \n LIMIT %(param_1)s'] [parameters: {'id_1': <telegram.chat.Chat object at 0x7fcba69df668>, 'param_1': 1}] (Background on this error at: http://sqlalche.me/e/f405)
+2018-08-09 18:49:04,965 - telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+2018-08-09 18:49:05,149 - telegram.ext.updater - WARNING - Exiting immediately!
+2018-08-09 18:49:34,055 - telegram.ext.dispatcher - ERROR - An uncaught error was raised while processing the update
+Traceback (most recent call last):
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 1193, in _execute_context
+    context)
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/sqlalchemy/engine/default.py", line 509, in do_execute
+    cursor.execute(statement, parameters)
+psycopg2.ProgrammingError: can't adapt type 'Chat'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/telegram/ext/dispatcher.py", line 279, in process_update
+    handler.handle_update(update, self)
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/telegram/ext/conversationhandler.py", line 305, in handle_update
+    new_state = self.current_handler.handle_update(update, dispatcher)
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/telegram/ext/messagehandler.py", line 169, in handle_update
+    return self.callback(dispatcher.bot, update, **optional_args)
+  File "/home/jh/programming/HahOrNahBot/app/HahOrNahBot.py", line 231, in new_user_received_username
+    user = self.private_register_user(user_id, username)
+  File "/home/jh/programming/HahOrNahBot/app/HahOrNahBot.py", line 165, in private_register_user
+    user = self.session.query(User).filter(User.id==user_id).first()
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/sqlalchemy/orm/query.py", line 2888, in first
+    ret = list(self[0:1])
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/sqlalchemy/orm/query.py", line 2680, in __getitem__
+    return list(res)
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/sqlalchemy/orm/query.py", line 2988, in __iter__
+    return self._execute_and_instances(context)
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/sqlalchemy/orm/query.py", line 3011, in _execute_and_instances
+    result = conn.execute(querycontext.statement, self._params)
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 948, in execute
+    return meth(self, multiparams, params)
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/sqlalchemy/sql/elements.py", line 269, in _execute_on_connection
+    return connection._execute_clauseelement(self, multiparams, params)
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 1060, in _execute_clauseelement
+    compiled_sql, distilled_params
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 1200, in _execute_context
+    context)
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 1413, in _handle_dbapi_exception
+    exc_info
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/sqlalchemy/util/compat.py", line 265, in raise_from_cause
+    reraise(type(exception), exception, tb=exc_tb, cause=cause)
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/sqlalchemy/util/compat.py", line 248, in reraise
+    raise value.with_traceback(tb)
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 1193, in _execute_context
+    context)
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/sqlalchemy/engine/default.py", line 509, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.ProgrammingError: (psycopg2.ProgrammingError) can't adapt type 'Chat' [SQL: 'SELECT users.id AS users_id, users.username AS users_username, users.score AS users_score \nFROM users \nWHERE users.id = %(id_1)s \n LIMIT %(param_1)s'] [parameters: {'id_1': <telegram.chat.Chat object at 0x7f54442f7fd0>, 'param_1': 1}] (Background on this error at: http://sqlalche.me/e/f405)
+2018-08-09 18:51:25,818 - telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+2018-08-09 18:51:26,002 - telegram.ext.updater - WARNING - Exiting immediately!
+2018-08-09 18:51:32,666 - telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+2018-08-09 18:51:32,850 - telegram.ext.updater - WARNING - Exiting immediately!
+2018-08-09 18:54:12,047 - telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+2018-08-09 18:54:12,215 - telegram.ext.updater - WARNING - Exiting immediately!
+2018-08-09 18:55:36,181 - telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+2018-08-09 18:55:36,405 - telegram.ext.updater - WARNING - Exiting immediately!
+2018-08-09 19:00:40,046 - telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+2018-08-09 19:00:40,190 - telegram.ext.updater - WARNING - Exiting immediately!
+2018-08-09 19:02:25,949 - app.HahOrNahBot - INFO - No response found for I have trouble remembering short names, how else could I call you?
+2018-08-09 19:02:25,949 - app.HahOrNahBot - INFO - dict_keys(['user_not_registered', 'user_new_keyboard_button_try_again', 'user_new_keyboard_button', 'user_new_ask_for_username', 'user_register_success', 'user_registered_already', 'username_too_short', 'username_too_long', 'username_invalid_characters', 'joke_no_current', 'joke_no_favorite', 'joke_add', 'joke_too_short', 'joke_too_long', 'joke_forbidden_characters', 'joke_submitted', 'menu', 'no_new_jokes', 'hah_or_nah', 'positive_vote', 'negative_vote'])
+2018-08-09 19:03:42,442 - telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+2018-08-09 19:03:42,602 - telegram.ext.updater - WARNING - Exiting immediately!
+2018-08-09 19:04:38,116 - app.HahOrNahBot - INFO - a
+2018-08-09 19:04:38,117 - app.HahOrNahBot - INFO - No response found for Could you drop those weird charaters, please? It makes my head hurt!
+2018-08-09 19:04:38,117 - app.HahOrNahBot - INFO - dict_keys(['user_not_registered', 'user_new_keyboard_button_try_again', 'user_new_keyboard_button', 'user_new_ask_for_username', 'user_register_success', 'user_registered_already', 'username_too_short', 'username_too_long', 'username_invalid_characters', 'joke_no_current', 'joke_no_favorite', 'joke_add', 'joke_too_short', 'joke_too_long', 'joke_forbidden_characters', 'joke_submitted', 'menu', 'no_new_jokes', 'hah_or_nah', 'positive_vote', 'negative_vote'])
+2018-08-09 19:04:58,128 - telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+2018-08-09 19:04:58,321 - telegram.ext.updater - WARNING - Exiting immediately!
+2018-08-09 19:05:20,886 - app.HahOrNahBot - INFO - a
+2018-08-09 19:05:35,719 - app.HahOrNahBot - INFO - a
+2018-08-09 19:05:38,685 - app.HahOrNahBot - INFO - a
+2018-08-09 19:05:45,529 - app.HahOrNahBot - INFO - a
+2018-08-09 19:05:46,018 - app.HahOrNahBot - INFO - a
+2018-08-09 19:05:50,571 - app.HahOrNahBot - INFO - a
+2018-08-09 19:05:52,072 - app.HahOrNahBot - INFO - a
+2018-08-09 19:05:57,544 - app.HahOrNahBot - INFO - a
+2018-08-09 19:05:59,309 - app.HahOrNahBot - INFO - a
+2018-08-09 19:06:02,332 - app.HahOrNahBot - INFO - a
+2018-08-09 19:06:02,332 - telegram.ext.dispatcher - ERROR - An uncaught error was raised while processing the update
+Traceback (most recent call last):
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 1193, in _execute_context
+    context)
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/sqlalchemy/engine/default.py", line 509, in do_execute
+    cursor.execute(statement, parameters)
+psycopg2.ProgrammingError: can't adapt type 'Chat'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/jh/programming/HahOrNahBot/app/HahOrNahBot.py", line 229, in new_user_received_username
+    user = self.private_register_user(user_id, username)
+  File "/home/jh/programming/HahOrNahBot/app/HahOrNahBot.py", line 175, in private_register_user
+    user = self.session.query(User).filter(User.id==user_id).first()
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/sqlalchemy/orm/query.py", line 2888, in first
+    ret = list(self[0:1])
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/sqlalchemy/orm/query.py", line 2680, in __getitem__
+    return list(res)
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/sqlalchemy/orm/query.py", line 2988, in __iter__
+    return self._execute_and_instances(context)
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/sqlalchemy/orm/query.py", line 3011, in _execute_and_instances
+    result = conn.execute(querycontext.statement, self._params)
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 948, in execute
+    return meth(self, multiparams, params)
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/sqlalchemy/sql/elements.py", line 269, in _execute_on_connection
+    return connection._execute_clauseelement(self, multiparams, params)
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 1060, in _execute_clauseelement
+    compiled_sql, distilled_params
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 1200, in _execute_context
+    context)
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 1413, in _handle_dbapi_exception
+    exc_info
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/sqlalchemy/util/compat.py", line 265, in raise_from_cause
+    reraise(type(exception), exception, tb=exc_tb, cause=cause)
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/sqlalchemy/util/compat.py", line 248, in reraise
+    raise value.with_traceback(tb)
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 1193, in _execute_context
+    context)
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/sqlalchemy/engine/default.py", line 509, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.ProgrammingError: (psycopg2.ProgrammingError) can't adapt type 'Chat' [SQL: 'SELECT users.id AS users_id, users.username AS users_username, users.score AS users_score \nFROM users \nWHERE users.id = %(id_1)s \n LIMIT %(param_1)s'] [parameters: {'id_1': <telegram.chat.Chat object at 0x7fdf48772438>, 'param_1': 1}] (Background on this error at: http://sqlalche.me/e/f405)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/telegram/ext/dispatcher.py", line 279, in process_update
+    handler.handle_update(update, self)
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/telegram/ext/conversationhandler.py", line 305, in handle_update
+    new_state = self.current_handler.handle_update(update, dispatcher)
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/telegram/ext/messagehandler.py", line 169, in handle_update
+    return self.callback(dispatcher.bot, update, **optional_args)
+  File "/home/jh/programming/HahOrNahBot/app/HahOrNahBot.py", line 257, in new_user_received_username
+    text=reply_message,
+UnboundLocalError: local variable 'reply_message' referenced before assignment
+2018-08-09 19:06:05,055 - telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+2018-08-09 19:06:06,095 - telegram.ext.updater - WARNING - Exiting immediately!
+2018-08-09 19:06:52,010 - app.HahOrNahBot - INFO - a
+2018-08-09 19:06:53,402 - app.HahOrNahBot - INFO - a
+2018-08-09 19:07:24,220 - app.HahOrNahBot - INFO - a
+2018-08-09 19:08:24,596 - telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+2018-08-09 19:08:24,780 - telegram.ext.updater - WARNING - Exiting immediately!
+2018-08-10 10:23:17,524 - app.HahOrNahBot - INFO - a
+2018-08-10 10:23:21,921 - app.HahOrNahBot - INFO - a
+2018-08-10 10:23:25,535 - app.HahOrNahBot - INFO - a
+2018-08-10 10:24:02,292 - telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+2018-08-10 10:24:02,460 - telegram.ext.updater - WARNING - Exiting immediately!
+2018-08-10 10:25:48,061 - telegram.ext.dispatcher - ERROR - An uncaught error was raised while processing the update
+Traceback (most recent call last):
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 1193, in _execute_context
+    context)
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/sqlalchemy/engine/default.py", line 509, in do_execute
+    cursor.execute(statement, parameters)
+psycopg2.ProgrammingError: can't adapt type 'Chat'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/jh/programming/HahOrNahBot/app/HahOrNahBot.py", line 229, in new_user_received_username
+    user = self.private_register_user(user_id, username)
+  File "/home/jh/programming/HahOrNahBot/app/HahOrNahBot.py", line 175, in private_register_user
+    user = self.session.query(User).filter(User.id==user_id).first()
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/sqlalchemy/orm/query.py", line 2888, in first
+    ret = list(self[0:1])
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/sqlalchemy/orm/query.py", line 2680, in __getitem__
+    return list(res)
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/sqlalchemy/orm/query.py", line 2988, in __iter__
+    return self._execute_and_instances(context)
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/sqlalchemy/orm/query.py", line 3011, in _execute_and_instances
+    result = conn.execute(querycontext.statement, self._params)
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 948, in execute
+    return meth(self, multiparams, params)
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/sqlalchemy/sql/elements.py", line 269, in _execute_on_connection
+    return connection._execute_clauseelement(self, multiparams, params)
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 1060, in _execute_clauseelement
+    compiled_sql, distilled_params
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 1200, in _execute_context
+    context)
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 1413, in _handle_dbapi_exception
+    exc_info
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/sqlalchemy/util/compat.py", line 265, in raise_from_cause
+    reraise(type(exception), exception, tb=exc_tb, cause=cause)
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/sqlalchemy/util/compat.py", line 248, in reraise
+    raise value.with_traceback(tb)
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 1193, in _execute_context
+    context)
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/sqlalchemy/engine/default.py", line 509, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.ProgrammingError: (psycopg2.ProgrammingError) can't adapt type 'Chat' [SQL: 'SELECT users.id AS users_id, users.username AS users_username, users.score AS users_score \nFROM users \nWHERE users.id = %(id_1)s \n LIMIT %(param_1)s'] [parameters: {'id_1': <telegram.chat.Chat object at 0x7f545a73eb70>, 'param_1': 1}] (Background on this error at: http://sqlalche.me/e/f405)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/telegram/ext/dispatcher.py", line 279, in process_update
+    handler.handle_update(update, self)
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/telegram/ext/conversationhandler.py", line 305, in handle_update
+    new_state = self.current_handler.handle_update(update, dispatcher)
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/telegram/ext/messagehandler.py", line 169, in handle_update
+    return self.callback(dispatcher.bot, update, **optional_args)
+  File "/home/jh/programming/HahOrNahBot/app/HahOrNahBot.py", line 254, in new_user_received_username
+    finally:
+UnboundLocalError: local variable 'reply_message' referenced before assignment
+2018-08-10 10:27:14,073 - telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+2018-08-10 10:27:14,297 - telegram.ext.updater - WARNING - Exiting immediately!
+2018-08-10 10:27:14,992 - app.HahOrNahBot - INFO - No response found for user_new_keyboard_button_try_again
+2018-08-10 10:27:14,992 - app.HahOrNahBot - INFO - dict_keys(['user_not_registered', 'user_new_keyboard_button', 'user_new_ask_for_username', 'user_register_success', 'user_registered_already', 'username_too_short', 'username_too_long', 'username_invalid_characters', 'joke_no_current', 'joke_no_favorite', 'joke_add', 'joke_too_short', 'joke_too_long', 'joke_forbidden_characters', 'joke_submitted', 'menu', 'no_new_jokes', 'hah_or_nah', 'positive_vote', 'negative_vote'])
+2018-08-10 10:28:51,234 - telegram.ext.dispatcher - ERROR - An uncaught error was raised while processing the update
+Traceback (most recent call last):
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 1193, in _execute_context
+    context)
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/sqlalchemy/engine/default.py", line 509, in do_execute
+    cursor.execute(statement, parameters)
+psycopg2.ProgrammingError: can't adapt type 'Chat'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/jh/programming/HahOrNahBot/app/HahOrNahBot.py", line 228, in new_user_received_username
+    user = self.private_register_user(user_id, username)
+  File "/home/jh/programming/HahOrNahBot/app/HahOrNahBot.py", line 174, in private_register_user
+    user = self.session.query(User).filter(User.id==user_id).first()
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/sqlalchemy/orm/query.py", line 2888, in first
+    ret = list(self[0:1])
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/sqlalchemy/orm/query.py", line 2680, in __getitem__
+    return list(res)
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/sqlalchemy/orm/query.py", line 2988, in __iter__
+    return self._execute_and_instances(context)
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/sqlalchemy/orm/query.py", line 3011, in _execute_and_instances
+    result = conn.execute(querycontext.statement, self._params)
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 948, in execute
+    return meth(self, multiparams, params)
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/sqlalchemy/sql/elements.py", line 269, in _execute_on_connection
+    return connection._execute_clauseelement(self, multiparams, params)
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 1060, in _execute_clauseelement
+    compiled_sql, distilled_params
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 1200, in _execute_context
+    context)
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 1413, in _handle_dbapi_exception
+    exc_info
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/sqlalchemy/util/compat.py", line 265, in raise_from_cause
+    reraise(type(exception), exception, tb=exc_tb, cause=cause)
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/sqlalchemy/util/compat.py", line 248, in reraise
+    raise value.with_traceback(tb)
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 1193, in _execute_context
+    context)
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/sqlalchemy/engine/default.py", line 509, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.ProgrammingError: (psycopg2.ProgrammingError) can't adapt type 'Chat' [SQL: 'SELECT users.id AS users_id, users.username AS users_username, users.score AS users_score \nFROM users \nWHERE users.id = %(id_1)s \n LIMIT %(param_1)s'] [parameters: {'id_1': <telegram.chat.Chat object at 0x7fd9a50ca2e8>, 'param_1': 1}] (Background on this error at: http://sqlalche.me/e/f405)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/telegram/ext/dispatcher.py", line 279, in process_update
+    handler.handle_update(update, self)
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/telegram/ext/conversationhandler.py", line 305, in handle_update
+    new_state = self.current_handler.handle_update(update, dispatcher)
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/telegram/ext/messagehandler.py", line 169, in handle_update
+    return self.callback(dispatcher.bot, update, **optional_args)
+  File "/home/jh/programming/HahOrNahBot/app/HahOrNahBot.py", line 255, in new_user_received_username
+    message.reply_text(reply_message)
+UnboundLocalError: local variable 'reply_message' referenced before assignment
+2018-08-10 10:28:54,200 - telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+2018-08-10 10:28:54,720 - telegram.ext.updater - WARNING - Exiting immediately!
+2018-08-10 10:30:08,200 - telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+2018-08-10 10:30:08,400 - telegram.ext.updater - WARNING - Exiting immediately!
+2018-08-10 10:30:38,152 - telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+2018-08-10 10:30:38,343 - telegram.ext.updater - WARNING - Exiting immediately!
+2018-08-10 10:30:48,070 - app.HahOrNahBot - INFO - 452678368
+2018-08-10 10:34:10,389 - telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+2018-08-10 10:34:10,565 - telegram.ext.updater - WARNING - Exiting immediately!
+2018-08-10 10:34:19,804 - app.HahOrNahBot - INFO - No response found for username_try_again
+2018-08-10 10:34:19,804 - app.HahOrNahBot - INFO - dict_keys(['user_not_registered', 'user_new_keyboard_button', 'user_new_ask_for_username', 'user_register_success', 'user_registered_already', 'username_too_short', 'username_too_long', 'username_invalid_characters', 'joke_no_current', 'joke_no_favorite', 'joke_add', 'joke_too_short', 'joke_too_long', 'joke_forbidden_characters', 'joke_submitted', 'menu', 'no_new_jokes', 'hah_or_nah', 'positive_vote', 'negative_vote'])
+2018-08-10 10:35:10,853 - telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+2018-08-10 10:35:11,037 - telegram.ext.updater - WARNING - Exiting immediately!
+2018-08-10 10:35:33,332 - app.HahOrNahBot - INFO - username: abcdef 
+id: 452678368
+score: 0
+jokes submitted: 0
+2018-08-10 10:35:33,415 - telegram.ext.dispatcher - ERROR - An uncaught error was raised while processing the update
+Traceback (most recent call last):
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/telegram/ext/dispatcher.py", line 279, in process_update
+    handler.handle_update(update, self)
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/telegram/ext/conversationhandler.py", line 305, in handle_update
+    new_state = self.current_handler.handle_update(update, dispatcher)
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/telegram/ext/messagehandler.py", line 169, in handle_update
+    return self.callback(dispatcher.bot, update, **optional_args)
+  File "/home/jh/programming/HahOrNahBot/app/HahOrNahBot.py", line 256, in new_user_received_username
+    reply_message = '{} {}'.format(error_message, try_again_message)
+UnboundLocalError: local variable 'error_message' referenced before assignment
+2018-08-10 10:36:48,612 - telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+2018-08-10 10:36:48,828 - telegram.ext.updater - WARNING - Exiting immediately!
+2018-08-10 10:45:59,934 - telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+2018-08-10 10:46:00,102 - telegram.ext.updater - WARNING - Exiting immediately!
+2018-08-10 10:46:31,630 - telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+2018-08-10 10:46:31,773 - telegram.ext.updater - WARNING - Exiting immediately!
+2018-08-10 10:49:18,004 - telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+2018-08-10 10:49:18,188 - telegram.ext.updater - WARNING - Exiting immediately!
+2018-08-10 11:03:58,526 - telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+2018-08-10 11:03:58,678 - telegram.ext.updater - WARNING - Exiting immediately!
+2018-08-10 11:27:56,183 - app.HahOrNahBot - INFO - username: asdfsg 
+id: 452678368
+score: 0
+jokes submitted: 0
+2018-08-10 11:27:56,265 - telegram.ext.dispatcher - ERROR - An uncaught error was raised while processing the update
+Traceback (most recent call last):
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/telegram/ext/dispatcher.py", line 279, in process_update
+    handler.handle_update(update, self)
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/telegram/ext/conversationhandler.py", line 305, in handle_update
+    new_state = self.current_handler.handle_update(update, dispatcher)
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/telegram/ext/messagehandler.py", line 169, in handle_update
+    return self.callback(dispatcher.bot, update, **optional_args)
+  File "/home/jh/programming/HahOrNahBot/app/HahOrNahBot.py", line 311, in new_user_received_username
+    reply_message = '{} {}'.format(error_message, try_again_message)
+UnboundLocalError: local variable 'error_message' referenced before assignment
+2018-08-10 11:32:16,435 - telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+2018-08-10 11:32:16,635 - telegram.ext.updater - WARNING - Exiting immediately!
+2018-08-10 11:34:06,409 - telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+2018-08-10 11:34:06,601 - telegram.ext.updater - WARNING - Exiting immediately!
+2018-08-10 11:34:10,938 - telegram.ext.dispatcher - ERROR - An uncaught error was raised while processing the update
+Traceback (most recent call last):
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/telegram/ext/dispatcher.py", line 279, in process_update
+    handler.handle_update(update, self)
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/telegram/ext/callbackqueryhandler.py", line 143, in handle_update
+    return self.callback(dispatcher.bot, update, **optional_args)
+TypeError: callback_eval() got an unexpected keyword argument 'chat_data'
+2018-08-10 11:34:27,416 - telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+2018-08-10 11:34:27,584 - telegram.ext.updater - WARNING - Exiting immediately!
+2018-08-10 11:35:26,391 - telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+2018-08-10 11:35:26,567 - telegram.ext.updater - WARNING - Exiting immediately!
+2018-08-10 11:38:48,242 - telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+2018-08-10 11:38:48,427 - telegram.ext.updater - WARNING - Exiting immediately!
+2018-08-10 11:39:08,834 - telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+2018-08-10 11:39:09,005 - telegram.ext.updater - WARNING - Exiting immediately!
+2018-08-10 11:39:19,266 - telegram.ext.dispatcher - ERROR - An uncaught error was raised while processing the update
+Traceback (most recent call last):
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/telegram/ext/dispatcher.py", line 279, in process_update
+    handler.handle_update(update, self)
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/telegram/ext/callbackqueryhandler.py", line 143, in handle_update
+    return self.callback(dispatcher.bot, update, **optional_args)
+  File "/home/jh/programming/HahOrNahBot/app/HahOrNahBot.py", line 286, in callback_eval
+    self.show_new_joke_keyboard(bot, update)
+  File "/home/jh/programming/HahOrNahBot/app/HahOrNahBot.py", line 252, in show_new_joke_keyboard
+    bot.send_message(chat_id=update.message.chat_id,
+AttributeError: 'NoneType' object has no attribute 'chat_id'
+2018-08-10 12:06:22,869 - telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+2018-08-10 12:07:06,858 - telegram.ext.dispatcher - ERROR - An uncaught error was raised while processing the update
+Traceback (most recent call last):
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/telegram/ext/dispatcher.py", line 279, in process_update
+    handler.handle_update(update, self)
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/telegram/ext/callbackqueryhandler.py", line 143, in handle_update
+    return self.callback(dispatcher.bot, update, **optional_args)
+  File "/home/jh/programming/HahOrNahBot/app/HahOrNahBot.py", line 286, in callback_eval
+    self.show_new_joke_keyboard(bot, update)
+  File "/home/jh/programming/HahOrNahBot/app/HahOrNahBot.py", line 252, in show_new_joke_keyboard
+    bot.send_message(chat_id=update.message.chat_id,
+AttributeError: 'NoneType' object has no attribute 'chat_id'
+2018-08-10 12:07:51,059 - telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+2018-08-10 12:07:51,235 - telegram.ext.updater - WARNING - Exiting immediately!
+2018-08-10 12:07:54,955 - telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+2018-08-10 12:07:55,115 - telegram.ext.updater - WARNING - Exiting immediately!
+2018-08-10 12:10:36,079 - telegram.ext.dispatcher - ERROR - An uncaught error was raised while processing the update
+Traceback (most recent call last):
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/telegram/ext/dispatcher.py", line 279, in process_update
+    handler.handle_update(update, self)
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/telegram/ext/regexhandler.py", line 173, in handle_update
+    return self.callback(dispatcher.bot, update, **optional_args)
+  File "/home/jh/programming/HahOrNahBot/app/HahOrNahBot.py", line 303, in menu
+    message = self.private_get_message(update)
+  File "/home/jh/programming/HahOrNahBot/app/HahOrNahBot.py", line 244, in private_get_message
+    message = self.private_get_message(update)
+  File "/home/jh/programming/HahOrNahBot/app/HahOrNahBot.py", line 244, in private_get_message
+    message = self.private_get_message(update)
+  File "/home/jh/programming/HahOrNahBot/app/HahOrNahBot.py", line 244, in private_get_message
+    message = self.private_get_message(update)
+  [Previous line repeated 984 more times]
+RecursionError: maximum recursion depth exceeded
+2018-08-10 12:11:32,248 - telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+2018-08-10 12:11:32,414 - telegram.ext.updater - WARNING - Exiting immediately!
+2018-08-10 12:11:34,532 - app.HahOrNahBot - INFO - {'message_id': 2088, 'date': 1533895894, 'chat': {'id': 452678368, 'type': 'private', 'username': 'jac08h', 'first_name': 'jac08h'}, 'text': 'fads', 'entities': [], 'caption_entities': [], 'photo': [], 'new_chat_members': [], 'new_chat_photo': [], 'delete_chat_photo': False, 'group_chat_created': False, 'supergroup_chat_created': False, 'channel_chat_created': False, 'from': {'id': 452678368, 'first_name': 'jac08h', 'is_bot': False, 'username': 'jac08h', 'language_code': 'en-US'}}
+2018-08-10 12:11:34,532 - telegram.ext.dispatcher - ERROR - An uncaught error was raised while processing the update
+Traceback (most recent call last):
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/telegram/ext/dispatcher.py", line 279, in process_update
+    handler.handle_update(update, self)
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/telegram/ext/regexhandler.py", line 173, in handle_update
+    return self.callback(dispatcher.bot, update, **optional_args)
+  File "/home/jh/programming/HahOrNahBot/app/HahOrNahBot.py", line 305, in menu
+    user = self.private_get_user(message, user_data)
+  File "/home/jh/programming/HahOrNahBot/app/HahOrNahBot.py", line 159, in private_get_user
+    user_id = message.chat.id
+AttributeError: 'NoneType' object has no attribute 'chat'
+2018-08-10 12:12:24,189 - telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+2018-08-10 12:12:24,341 - telegram.ext.updater - WARNING - Exiting immediately!
+2018-08-10 12:12:26,270 - app.HahOrNahBot - INFO - {'message_id': 2089, 'date': 1533895946, 'chat': {'id': 452678368, 'type': 'private', 'username': 'jac08h', 'first_name': 'jac08h'}, 'text': 'fdas', 'entities': [], 'caption_entities': [], 'photo': [], 'new_chat_members': [], 'new_chat_photo': [], 'delete_chat_photo': False, 'group_chat_created': False, 'supergroup_chat_created': False, 'channel_chat_created': False, 'from': {'id': 452678368, 'first_name': 'jac08h', 'is_bot': False, 'username': 'jac08h', 'language_code': 'en-US'}}
+2018-08-10 12:12:28,205 - app.HahOrNahBot - INFO - None
+2018-08-10 12:12:28,205 - telegram.ext.dispatcher - ERROR - An uncaught error was raised while processing the update
+Traceback (most recent call last):
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/telegram/ext/dispatcher.py", line 279, in process_update
+    handler.handle_update(update, self)
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/telegram/ext/callbackqueryhandler.py", line 143, in handle_update
+    return self.callback(dispatcher.bot, update, **optional_args)
+  File "/home/jh/programming/HahOrNahBot/app/HahOrNahBot.py", line 298, in callback_eval
+    self.show_random_joke(bot, update, user_data)
+  File "/home/jh/programming/HahOrNahBot/app/HahOrNahBot.py", line 385, in show_random_joke
+    message = self.private_get_message(update).message
+AttributeError: 'NoneType' object has no attribute 'message'
+2018-08-10 12:12:57,092 - telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+2018-08-10 12:12:57,244 - telegram.ext.updater - WARNING - Exiting immediately!
+2018-08-10 12:12:59,617 - app.HahOrNahBot - INFO - {'message_id': 2091, 'date': 1533895979, 'chat': {'id': 452678368, 'type': 'private', 'username': 'jac08h', 'first_name': 'jac08h'}, 'text': 'fdas', 'entities': [], 'caption_entities': [], 'photo': [], 'new_chat_members': [], 'new_chat_photo': [], 'delete_chat_photo': False, 'group_chat_created': False, 'supergroup_chat_created': False, 'channel_chat_created': False, 'from': {'id': 452678368, 'first_name': 'jac08h', 'is_bot': False, 'username': 'jac08h', 'language_code': 'en-US'}}
+2018-08-10 12:13:00,935 - app.HahOrNahBot - INFO - None
+2018-08-10 12:13:00,937 - telegram.ext.dispatcher - ERROR - An uncaught error was raised while processing the update
+Traceback (most recent call last):
+  File "/home/jh/programming/HahOrNahBot/app/HahOrNahBot.py", line 397, in show_random_joke
+    random_joke_index = randint(0, len(all_jokes)-1)
+  File "/usr/lib/python3.7/random.py", line 222, in randint
+    return self.randrange(a, b+1)
+  File "/usr/lib/python3.7/random.py", line 200, in randrange
+    raise ValueError("empty range for randrange() (%d,%d, %d)" % (istart, istop, width))
+ValueError: empty range for randrange() (0,0, 0)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/telegram/ext/dispatcher.py", line 279, in process_update
+    handler.handle_update(update, self)
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/telegram/ext/callbackqueryhandler.py", line 143, in handle_update
+    return self.callback(dispatcher.bot, update, **optional_args)
+  File "/home/jh/programming/HahOrNahBot/app/HahOrNahBot.py", line 298, in callback_eval
+    self.show_random_joke(bot, update, user_data)
+  File "/home/jh/programming/HahOrNahBot/app/HahOrNahBot.py", line 399, in show_random_joke
+    message.reply_text(self.private_get_random_response('no_new_jokes'))
+AttributeError: 'NoneType' object has no attribute 'reply_text'
+2018-08-10 12:13:50,189 - telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+2018-08-10 12:13:50,363 - telegram.ext.updater - WARNING - Exiting immediately!
+2018-08-10 12:13:53,427 - app.HahOrNahBot - INFO - {'message_id': 2093, 'date': 1533896033, 'chat': {'id': 452678368, 'type': 'private', 'username': 'jac08h', 'first_name': 'jac08h'}, 'text': 'fsad', 'entities': [], 'caption_entities': [], 'photo': [], 'new_chat_members': [], 'new_chat_photo': [], 'delete_chat_photo': False, 'group_chat_created': False, 'supergroup_chat_created': False, 'channel_chat_created': False, 'from': {'id': 452678368, 'first_name': 'jac08h', 'is_bot': False, 'username': 'jac08h', 'language_code': 'en-US'}}
+2018-08-10 12:13:54,828 - app.HahOrNahBot - INFO - {'message_id': 2094, 'date': 1533896033, 'chat': {'id': 452678368, 'type': 'private', 'username': 'jac08h', 'first_name': 'jac08h'}, 'text': "What's up!", 'entities': [], 'caption_entities': [], 'photo': [], 'new_chat_members': [], 'new_chat_photo': [], 'delete_chat_photo': False, 'group_chat_created': False, 'supergroup_chat_created': False, 'channel_chat_created': False, 'from': {'id': 617375870, 'first_name': 'HahOrNah', 'is_bot': True, 'username': 'HahOrNahBot'}}
+2018-08-10 12:13:56,602 - app.HahOrNahBot - INFO - {'message_id': 2094, 'date': 1533896033, 'chat': {'id': 452678368, 'type': 'private', 'username': 'jac08h', 'first_name': 'jac08h'}, 'text': "What's up!", 'entities': [], 'caption_entities': [], 'photo': [], 'new_chat_members': [], 'new_chat_photo': [], 'delete_chat_photo': False, 'group_chat_created': False, 'supergroup_chat_created': False, 'channel_chat_created': False, 'from': {'id': 617375870, 'first_name': 'HahOrNah', 'is_bot': True, 'username': 'HahOrNahBot'}}
+2018-08-10 12:13:56,603 - telegram.ext.dispatcher - ERROR - An uncaught error was raised while processing the update
+Traceback (most recent call last):
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/telegram/ext/dispatcher.py", line 279, in process_update
+    handler.handle_update(update, self)
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/telegram/ext/callbackqueryhandler.py", line 143, in handle_update
+    return self.callback(dispatcher.bot, update, **optional_args)
+  File "/home/jh/programming/HahOrNahBot/app/HahOrNahBot.py", line 302, in callback_eval
+    self.show_new_joke_keyboard(bot, update)
+  File "/home/jh/programming/HahOrNahBot/app/HahOrNahBot.py", line 266, in show_new_joke_keyboard
+    message = self.private_get_message(update).message
+AttributeError: 'Message' object has no attribute 'message'
+2018-08-10 12:15:23,289 - telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+2018-08-10 12:15:23,441 - telegram.ext.updater - WARNING - Exiting immediately!
+2018-08-10 12:15:32,138 - app.HahOrNahBot - INFO - {'message_id': 2096, 'date': 1533896132, 'chat': {'id': 452678368, 'type': 'private', 'username': 'jac08h', 'first_name': 'jac08h'}, 'text': 'asfd', 'entities': [], 'caption_entities': [], 'photo': [], 'new_chat_members': [], 'new_chat_photo': [], 'delete_chat_photo': False, 'group_chat_created': False, 'supergroup_chat_created': False, 'channel_chat_created': False, 'from': {'id': 452678368, 'first_name': 'jac08h', 'is_bot': False, 'username': 'jac08h', 'language_code': 'en-US'}}
+2018-08-10 12:15:33,478 - app.HahOrNahBot - INFO - {'message_id': 2097, 'date': 1533896132, 'chat': {'id': 452678368, 'type': 'private', 'username': 'jac08h', 'first_name': 'jac08h'}, 'text': 'How are you?', 'entities': [], 'caption_entities': [], 'photo': [], 'new_chat_members': [], 'new_chat_photo': [], 'delete_chat_photo': False, 'group_chat_created': False, 'supergroup_chat_created': False, 'channel_chat_created': False, 'from': {'id': 617375870, 'first_name': 'HahOrNah', 'is_bot': True, 'username': 'HahOrNahBot'}}
+2018-08-10 12:18:07,229 - telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+2018-08-10 12:18:07,372 - telegram.ext.updater - WARNING - Exiting immediately!
+2018-08-10 12:18:18,446 - telegram.ext.dispatcher - ERROR - An uncaught error was raised while processing the update
+Traceback (most recent call last):
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/telegram/ext/dispatcher.py", line 279, in process_update
+    handler.handle_update(update, self)
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/telegram/ext/conversationhandler.py", line 305, in handle_update
+    new_state = self.current_handler.handle_update(update, dispatcher)
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/telegram/ext/regexhandler.py", line 173, in handle_update
+    return self.callback(dispatcher.bot, update, **optional_args)
+TypeError: new_joke_prompt() missing 1 required positional argument: 'user_data'
+2018-08-10 12:19:24,291 - telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+2018-08-10 12:19:24,467 - telegram.ext.updater - WARNING - Exiting immediately!
+2018-08-10 12:19:39,047 - telegram.ext.dispatcher - ERROR - An uncaught error was raised while processing the update
+Traceback (most recent call last):
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/telegram/ext/dispatcher.py", line 279, in process_update
+    handler.handle_update(update, self)
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/telegram/ext/conversationhandler.py", line 305, in handle_update
+    new_state = self.current_handler.handle_update(update, dispatcher)
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/telegram/ext/messagehandler.py", line 169, in handle_update
+    return self.callback(dispatcher.bot, update, **optional_args)
+  File "/home/jh/programming/HahOrNahBot/app/HahOrNahBot.py", line 369, in new_joke_received
+    reply_message = '{} {}'.format(error_message, try_again_message)
+UnboundLocalError: local variable 'error_message' referenced before assignment
+2018-08-10 12:21:22,536 - telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+2018-08-10 12:21:22,696 - telegram.ext.updater - WARNING - Exiting immediately!
+2018-08-10 12:24:20,844 - telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+2018-08-10 12:24:21,020 - telegram.ext.updater - WARNING - Exiting immediately!
+2018-08-10 12:24:24,180 - telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+2018-08-10 12:24:24,324 - telegram.ext.updater - WARNING - Exiting immediately!
+2018-08-10 12:24:36,796 - app.HahOrNahBot - INFO - No response found for positive_vote_keyboard_button
+2018-08-10 12:24:36,796 - app.HahOrNahBot - INFO - dict_keys(['user_not_registered', 'user_new_keyboard_button', 'user_new_prompt', 'user_register_success', 'user_register_try_again', 'user_registered_already', 'username_too_short', 'username_too_long', 'username_invalid_characters', 'joke_no_current', 'joke_no_favorite', 'joke_new_prompt', 'joke_new_try_again', 'joke_new_keyboard_button', 'joke_new_ask', 'joke_too_short', 'joke_too_long', 'joke_submitted', 'menu', 'no_new_jokes', 'hah_or_nah', 'positive_vote', 'negative_vote'])
+2018-08-10 12:25:45,586 - telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+2018-08-10 12:25:45,778 - telegram.ext.updater - WARNING - Exiting immediately!
+2018-08-10 12:26:14,105 - telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+2018-08-10 12:26:14,289 - telegram.ext.updater - WARNING - Exiting immediately!
+2018-08-10 12:29:32,549 - telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+2018-08-10 12:29:32,717 - telegram.ext.updater - WARNING - Exiting immediately!
+2018-08-10 12:31:28,730 - telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+2018-08-10 12:31:29,066 - telegram.ext.updater - WARNING - Exiting immediately!
+2018-08-10 12:34:16,190 - telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+2018-08-10 12:34:16,342 - telegram.ext.updater - WARNING - Exiting immediately!
+2018-08-10 12:36:12,020 - telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+2018-08-10 12:36:12,196 - telegram.ext.updater - WARNING - Exiting immediately!
+2018-08-10 12:36:45,114 - telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+2018-08-10 12:36:45,291 - telegram.ext.updater - WARNING - Exiting immediately!
+2018-08-10 12:37:08,322 - telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+2018-08-10 12:37:08,466 - telegram.ext.updater - WARNING - Exiting immediately!
+2018-08-10 12:37:51,617 - telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+2018-08-10 12:37:51,849 - telegram.ext.updater - WARNING - Exiting immediately!
+2018-08-10 12:38:23,760 - telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+2018-08-10 12:38:23,905 - telegram.ext.updater - WARNING - Exiting immediately!
+2018-08-10 12:42:07,451 - telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+2018-08-10 12:42:07,619 - telegram.ext.updater - WARNING - Exiting immediately!
+2018-08-10 12:42:11,695 - telegram.ext.dispatcher - WARNING - A TelegramError was raised while processing the Update
+2018-08-10 12:42:11,695 - telegram.ext.dispatcher - ERROR - No error handlers are registered, logging exception...
+Traceback (most recent call last):
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/telegram/ext/dispatcher.py", line 279, in process_update
+    handler.handle_update(update, self)
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/telegram/ext/regexhandler.py", line 173, in handle_update
+    return self.callback(dispatcher.bot, update, **optional_args)
+  File "/home/jh/programming/HahOrNahBot/app/HahOrNahBot.py", line 319, in menu
+    self.show_menu_keyboard(bot, update)
+  File "/home/jh/programming/HahOrNahBot/app/HahOrNahBot.py", line 288, in show_menu_keyboard
+    reply_markup=keyboard)
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/telegram/bot.py", line 60, in decorator
+    result = func(self, *args, **kwargs)
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/telegram/bot.py", line 85, in decorator
+    result = self._request.post(url, data, timeout=kwargs.get('timeout'))
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/telegram/utils/request.py", line 278, in post
+    **urlopen_kwargs)
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/telegram/utils/request.py", line 215, in _request_wrapper
+    raise BadRequest(message)
+telegram.error.BadRequest: Can't parse inline keyboard button: text buttons are unallowed in the inline keyboard
+2018-08-10 12:43:33,353 - telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+2018-08-10 12:43:33,529 - telegram.ext.updater - WARNING - Exiting immediately!
+2018-08-10 12:43:38,420 - telegram.ext.dispatcher - WARNING - A TelegramError was raised while processing the Update
+2018-08-10 12:43:38,421 - telegram.ext.dispatcher - ERROR - No error handlers are registered, logging exception...
+Traceback (most recent call last):
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/telegram/ext/dispatcher.py", line 279, in process_update
+    handler.handle_update(update, self)
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/telegram/ext/regexhandler.py", line 173, in handle_update
+    return self.callback(dispatcher.bot, update, **optional_args)
+  File "/home/jh/programming/HahOrNahBot/app/HahOrNahBot.py", line 318, in menu
+    self.show_menu_keyboard(bot, update)
+  File "/home/jh/programming/HahOrNahBot/app/HahOrNahBot.py", line 287, in show_menu_keyboard
+    reply_markup=keyboard)
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/telegram/bot.py", line 60, in decorator
+    result = func(self, *args, **kwargs)
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/telegram/bot.py", line 85, in decorator
+    result = self._request.post(url, data, timeout=kwargs.get('timeout'))
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/telegram/utils/request.py", line 278, in post
+    **urlopen_kwargs)
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/telegram/utils/request.py", line 215, in _request_wrapper
+    raise BadRequest(message)
+telegram.error.BadRequest: Can't parse inline keyboard button: text buttons are unallowed in the inline keyboard
+2018-08-10 12:43:50,665 - telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+2018-08-10 12:43:50,833 - telegram.ext.updater - WARNING - Exiting immediately!
+2018-08-10 12:43:54,228 - telegram.ext.dispatcher - ERROR - An uncaught error was raised while processing the update
+Traceback (most recent call last):
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/telegram/ext/dispatcher.py", line 279, in process_update
+    handler.handle_update(update, self)
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/telegram/ext/regexhandler.py", line 173, in handle_update
+    return self.callback(dispatcher.bot, update, **optional_args)
+  File "/home/jh/programming/HahOrNahBot/app/HahOrNahBot.py", line 318, in menu
+    self.show_menu_keyboard(bot, update)
+  File "/home/jh/programming/HahOrNahBot/app/HahOrNahBot.py", line 284, in show_menu_keyboard
+    keyboard = KeyboardMarkup(menu_options)
+NameError: name 'KeyboardMarkup' is not defined
+2018-08-10 12:44:21,896 - telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+2018-08-10 12:44:22,136 - telegram.ext.updater - WARNING - Exiting immediately!
+2018-08-10 12:45:07,271 - telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+2018-08-10 12:45:07,471 - telegram.ext.updater - WARNING - Exiting immediately!
+2018-08-10 12:51:03,959 - telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+2018-08-10 12:51:04,119 - telegram.ext.updater - WARNING - Exiting immediately!
+2018-08-10 12:52:41,341 - telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+2018-08-10 12:52:41,501 - telegram.ext.updater - WARNING - Exiting immediately!
+2018-08-10 12:57:37,206 - telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+2018-08-10 12:57:37,334 - telegram.ext.updater - WARNING - Exiting immediately!
+2018-08-10 12:59:54,915 - telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+2018-08-10 12:59:55,131 - telegram.ext.updater - WARNING - Exiting immediately!
+2018-08-10 13:00:06,612 - telegram.ext.dispatcher - ERROR - An uncaught error was raised while processing the update
+Traceback (most recent call last):
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/telegram/ext/dispatcher.py", line 279, in process_update
+    handler.handle_update(update, self)
+  File "/home/jh/programming/HahOrNahBot/venv/lib/python3.7/site-packages/telegram/ext/commandhandler.py", line 173, in handle_update
+    return self.callback(dispatcher.bot, update, **optional_args)
+TypeError: profile() got an unexpected keyword argument 'user_data'
+2018-08-10 13:01:53,864 - telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+2018-08-10 13:01:53,992 - telegram.ext.updater - WARNING - Exiting immediately!
+2018-08-10 13:04:46,388 - telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+2018-08-10 13:04:46,524 - telegram.ext.updater - WARNING - Exiting immediately!

@@ -5,10 +5,22 @@
       "I don't know you, I swear.",
       "You are new, aren't you?"
     ],
-    "user_registered_success" : [
+
+    "user_new_keyboard_button": [
+      "I'd like to introduce myself"
+    ],
+    "user_new_prompt":[
+      "What's your name?",
+      "How should I call you?"
+    ],
+    "user_register_success" : [
       "Alright, I'm sure I'll remember you!",
-      "Hah, that's a nice name. Welcome!",
+      "That's a nice name. Welcome!",
       "Welcome!"
+    ],
+    "user_register_try_again" : [
+      "Try again, please.",
+      "Any other ideas?"
     ],
     "user_registered_already" : [
       "No need for that, I know you already!",
@@ -16,15 +28,14 @@
     ],
     "username_too_short" : [
       "Oh, that's too short.",
-      "I have trouble remembering short names, can I call you something longer?"
+      "I have trouble remembering short names."
     ],
     "username_too_long" : [
-      "No way I can remember that! You have to come up with shorter version."
+      "No way I can remember that! You have to come up with something shorter!"
     ],
-    "username_forbidden_characters" : [
+    "username_invalid_characters" : [
       "Could you drop those weird charaters, please? It makes my head hurt!"
     ],
-
 
 
 
@@ -38,9 +49,24 @@
     "That won't be possible. You don't find my jokes funny 😔"
     ],
 
-    "joke_add" : [
-      "Go ahead! Add '+' sign to the beginning of your message and I'll remember it as a joke."
+    "joke_new_prompt" : [
+      "I'm listening!"
     ],
+
+    "joke_new_try_again": [
+      "Try again, please."
+    ],
+
+    "joke_new_keyboard_button" : [
+      "Listen up!",
+      "I'm sure you haven't heard this one before!",
+      "Sure, listen!"
+    ],
+
+    "joke_new_ask" : [
+      "You've got something new?"
+    ],
+
     "joke_too_short" : [
       "Huh?",
       "Once again, please. That was too short."
@@ -48,29 +74,19 @@
     "joke_too_long" : [
     "I already forgot the first part, hah! Try again, but you have to cut it short!"
     ],
-    "joke_forbidden_characters" : [
-    "Oh, my eyes! Please don't use anything except letters, numbers and punctuation."
-    ],
 
     "joke_submitted" : [
       "Thank you!",
       "Not bad!",
       "Haha, thanks!",
-      "I don't get it but thank you anyway"
+      "I don't get it but thank you anyway!"
     ],
 
 
 
 
     "menu" : [
-      "What's up!",
-      "Hey, what should I do now?",
-      "Welcome back!",
-      "It's been a while!",
-      "You again?",
-      "I can do anything!",
-      "How are you?"
-
+      "😄"
     ],
 
     "no_new_jokes" : [
@@ -82,14 +98,19 @@
 
     "hah_or_nah" : [
       "Hah or nah?",
-      ":D or :|",
-      "Funny or not?",
       "What do you think?"
     ],
-    "positive_vote" : [
-      ":)"
+    "positive_vote_keyboard_button" : [
+      "Hah!",
+      ":D",
+      "That's funny!"
     ],
-    "negative_vote" : [
-      ":("
+    "negative_vote_keyboard_button" : [
+      "Nah.",
+      ":|",
+      "No, sorry"
+  ],
+    "cancel" : [
+      "Alright"
   ]
 }

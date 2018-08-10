@@ -1,22 +1,29 @@
-from telegram.ext import Updater, CommandHandler, ConversationHandler, CallbackQueryHandler, RegexHandler
-from telegram import InlineKeyboardMarkup, InlineKeyboardButton, ReplyKeyboardRemove
-from time import sleep
+from telegram.ext import (Updater,
+                          CommandHandler, ConversationHandler, RegexHandler, MessageHandler, CallbackQueryHandler,
+                          Filters)
+
+from telegram import (KeyboardButton, ReplyKeyboardMarkup,
+                      InlineKeyboardMarkup, InlineKeyboardButton,
+                      ReplyKeyboardRemove)
 
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-import sqlalchemy.orm.exc as sql_errors
 
 import logging
 from random import randint, choice
 import json
 from sys import exit
 from string import ascii_letters, digits
+from time import sleep
 
 from app.models import Joke, User
-from app.exceptions import InvalidVote, UserDoesNotExist
+from app.exceptions import *
+
 
 logger = logging.getLogger(__name__)
 
+USERNAME_RECEIVED = 0
+JOKE_RECEIVED = 0
 
 class HahOrNahBot:
     def __init__(self, token, database_url):
@@ -26,24 +33,58 @@ class HahOrNahBot:
         self.USERNAME_LENGTH_MAX = 20
         self.USERNAME_ALLOWED_CHARACTERS = set(ascii_letters + digits + '-_')
 
-        self.MESSAGES_FILE = 'messages.json'
+        self.WAIT_TIME = 2
+
+        self.RESPONSES_FILE = 'bot_responses/bot_responses.json'
+        self.responses = self.private_get_responses(self.RESPONSES_FILE)
 
         self.token = token
         self.database_url = database_url
         self.updater = Updater(token=token)
         self.dispatcher = self.updater.dispatcher
 
-        start_handler = CommandHandler('start', self.command_menu)
-        register_user_handler = CommandHandler('register', self.register_user)
-        add_handler = RegexHandler('\+.+', self.add_joke, pass_chat_data=True)  # any text starting with + sign
-        menu_handler = RegexHandler('.+', self.command_menu)
-        callback_handler = CallbackQueryHandler(self.callback_eval, pass_chat_data=True)
+        new_user_keyboard_string = self.private_get_one_response('user_new_keyboard_button')
+        new_user_handler = ConversationHandler(
+            entry_points=[RegexHandler("{}".format(new_user_keyboard_string), self.new_user_prompt)],
+            states={
+                USERNAME_RECEIVED: [MessageHandler(Filters.text,
+                                                     self.new_user_received_username,
+                                                     pass_user_data=True)
+                                    ],
+            },
+            fallbacks=[RegexHandler('Cancel', self.cancel)]
+        )
 
+        new_joke_keyboard_string = self.private_get_one_response('joke_new_keyboard_button')
+        new_joke_handler = ConversationHandler(
+            entry_points=[RegexHandler("/add_joke".format(new_joke_keyboard_string), self.new_joke_prompt)],
+            states={
+                JOKE_RECEIVED: [MessageHandler(Filters.text,
+                                                  self.new_joke_received,
+                                                  pass_user_data=True)
+                    ]
+            },
+            fallbacks=[RegexHandler('Cancel', self.cancel)]
+        )
+
+        start_handler = CommandHandler('start', self.menu, pass_user_data=True)
+        random_joke_handler = CommandHandler('random_joke', self.show_random_joke, pass_user_data=True)
+        random_favorite_joke_handler = CommandHandler('random_favorite_joke', self.show_random_favorite_joke, pass_user_data=True)
+        profile_handler = CommandHandler('profile', self.profile, pass_user_data=True)
+        top10_handler = CommandHandler('top10', self.top10, pass_user_data=True)
+
+        menu_handler = RegexHandler('menu', self.menu, pass_user_data=True)
         handlers = [start_handler,
-                    register_user_handler,
-                    add_handler,
-                    menu_handler,
-                    callback_handler]
+                    new_user_handler,
+                    new_joke_handler,
+
+                    random_joke_handler,
+                    random_favorite_joke_handler,
+                    profile_handler,
+                    top10_handler,
+
+                    menu_handler]
+
         for handler in handlers:
             self.dispatcher.add_handler(handler)
 
@@ -51,50 +92,73 @@ class HahOrNahBot:
         Session = sessionmaker(bind=engine)
         self.session = Session()
 
-        self.messages = self.private_get_messages(self.MESSAGES_FILE)
+    # PRIVATE METHODS
 
-    def private_get_messages(self, messages_file):
+    def private_get_responses(self, responses_file):
         """
-        Get bot messages defined in config_file
+        Get bot responses defined in self.RESPONSES_FILE
 
         Returns:
             dict
         """
         try:
-            with open(messages_file, 'r') as fp:
-                messages = json.load(fp)
-            return messages
+            with open(responses_file, 'r') as fp:
+                responses = json.load(fp)
+            return responses
 
         except FileNotFoundError:
-            logger.info('Messages file {} not found. Exiting'.format(messages_file))
+            logger.info('Responses file {} not found. Exiting'.format(responses_file))
             exit()
 
-    def private_get_random_message(self, state):
+    def private_get_random_response(self, state):
         """
-        Return random message from to be replied
+        Return random response from config_file
 
         Returns:
             string
         """
         try:
-            assert state in self.messages.keys()  # should be called only with states defined in self.MESSAGES_FILE
+            assert state in self.responses.keys()  # should be called only with states defined in self.RESPONSES_FILE
         except AssertionError:
-            logger.info('No message found for ' + state)
-            logger.info(self.messages.keys())
+            logger.info('No response found for ' + state)
+            logger.info(self.responses.keys())
             exit()
 
-        message = choice(self.messages[state])
-        return message
+        response = choice(self.responses[state])
+        return response
 
-    def private_get_user(self, message, chat_data):
+    def private_get_one_response(self, state):
         """
-        Get user by id if the user is in database, create new database record otherwise.
+        Return response from config_file when there is only one possible
 
         Returns:
-            instance of User class if user exists, None otherwise
+            string
+
         """
         try:
-            user = chat_data['current_user']
+            assert state in self.responses.keys()  # should be called only with states defined in self.RESPONSES_FILE
+        except AssertionError:
+            logger.info('No response found for ' + state)
+            logger.info(self.responses.keys())
+            exit()
+
+        response = self.responses[state][0]
+        return response
+
+    def private_get_user(self, message, user_data):
+        """
+        Get user by id if the user is in database, raise exception if user is not found.
+
+        Returns:
+            instance of User class if user exists
+
+        Raises:
+            UserDoesNotExist
+        """
+
+        # Check user in cache
+        try:
+            user = user_data['current_user']
             return user
         except KeyError:
             pass
@@ -103,165 +167,292 @@ class HahOrNahBot:
         user_id = message.chat.id
         user = self.session.query(User).filter(User.id == user_id).first()
         if user is None:
-            reply_message = self.private_get_random_message('user_not_registered')
-            message.reply_markdown(reply_message)
             raise UserDoesNotExist
 
         else:
-            chat_data['current_user'] = user
+            user_data['current_user'] = user
             return user
 
+    def private_add_user(self, user_id, username):
+        """
+        Add new user to database
 
-    def callback_eval(self, bot, update, chat_data):
-        query_data = update.callback_query.data
-        message = update.callback_query.message
+        Returns:
+            User object
 
-        if 'joke_show_random' in query_data:
-            self.show_random_joke(message, bot, chat_data)
-
-        if 'joke_show_favorite' in query_data:
-            self.show_random_joke_from_favorites(message, chat_data)
-
-        elif 'vote' in query_data:
-            try:
-                joke = chat_data['last_joke']
-            except KeyError:
-                message.reply_text(self.private_get_random_message('joke_no_current'))
-                return
-
-            del chat_data['last_joke']
-
-            if 'positive' in query_data:
-                self.vote_for_joke(message, chat_data, joke, positive_vote=True)
-            else:
-                self.vote_for_joke(message, chat_data, joke, positive_vote=False)
-
-        elif 'joke_add' in query_data:
-            message.reply_text(self.private_get_random_message('joke_add'))
-
-        elif 'profile' in query_data:
-            self.profile_command(message, chat_data)
-
-        elif 'top10' in query_data:
-            self.top10_command(message)
-
-        return
-
-    def command_menu(self, bot, update):
-        menu_options = [
-            [InlineKeyboardButton(text='Show random joke', callback_data='joke_show_random')],
-            [InlineKeyboardButton(text='Show random favorite joke', callback_data='joke_show_favorite')],
-            [InlineKeyboardButton(text='Add joke', callback_data='joke_add')],
-            [InlineKeyboardButton(text='Profile', callback_data='profile')],
-            [InlineKeyboardButton(text='Top 10', callback_data='top10')],
-        ]
-
-        vote_options_keyboard = InlineKeyboardMarkup(menu_options, one_time_keyboard=True)
-
-        bot.send_message(chat_id=update.message.chat_id,
-                         text=self.private_get_random_message('menu'),
-                         reply_markup=vote_options_keyboard)
-        return
-
-    def register_user(self, bot, update):
-        message = update.message
-        user_id = message.chat_id
-
-        user = self.session.query(User).filter(User.id==user_id).first()
-        if user is not None:
-            message.reply_text(self.private_get_random_message('user_registered_already'))
-            return
-
-        username = message.text.replace('/register ', '').strip()
-        if len(username) < self.USERNAME_LENGTH_MIN:
-            message.reply_text(self.private_get_random_message('username_too_short'))
-            return
-
-        if len(username) > self.USERNAME_LENGTH_MAX:
-            message.reply_text(self.private_get_random_message('username_too_long'))
-            return
+        Raises:
+            InvalidCharacters
+            TooShort
+            TooLong
+        """
 
         only_allowed_chars = set(username) <= self.USERNAME_ALLOWED_CHARACTERS
         if not only_allowed_chars:
-            message.reply_text(self.private_get_random_message('username_forbidden_characters'))
-            return
+            raise InvalidCharacters
 
+        if len(username) < self.USERNAME_LENGTH_MIN:
+            raise TooShort
 
+        if  self.USERNAME_LENGTH_MAX < len(username):
+            raise TooLong
+
+        user = self.session.query(User).filter(User.id==user_id).first()
+        assert user is None  # should be called only for new users
 
         user = User(id=user_id, username=username, score=0)
-        message.reply_text(self.private_get_random_message('user_registered_success'))
-
         self.session.add(user)
+        self.session.commit()
+        return user
+
+    def private_add_joke(self, joke_body, author):
+        """
+        Add new joke to database
+
+        Arguments:
+            joke_id: int
+            joke_body: str
+            author: User
+
+        Returns:
+            None
+
+        Raises:
+            InvalidCharacters
+            TooShort
+            TooLong
+        """
+        if len(joke_body) < self.JOKE_LENGTH_MIN:
+            raise TooShort
+
+        if self.JOKE_LENGTH_MAX < len(joke_body):
+            raise TooLong
+
+
+        # Calculate id by adding one to last joke's id
+        all_jokes = self.session.query(Joke).order_by(Joke.id).all()
+        try:
+            last_joke = all_jokes[-1]
+            last_joke_id = last_joke.get_id()
+            joke_id = last_joke_id + 1
+        except IndexError:  # no jokes in database
+            joke_id = 0
+
+        new_joke = Joke(id=joke_id, body=joke_body, vote_count=0, author=author)
+        self.session.add(new_joke)
         self.session.commit()
         return
 
-    def show_random_joke(self, message, bot, chat_data):
+    def private_get_message(self, update):
+        """
+        Depending on the type of response, message object can be located in update.message or update.message.callback_query.
+
+        Returns:
+            Message
+        """
+        try:
+            message = update.callback_query.message
+        except AttributeError:
+            message = update.message  # this line returns None if a callback is used so it wouldn't work vice-versa
+
+        return message
+
+    def show_new_user_keyboard(self, bot, update):
+        """
+        Display keyboard prompt to register new user
+        """
+        keyboard_buttons = [[KeyboardButton(self.private_get_one_response('user_new_keyboard_button'))],
+                            [KeyboardButton('Cancel')]]
+        bot.send_message(chat_id=update.message.chat_id,
+                         text=self.private_get_random_response('user_not_registered'),
+                         reply_markup=ReplyKeyboardMarkup(keyboard_buttons, one_time_keyboard=True))
+        return
+
+    def show_new_joke_keyboard(self, bot, update):
+        """
+        Display keyboard prompot to add new joke
+        """
+        message = self.private_get_message(update)
+        keyboard_buttons = [[KeyboardButton(self.private_get_one_response('joke_new_keyboard_button'))],
+                            [KeyboardButton('Cancel')]]
+        bot.send_message(chat_id=message.chat_id,
+                         text=self.private_get_random_response('joke_new_ask'),
+                         reply_markup=ReplyKeyboardMarkup(keyboard_buttons, one_time_keyboard=True))
+        return
+
+    def show_menu_keyboard(self, bot, update):
+        """
+        Display menu
+        """
+        menu_options = [
+            [KeyboardButton('/random_joke')],
+            [KeyboardButton('/random_favorite_joke')],
+            [KeyboardButton('/add_joke')],
+            [KeyboardButton('/profile')],
+            [KeyboardButton('/top10')],
+        ]
+
+        keyboard = ReplyKeyboardMarkup(menu_options)
+        bot.send_message(chat_id=update.message.chat_id,
+                         text=self.private_get_random_response('menu'),
+                         reply_markup=keyboard)
+        return
+
+
+    # COMMAND METHODS
+    def cancel(self, bot, update):
+        message = self.private_get_message(update)
+        message.reply_text(self.private_get_random_response('cancel'))
+        return
+
+    def menu(self, bot, update, user_data):
+        message = self.private_get_message(update)
+        try:
+            user = self.private_get_user(message, user_data)
+        except UserDoesNotExist:
+            self.show_new_user_keyboard(bot, update)
+            return
+
+        self.show_menu_keyboard(bot, update)
+
+    def new_user_prompt(self, bot, update):
+        message = self.private_get_message(update)
+        message.reply_text(self.private_get_random_response('user_new_prompt'))
+        return USERNAME_RECEIVED
+
+    def new_user_received_username(self, bot, update, user_data):
+        message = self.private_get_message(update)
+        username = message.text
+        user_id = message.chat.id
+
+        try:
+            user = self.private_add_user(user_id, username)
+            user_data['user'] = user
+
+            message.reply_text(self.private_get_random_response('user_register_success'))
+            self.show_menu_keyboard(bot, update)
+
+        except InvalidCharacters:
+            error_message = self.private_get_random_response('username_invalid_characters')
+            message.reply_text(error_message)
+        except TooShort:
+            error_message = self.private_get_random_response('username_too_short')
+            message.reply_text(error_message)
+        except TooLong:
+            error_message = self.private_get_random_response('username_too_long')
+            message.reply_text(error_message)
+        finally:
+            return
+
+    def new_joke_prompt(self, bot, update):
+        message = self.private_get_message(update)
+        remove_keyboard = ReplyKeyboardRemove()
+        reply_message = self.private_get_random_response('joke_new_prompt')
+        bot.send_message(chat_id=message.chat.id,
+                         text=reply_message,
+                         reply_markup=remove_keyboard)
+
+        return JOKE_RECEIVED
+
+    def new_joke_received(self, bot, update, user_data):
+        # Check if user is registered
+        message = self.private_get_message(update)
+        try:
+            user = self.private_get_user(message, user_data)
+        except UserDoesNotExist:
+            self.show_new_user_keyboard(bot, update)
+            return
+
+        joke_body = message.text
+        try:
+            self.private_add_joke(joke_body, user)
+            message.reply_text(self.private_get_random_response('joke_submitted'))
+            self.show_menu_keyboard(bot, update)
+        except TooShort:
+            error_message = self.private_get_random_response('joke_too_short')
+            message.reply_text(error_message)
+        except TooLong:
+            error_message = self.private_get_random_response('joke_too_long')
+            message.reply_text(error_message)
+        finally:
+            return
+
+    def show_random_joke(self, bot, update, user_data):
         """
         Return random joke
         """
+        message = self.private_get_message(update)
+
+        # Check if user is registered
         try:
-            user = self.private_get_user(message, chat_data)
+            user = self.private_get_user(message, user_data)
         except UserDoesNotExist:
+            self.show_new_user_keyboard(bot, update)
             return
 
-        chat_id = message.chat.id
-
+        # Check if database is not empty
         all_jokes = self.session.query(Joke).all()
-
         try:
             random_joke_index = randint(0, len(all_jokes)-1)
         except ValueError:
-            message.reply_text(self.private_get_random_message('no_new_jokes'))
+            message.reply_text(self.private_get_random_response('no_new_jokes'))
             return
 
+
+        # Find joke which user hasn't voted on and is not author of the joke
         random_joke = all_jokes.pop(random_joke_index)
         voted_already = random_joke in user.jokes_voted_for
         user_is_author = random_joke in user.jokes_submitted
-
         while voted_already or user_is_author:
             try:
                 random_joke_index = randint(0, len(all_jokes)-1)
             except ValueError:
-                message.reply_text(self.private_get_random_message('no_new_jokes'))
+                message.reply_text(self.private_get_random_response('no_new_jokes'))
                 return
-
             random_joke = all_jokes.pop(random_joke_index)
 
         vote_options = [
-            [InlineKeyboardButton(text='Hah!', callback_data='positive_vote')],
-            [InlineKeyboardButton(text='Nah.', callback_data='negative_vote')]
+            [InlineKeyboardButton(text=self.private_get_random_response('positive_vote_keyboard_button'), callback_data='positive_vote')],
+            [InlineKeyboardButton(text=self.private_get_random_response('negative_vote_keyboard_button'), callback_data='negative_vote')]
         ]
         vote_options_keyboard = InlineKeyboardMarkup(vote_options)
 
-        chat_data['last_joke'] = random_joke
-
+        # Remember last joke shown - used in self.vote_for_joke to vote for right joke
+        user_data['last_joke'] = random_joke
+        # Display joke
         message.reply_text(random_joke.get_body())
 
-        bot.send_message(chat_id=chat_id,
-                         text=self.private_get_random_message('hah_or_nah'),
+        # Display vote keyboard
+        bot.send_message(chat_id=message.chat.id,
+                         text=self.private_get_random_response('hah_or_nah'),
                          reply_markup=vote_options_keyboard)
         return
 
-    def show_random_joke_from_favorites(self, message, chat_data):
+    def show_random_favorite_joke(self, bot, update, user_data):
         """
-        Return random joke from jokes user marked as funny.
+        Return random joke from jokes user voted for.
         """
+
+        # Check if user is registered
+        message = self.private_get_message(update)
         try:
-            user = self.private_get_user(message, chat_data)
+            user = self.private_get_user(message, user_data)
         except UserDoesNotExist:
+            self.show_new_user_keyboard(bot, update)
             return
 
+        # Check if there are any jokes marked as favorite
         all_favorite_jokes = user.get_jokes_voted_positive()
         try:
             random_joke = choice(all_favorite_jokes)
         except IndexError:
-            message.reply_text(self.private_get_random_message('joke_no_favorite'))
+            message.reply_text(self.private_get_random_response('joke_no_favorite'))
             return
 
+        # Display joke
         message.reply_text(random_joke.get_body())
         return
 
-    def vote_for_joke(self, message, chat_data, joke, positive_vote):
+    def vote_for_joke(self, update, bot, user_data, joke, positive_vote):
         """
         Register user's vote for joke.
         Remove
@@ -269,18 +460,22 @@ class HahOrNahBot:
         Arguments:
             positive_vote: bool, True for positive vote
         """
+
+        # Check if user is registered
+        message = self.private_get_message(update)
         try:
-            user = self.private_get_user(message, chat_data)
+            user = self.private_get_user(message, user_data)
         except UserDoesNotExist:
+            self.show_new_user_keyboard(bot, update)
             return
 
         try:
             if positive_vote:
                 user.vote_for_joke(joke, positive=True)
-                message.edit_text(self.private_get_random_message('positive_vote'))
+                message.edit_text(self.private_get_random_response('positive_vote'))
             else:
                 user.vote_for_joke(joke, positive=False)
-                message.edit_text(self.private_get_random_message('negative_vote'))
+                message.edit_text(self.private_get_random_response('negative_vote'))
 
             self.session.add(user, joke)
             self.session.commit()
@@ -290,49 +485,15 @@ class HahOrNahBot:
 
         return
 
-    def add_joke(self, bot, update, chat_data):
-        """
-        Add joke to database.
-        """
-        message = update.message
-        try:
-            user = self.private_get_user(message, chat_data)
-        except UserDoesNotExist:
-            return
-
-        text = message.text
-        joke_body = text.replace('+', '').strip()
-
-        if len(joke_body) < self.JOKE_LENGTH_MIN:
-            message.reply_text(self.private_get_random_message('joke_too_short'))
-            return
-
-        if len(joke_body) > self.JOKE_LENGTH_MAX:
-            message.reply_text(self.private_get_random_message('joke_too_long'))
-            return
-
-        all_jokes = self.session.query(Joke).order_by(Joke.id).all()
-        try:
-            last_joke = all_jokes[-1]
-            last_joke_id = last_joke.get_id()
-            new_joke_id = last_joke_id + 1
-        except IndexError:  # no jokes in database
-            new_joke_id = 0
-
-        new_joke = Joke(id=new_joke_id, body=joke_body, vote_count=0, author=user)
-
-        message.reply_text(self.private_get_random_message('joke_submitted'))
-        self.session.add(new_joke)
-        self.session.commit()
-        return
-
-    def profile_command(self, message, chat_data):
+    def profile(self, bot, update, user_data):
         """
         Show information about user.
         """
+        message = self.private_get_message(update)
         try:
-            user = self.private_get_user(message, chat_data)
+            user = self.private_get_user(message, user_data)
         except UserDoesNotExist:
+            self.show_new_user_keyboard(bot, update)
             return
 
         all_users = self.session.query(User).order_by(User.score).all()
@@ -349,10 +510,17 @@ class HahOrNahBot:
         message.reply_markdown(user_info)
         return
 
-    def top10_command(self, message):
+    def top10(self, bot, update, user_data):
         """
         Show top 10 users by score.
         """
+        message = self.private_get_message(update)
+        try:
+            user = self.private_get_user(message, user_data)
+        except UserDoesNotExist:
+            self.show_new_user_keyboard(bot, update)
+            return
+
         all_users = self.session.query(User).order_by(User.score).all()
         top_10_users = all_users[:10]
         reply_message = ''
