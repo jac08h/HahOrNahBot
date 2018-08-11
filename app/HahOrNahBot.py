@@ -68,13 +68,15 @@ class HahOrNahBot:
         )
 
         start_handler = CommandHandler('start', self.menu, pass_user_data=True)
+        help_handler = CommandHandler('help', self.help)
         random_joke_handler = CommandHandler('random_joke', self.show_random_joke, pass_user_data=True)
         random_favorite_joke_handler = CommandHandler('random_favorite_joke', self.show_random_favorite_joke, pass_user_data=True)
         profile_handler = CommandHandler('profile', self.profile, pass_user_data=True)
         top10_handler = CommandHandler('top10', self.top10, pass_user_data=True)
 
-        menu_handler = RegexHandler('menu', self.menu, pass_user_data=True)
+        menu_handler = CommandHandler('menu', self.menu, pass_user_data=True)
         handlers = [start_handler,
+                    help_handler,
                     new_user_handler,
                     new_joke_handler,
 
@@ -209,7 +211,6 @@ class HahOrNahBot:
         Add new joke to database
 
         Arguments:
-            joke_id: int
             joke_body: str
             author: User
 
@@ -256,6 +257,8 @@ class HahOrNahBot:
 
         return message
 
+    # SHOW KEYBOARDS METHODS
+
     def show_new_user_keyboard(self, bot, update):
         """
         Display keyboard prompt to register new user
@@ -299,6 +302,21 @@ class HahOrNahBot:
 
 
     # COMMAND METHODS
+    def help(self, bot, update):
+        message = self.private_get_message(update)
+        help_message = '''
+        *Commands*
+        /help - Display this message
+        /menu - Display commands keyboard
+        /random\_joke - Display random joke
+        /random\_favorite\_joke - Display random joke from favorites
+        /add\_joke - Proceed to add a joke
+        /profile - Show user profile
+        /top\_10 - Show top 10 users by score
+        '''
+        message.reply_markdown(help_message)
+        return
+
     def cancel(self, bot, update):
         message = self.private_get_message(update)
         message.reply_text(self.private_get_random_response('cancel'))
