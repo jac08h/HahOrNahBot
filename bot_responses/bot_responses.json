@@ -28,7 +28,7 @@
     ],
     "username_too_short" : [
       "Oh, that's too short.",
-      "I have trouble remembering short names."
+      "I'm sorry, I have trouble remembering short names! Try again please."
     ],
     "username_too_long" : [
       "No way I can remember that! You have to come up with something shorter!"
@@ -45,7 +45,7 @@
     ],
 
     "joke_no_favorite" : [
-    "As much as I hate to admit it, you have never laughed on my joke. And that's kind of sad, when you think about it.",
+    "As much as I hate to admit it, you have never laughed at my joke. And that's kind of sad, when you think about it.",
     "That won't be possible. You don't find my jokes funny 😔"
     ],
 
@@ -79,7 +79,7 @@
       "Thank you!",
       "Not bad!",
       "Haha, thanks!",
-      "I don't get it but thank you anyway!"
+      "I don't get it, but thank you!"
     ],
 
 
@@ -111,6 +111,6 @@
       "No, sorry"
   ],
     "cancel" : [
-      "Alright"
+      "Nevermind!"
   ]
 }

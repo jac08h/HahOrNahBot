@@ -14,3 +14,4 @@ Telegram bot to display random jokes. And much more.
 | **/add_joke**| Proceed to add a joke|
 | **/profile** | Show user profile
 | **/top10** | Show top 10 users by score
+| **/cancel** | Cancel current action (adding joke/registering user)
