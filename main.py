@@ -6,9 +6,7 @@ from app.HahOrNahBot import HahOrNahBot
 if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO,
                         format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-                        handlers=[logging.FileHandler('hah_or_nah_bot.log'),
-                                  logging.StreamHandler()
-                                  ]
+                        handlers=[logging.StreamHandler()]
                         )
     try:
         token = os.environ['TELEGRAM_TOKEN']

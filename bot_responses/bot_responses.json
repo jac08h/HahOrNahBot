@@ -91,8 +91,6 @@
 
     "no_new_jokes" : [
       "I told you all of them!",
-      "Hmm, that's weird. I can't think of any joke right now!",
-      "Go away, ain't got anything to talk about anyway.",
       "Nothing new, sorry!"
     ],
 
@@ -100,16 +98,11 @@
       "Hah or nah?",
       "What do you think?"
     ],
-    "positive_vote_keyboard_button" : [
-      "Hah!",
-      ":D",
-      "That's funny!"
+
+    "after_vote" : [
+      "Thank you!"
     ],
-    "negative_vote_keyboard_button" : [
-      "Nah.",
-      ":|",
-      "No, sorry"
-  ],
+
     "cancel" : [
       "Nevermind!"
   ]
