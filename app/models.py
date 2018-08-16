@@ -59,6 +59,9 @@ class User(Base):
         except ZeroDivisionError:
             return 0
 
+    def is_author(self, joke):
+        return joke in self.jokes_submitted
+
     def vote_for_joke(self, joke, positive):
         """
         Registers user's vote.

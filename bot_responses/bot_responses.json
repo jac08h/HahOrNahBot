@@ -38,7 +38,6 @@
     ],
 
 
-
     "joke_no_current" : [
       "I wasn't telling anything!",
       "That's weird, I didn't say nothing!"
@@ -105,5 +104,14 @@
 
     "cancel" : [
       "Nevermind!"
-  ]
+  ],
+  "my_jokes_all_jokes_shown": [
+    "That's it!"
+    ],
+  "my_jokes_show_next": [
+    "Show next jokes?"
+    ],
+  "my_jokes_invalid_choice" : [
+    "Please select either next or cancel."
+    ]
 }
