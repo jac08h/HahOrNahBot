@@ -81,37 +81,48 @@
       "I don't get it, but thank you!"
     ],
 
-
-
-
     "menu" : [
       "😄"
     ],
-
     "no_new_jokes" : [
       "I told you all of them!",
       "Nothing new, sorry!"
     ],
-
     "hah_or_nah" : [
       "Hah or nah?",
       "What do you think?"
     ],
-
     "after_vote" : [
       "Thank you!"
     ],
-
     "cancel" : [
-      "Nevermind!"
-  ],
+      "Canceling!"
+    ],
+  "next_cancel_keyboard": [
+    "Continue?"
+    ],
   "my_jokes_all_jokes_shown": [
     "That's it!"
     ],
-  "my_jokes_show_next": [
-    "Show next jokes?"
-    ],
   "my_jokes_invalid_choice" : [
     "Please select either next or cancel."
+    ],
+  "my_jokes_no_jokes" : [
+    "You didn't tell me any joke yet!"
+    ],
+  "remove_joke_select" : [
+    "Please enter the ID of the joke to be deleted"
+    ],
+  "remove_joke_received_not_integer": [
+    "That's not a number! Try again"
+    ],
+  "remove_joke_confirm": [
+    "Are you sure?"
+    ],
+  "remove_joke_success": [
+    "That wasn't a good one, anyway."
+    ],
+  "remove_joke_invalid_id": [
+    "Oops! You definitely didn't tell me that one! Try again"
     ]
 }

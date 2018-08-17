@@ -11,7 +11,7 @@ Base = declarative_base()
 
 association_table = Table('association', Base.metadata,
                           Column('users_id', Integer, ForeignKey('users.id')),
-                          Column('jokes_id', Integer, ForeignKey('jokes.id'))
+                          Column('jokes_id', Integer, ForeignKey('jokes.id')),
                           )
 
 logger = logging.getLogger(__name__)
@@ -26,8 +26,10 @@ class User(Base):
                                    back_populates='users_voted')
     jokes_voted_positive = relationship('Joke',
                                         secondary=association_table,
-                                        back_populates='users_voted_positive')
-    jokes_submitted = relationship('Joke', backref='author')
+                                        back_populates='users_voted_positive',
+                                        cascade='all, delete, delete-orphan',
+                                        single_parent=True)
+    jokes_submitted = relationship('Joke', backref='author',cascade='all, delete, delete-orphan', single_parent=True)
     score = Column('score', Integer, default=0)
 
     def get_id(self):

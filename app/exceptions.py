@@ -12,3 +12,6 @@ class TooShort(Exception):
 
 class InvalidCharacters(Exception):
     pass
+
+class InvalidChoice(Exception):
+    pass

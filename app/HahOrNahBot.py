@@ -5,7 +5,7 @@ from telegram import (KeyboardButton, ReplyKeyboardMarkup,
 
 
 import logging
-from random import randint, choice, shuffle
+from random import choice, shuffle
 from string import ascii_letters, digits
 
 from app.TelegramBotHelperMethods import TelegramBotHelperFunctions
@@ -13,11 +13,14 @@ from app.TelegramBotResponses import TelegramBotResponses
 from app.models import Joke, User
 from app.exceptions import *
 
+from sqlalchemy.exc import SQLAlchemyError
+
 logger = logging.getLogger(__name__)
 
 USERNAME_RECEIVED = 0
 JOKE_RECEIVED, CANCEL = 0, 1
 MJ_CHOOSING, MJ_NEXT, MJ_CANCEL = range(3)
+RJ_RECEIVED, RJ_CONFIRM, RJ_REMOVE = range(3)
 
 class HahOrNahBot(TelegramBotHelperFunctions, TelegramBotResponses):
     def __init__(self, token, database_url):
@@ -46,7 +49,6 @@ class HahOrNahBot(TelegramBotHelperFunctions, TelegramBotResponses):
         cancel_handler = CommandHandler('cancel', self.cancel_conversation)
         random_joke_handler = CommandHandler('random_joke', self.display_random_joke, pass_user_data=True)
         random_favorite_joke_handler = CommandHandler('random_favorite_joke', self.display_random_favorite_joke, pass_user_data=True)
-        best_joke_handler = CommandHandler('best_joke', self.display_best_joke, pass_user_data=True)
         vote_handler = RegexHandler('^(/hah|/nah)$', self.vote_for_joke, pass_user_data=True)
         profile_handler = CommandHandler('profile', self.profile, pass_user_data=True)
 
@@ -66,30 +68,39 @@ class HahOrNahBot(TelegramBotHelperFunctions, TelegramBotResponses):
         )
 
         new_joke_handler = ConversationHandler(
-            entry_points=[RegexHandler("/add_joke", self.new_joke_prompt)],
+            entry_points=[CommandHandler("add_joke", self.new_joke_prompt)],
             states={
                 JOKE_RECEIVED: [MessageHandler(Filters.text, self.new_joke_received, pass_user_data=True)],
                 CANCEL: [cancel_handler]
             },
             fallbacks=[cancel_handler])
 
+        remove_joke_handler = ConversationHandler(
+            entry_points=[CommandHandler('remove_joke', self.remove_joke_select, pass_user_data=True)],
+            states={
+                RJ_RECEIVED: [MessageHandler(Filters.text, self.remove_joke_received, pass_user_data=True)],
+                RJ_CONFIRM: [RegexHandler('^(/next|/cancel)$', self.remove_joke_confirm, pass_user_data=True)],
+            },
+            fallbacks=[RegexHandler('/.*', self.cancel_conversation)])
+
         my_jokes_handler = ConversationHandler(
-            entry_points=[RegexHandler('/my_jokes', self.my_jokes, pass_user_data=True)],
+            entry_points=[CommandHandler('my_jokes', self.my_jokes, pass_user_data=True)],
             states={
                 MJ_CHOOSING: [RegexHandler('^(/next|/cancel)$', self.my_jokes_choosing, pass_user_data=True)],
                 MJ_NEXT: [RegexHandler('.*', self.my_jokes, pass_user_data=True)],
             },
             fallbacks=[cancel_handler])
 
+
         menu_handler = RegexHandler('menu', self.menu, pass_user_data=True) # any message
         handlers = [start_handler,
                     help_handler,
                     new_user_handler,
                     new_joke_handler,
+                    remove_joke_handler,
 
                     random_joke_handler,
                     random_favorite_joke_handler,
-                    best_joke_handler,
                     vote_handler,
 
                     my_jokes_handler,
@@ -127,14 +138,13 @@ class HahOrNahBot(TelegramBotHelperFunctions, TelegramBotResponses):
                          reply_markup=ReplyKeyboardMarkup(keyboard_buttons, one_time_keyboard=True))
         return
 
-    def display_menu_keyboard(self, bot, update):
+    def display_menu_keyboard(self, bot, update, text):
         """
         Display menu
         """
         menu_options = [
             [KeyboardButton('/random_joke')],
             [KeyboardButton('/random_favorite_joke')],
-            [KeyboardButton('/best_joke')],
             [KeyboardButton('/add_joke')],
             [KeyboardButton('/my_jokes')],
             [KeyboardButton('/profile')],
@@ -143,7 +153,7 @@ class HahOrNahBot(TelegramBotHelperFunctions, TelegramBotResponses):
 
         keyboard = ReplyKeyboardMarkup(menu_options)
         bot.send_message(chat_id=update.message.chat_id,
-                         text=self.get_random_response('menu'),
+                         text=text,
                          reply_markup=keyboard)
         return
 
@@ -164,7 +174,7 @@ class HahOrNahBot(TelegramBotHelperFunctions, TelegramBotResponses):
                          reply_markup=vote_options_keyboard)
         return
 
-    def display_next_cancel_keyboard(self, bot, update):
+    def display_confirmation_keyboard(self, bot, update):
         """
         /next | /cancel
         """
@@ -175,9 +185,28 @@ class HahOrNahBot(TelegramBotHelperFunctions, TelegramBotResponses):
 
         vote_options_keyboard = ReplyKeyboardMarkup(vote_options, one_time_keyboard=True)
         bot.send_message(chat_id=update.message.chat.id,
-                         text=self.get_random_response('my_jokes_show_next'),
+                         text=self.get_random_response('next_cancel_keyboard'),
                          reply_markup=vote_options_keyboard)
         return
+
+    def process_confirmation_response(self, update, response):
+        """
+        Return True if response was positive, False otherwises
+
+        Args:
+            response: string: user's response
+
+        Returns:
+            bool
+        """
+        try:
+            assert response in ['/next', '/cancel']  # should be called only with one of these in response
+        except AssertionError:
+            raise InvalidChoice
+
+        if '/next' in response:
+            return True
+        return False
 
     def remove_keyboard(self, bot, update, text):
         """
@@ -201,18 +230,15 @@ class HahOrNahBot(TelegramBotHelperFunctions, TelegramBotResponses):
         /menu - Display commands keyboard
         /random\_joke - Display random joke
         /random\_favorite\_joke - Display random joke from favorites
-        /best\_joke - Display joke with the most votes that you didn't see yet.
         /add\_joke - Proceed to add a joke
         /profile - Display user profile
-        /top\_10 - Display top 10 users by score
         /cancel - Cancel current action (adding joke/registering user)
         '''
         message.reply_markdown(help_message)
         return
 
     def cancel_conversation(self, bot, update):
-        reply = self.get_random_response('cancel')
-        self.remove_keyboard(bot, update, reply)
+        self.display_menu_keyboard(bot, update, self.get_random_response('cancel'))
         return ConversationHandler.END
 
     def menu(self, bot, update, user_data):
@@ -226,7 +252,7 @@ class HahOrNahBot(TelegramBotHelperFunctions, TelegramBotResponses):
             self.display_new_user_keyboard(bot, update)
             return
 
-        self.display_menu_keyboard(bot, update)
+        self.display_menu_keyboard(bot, update, self.get_random_response('menu'))
 
     def new_user_prompt(self, bot, update):
         """
@@ -258,8 +284,7 @@ class HahOrNahBot(TelegramBotHelperFunctions, TelegramBotResponses):
             user = self.add_user(user_id, username)
             user_data['user'] = user
 
-            message.reply_text(self.get_random_response('user_register_success'))
-            self.display_menu_keyboard(bot, update)
+            self.display_menu_keyboard(bot, update, self.get_random_response('user_register_success'))
             return ConversationHandler.END
         except InvalidCharacters:
             error_message = self.get_random_response('username_invalid_characters')
@@ -307,8 +332,7 @@ class HahOrNahBot(TelegramBotHelperFunctions, TelegramBotResponses):
         joke_body = message.text
         try:
             self.add_joke(joke_body, user)
-            message.reply_text(self.get_random_response('joke_submitted'))
-            self.display_menu_keyboard(bot, update)
+            self.display_menu_keyboard(bot, update, self.get_random_response('joke_submitted'))
             return ConversationHandler.END
         except TooShort:
             error_message = self.get_random_response('joke_too_short')
@@ -316,6 +340,87 @@ class HahOrNahBot(TelegramBotHelperFunctions, TelegramBotResponses):
         except TooLong:
             error_message = self.get_random_response('joke_too_long')
             message.reply_text(error_message)
+
+    def remove_joke_select(self, bot, update, user_data):
+        """
+        Display message to prompt user to type id of the joke to be deleted
+        """
+        message = update.message
+        # Check if user is registered
+        try:
+            user = self.get_user(message, user_data)
+        except UserDoesNotExist:
+            self.display_new_user_keyboard(bot, update)
+            return
+
+        message.reply_text(self.get_random_response('remove_joke_select'))
+        return RJ_RECEIVED
+
+    def remove_joke_received(self, bot, update, user_data):
+        """
+        Read joke id, display joke and ask for confirmation do delete joke
+        """
+        message = update.message
+        # Check if user is registered
+        try:
+            user = self.get_user(message, user_data)
+        except UserDoesNotExist:
+            self.display_new_user_keyboard(bot, update)
+            return
+
+        joke_id = message.text
+        try:
+            joke_id = int(joke_id)
+        except ValueError:
+            message.reply_text(self.get_random_response('remove_joke_received_not_integer'))
+            return
+
+        try:
+            joke = self.session.query(Joke).filter(Joke.id==joke_id).one()
+        except SQLAlchemyError:
+            message.reply_text(self.get_random_response('remove_joke_invalid_id'))
+            return
+
+        user_is_author = joke in user.jokes_submitted
+        if not user_is_author:
+            message.reply_text(self.get_random_response('remove_joke_invalid_id'))
+            return
+
+        user_data['joke_to_remove'] = joke
+        reply_message = '{joke}\n{confirm}'.format(joke=joke.get_body(), confirm=self.get_random_response('remove_joke_confirm'))
+        message.reply_text(reply_message)
+        self.display_confirmation_keyboard(bot, update)
+        return RJ_CONFIRM
+
+    def remove_joke_confirm(self, bot, update, user_data):
+        """
+        Process the response to confirmation keyboard. Proceed if positive, terminate if negative.
+        """
+        message = update.message
+        user_choice = message.text
+        try:
+            proceed = self.process_confirmation_response(update, user_choice)
+        except InvalidChoice:
+            message.reply_text(self.get_random_response('my_jokes_invalid_choice'))
+            return
+
+        logger.info(proceed)
+
+        if proceed:
+            self.remove_joke_remove(bot, update, user_data)
+        return ConversationHandler.END
+
+    def remove_joke_remove(self, bot, update, user_data):
+        """
+        Delete joke, display sucess message, display menu and return from ConversationHandler
+        """
+        message = update.message
+
+        joke = user_data['joke_to_remove']
+        self.session.delete(joke)
+        self.session.commit()
+
+        self.display_menu_keyboard(bot, update, self.get_random_response('remove_joke_success'))
 
     def display_random_joke(self, bot, update, user_data):
         """
@@ -379,27 +484,6 @@ class HahOrNahBot(TelegramBotHelperFunctions, TelegramBotResponses):
         message.reply_text(random_joke.get_body())
         return
 
-    def display_best_joke(self, bot, update, user_data):
-        """
-        Display joke with the highest number of votes the user hasn't seen yet.
-        """
-        # Check if user is registered
-        message = update.message
-        try:
-            user = self.get_user(message, user_data)
-        except UserDoesNotExist:
-            self.display_new_user_keyboard(bot, update)
-            return
-
-        jokes_by_score = self.session.query(Joke).order_by(Joke.vote_count).all()
-        for joke in jokes_by_score:
-            voted_already = joke in user.jokes_voted_for
-            user_is_author = joke in user.jokes_submitted
-            if not voted_already and not user_is_author:
-                message.reply_text(joke.get_body())
-                return
-
-
     def vote_for_joke(self, bot, update, user_data):
         """
         Register user's vote for joke.
@@ -416,7 +500,7 @@ class HahOrNahBot(TelegramBotHelperFunctions, TelegramBotResponses):
         try:
             joke = user_data['last_joke']
         except KeyError:
-            message.reply_text(self.get_random_response('joke_no_current'))
+            self.display_menu_keyboard(bot, update, self.get_random_response('joke_no_current'))
             return
 
         try:
@@ -432,7 +516,7 @@ class HahOrNahBot(TelegramBotHelperFunctions, TelegramBotResponses):
             logger.error(e)
 
         finally:
-            self.remove_keyboard(update, bot, self.get_random_response('after_vote'))
+            self.display_menu_keyboard(bot, update, self.get_random_response('menu'))
             del user_data['last_joke']
             return
 
@@ -467,24 +551,25 @@ class HahOrNahBot(TelegramBotHelperFunctions, TelegramBotResponses):
 
         if len(reply_message) == 0:
             if first_joke_index == 0: # user didn't submit any joke
-                message.reply_text(self.get_random_response('my_jokes_no_jokes'))
+                reply_message = self.get_random_response('my_jokes_no_jokes')
             else:
                 # user has submitted jokes but on this iteration there are no jokes to be displayed
                 # happens when number of jokes submitted is multiple of `self.MY_JOKES_PER_MESSAGE`
                 # e.g. submitted 20 jokes and the bot displays 10 per message - after second try there
                 # won't be any jokes to be displayed
+                reply_message = self.get_random_response('my_jokes_all_jokes_shown')
 
-                self.remove_keyboard(bot, update, self.get_random_response('my_jokes_all_jokes_shown'))
+            self.display_menu_keyboard(bot, update, reply_message)
 
             return ConversationHandler.END
 
         message.reply_text(reply_message)
         if all_jokes_shown:
-            self.remove_keyboard(bot, update, self.get_random_response('my_jokes_all_jokes_shown'))
+            self.display_menu_keyboard(bot, update, self.get_random_response('my_jokes_all_jokes_shown'))
             return ConversationHandler.END
         else:
             user_data['my_jokes_index'] = last_joke_index
-            self.display_next_cancel_keyboard(bot, update)
+            self.display_confirmation_keyboard(bot, update)
             return MJ_CHOOSING
 
     def my_jokes_choosing(self, bot, update, user_data):
@@ -497,14 +582,17 @@ class HahOrNahBot(TelegramBotHelperFunctions, TelegramBotResponses):
             return
 
         user_choice = message.text
-        if 'next' in user_choice:
+        try:
+            proceed = self.process_confirmation_response(update, user_choice)
+        except InvalidChoice:
+            message.reply_text(self.get_random_response('my_jokes_invalid_choice'))
+            return
+
+        if proceed:
             self.my_jokes(bot, update, user_data)
             return MJ_NEXT
-        elif 'cancel' in user_choice:
-            return ConversationHandler.END
         else:
-            message.reply_text(self.get_random_response('my_jokes_invalid_choice'))
-            return MJ_CHOOSING
+            return ConversationHandler.END
 
     def profile(self, bot, update, user_data):
         """
