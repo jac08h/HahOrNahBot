@@ -1,8 +1,5 @@
 {
     "user_not_registered" : [
-      "Hey, who are you?",
-      "Did we speak before?",
-      "I don't know you, I swear.",
       "You are new, aren't you?"
     ],
 
@@ -14,21 +11,18 @@
       "How should I call you?"
     ],
     "user_register_success" : [
-      "Alright, I'm sure I'll remember you!",
       "That's a nice name. Welcome!",
       "Welcome!"
     ],
     "user_register_try_again" : [
-      "Try again, please.",
-      "Any other ideas?"
+      "Try again, please."
     ],
     "user_registered_already" : [
-      "No need for that, I know you already!",
-      "Hey, you don't remember me? I certainly remember you!"
+      "No need for that, I remember you!"
     ],
     "username_too_short" : [
       "Oh, that's too short.",
-      "I'm sorry, I have trouble remembering short names! Try again please."
+      "I'm sorry, I have trouble remembering short names! Try again please"
     ],
     "username_too_long" : [
       "No way I can remember that! You have to come up with something shorter!"
@@ -44,12 +38,13 @@
     ],
 
     "joke_no_favorite" : [
-    "As much as I hate to admit it, you have never laughed at my joke. And that's kind of sad, when you think about it.",
-    "That won't be possible. You don't find my jokes funny 😔"
+    "As much as I hate to admit it, you have never laughed at my joke. And that's kind of sad when you think about it.",
+    "That's not possible. You don't find my jokes funny 😔"
     ],
 
     "joke_new_prompt" : [
-      "I'm listening!"
+      "I'm listening!",
+      "Bring it on!"
     ],
 
     "joke_new_try_again": [
@@ -71,7 +66,7 @@
       "Once again, please. That was too short."
     ],
     "joke_too_long" : [
-    "I already forgot the first part, hah! Try again, but you have to cut it short!"
+    "I already forgot the first part! Try again, but you have to cut it short!"
     ],
 
     "joke_submitted" : [
@@ -96,7 +91,7 @@
       "Thank you!"
     ],
     "cancel" : [
-      "Canceling!"
+      "Cancelling!"
     ],
   "next_cancel_keyboard": [
     "Continue?"

@@ -231,6 +231,7 @@ class HahOrNahBot(TelegramBotHelperFunctions, TelegramBotResponses):
         /random\_joke - Display random joke
         /random\_favorite\_joke - Display random joke from favorites
         /add\_joke - Proceed to add a joke
+        /remove\_joke - Proceed to remove a joke
         /profile - Display user profile
         /cancel - Cancel current action (adding joke/registering user)
         '''
