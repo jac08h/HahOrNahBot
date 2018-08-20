@@ -92,7 +92,7 @@ class HahOrNahBot(TelegramBotHelperFunctions, TelegramBotResponses):
             fallbacks=[cancel_handler])
 
 
-        menu_handler = RegexHandler('menu', self.menu, pass_user_data=True) # any message
+        menu_handler = CommandHandler('menu', self.menu, pass_user_data=True) # any message
         handlers = [start_handler,
                     help_handler,
                     new_user_handler,
