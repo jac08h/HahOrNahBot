@@ -24,3 +24,4 @@ if __name__ == '__main__':
 
     bot = HahOrNahBot(token, database_url)
     bot.start_webhook("https://hah-or-nah-bot.herokuapp.com/", port)
+    #bot.start_local()

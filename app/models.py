@@ -1,11 +1,11 @@
-from sqlalchemy import Column, Integer, String, Table, ForeignKey
+from sqlalchemy import Column, Integer, String, Boolean, Table, ForeignKey
 from sqlalchemy.orm import relationship
 from sqlalchemy.ext.declarative import declarative_base
 
 from app.exceptions import InvalidVote
 
 import logging
-from string import ascii_letters, digits
+
 Base = declarative_base()
 
 
@@ -111,6 +111,7 @@ class Joke(Base):
     id = Column('id', Integer, primary_key=True, unique=True)
     body = Column('body', String(1000))
     vote_count = Column(Integer)
+    approved = Column(Boolean, unique=False, default=False)
     users_voted = relationship('User',
                                secondary=association_table,
                                back_populates='jokes_voted_for')
@@ -130,6 +131,12 @@ class Joke(Base):
 
     def get_users_voted(self):
         return self.users_voted
+
+    def get_author(self):
+        return self.author
+
+    def approve(self):
+        self.approved = True
 
     def register_vote(self, user, positive):
         """
@@ -153,7 +160,7 @@ class Joke(Base):
         self.users_voted.append(user)
 
     def __repr__(self):
-        joke_info =  """id: {id}\nbody: {body}\nvotes: {vote_count}\nauthor: {author}""".format(id=self.id, body=self.body, vote_count=self.vote_count, author=self.author.username)
+        joke_info =  """id: {id}\nauthor: {author}\nbody: {body}\nvotes: {vote_count}\napproved: {approved}""".format(id=self.id, body=self.body, vote_count=self.vote_count, author=self.author.username, approved=self.approved)
         # For some reason the formatting is off when using multiline string
         return joke_info
 

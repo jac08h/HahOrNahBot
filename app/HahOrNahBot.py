@@ -1,8 +1,5 @@
-from telegram.ext import (Updater, Filters,
-                          CommandHandler, ConversationHandler, RegexHandler, MessageHandler)
-from telegram import (KeyboardButton, ReplyKeyboardMarkup,
-                      ReplyKeyboardRemove)
-
+from telegram.ext import Updater, Filters, CommandHandler, ConversationHandler, RegexHandler, MessageHandler
+from telegram import KeyboardButton, ReplyKeyboardMarkup, ReplyKeyboardRemove
 
 import logging
 from random import choice, shuffle
@@ -21,6 +18,7 @@ USERNAME_RECEIVED = 0
 JOKE_RECEIVED, CANCEL = 0, 1
 MJ_CHOOSING, MJ_NEXT, MJ_CANCEL = range(3)
 RJ_RECEIVED, RJ_CONFIRM, RJ_REMOVE = range(3)
+AJ_VOTED, AJ_NEXT = range(2)
 
 class HahOrNahBot(TelegramBotHelperFunctions, TelegramBotResponses):
     def __init__(self, token, database_url):
@@ -32,6 +30,7 @@ class HahOrNahBot(TelegramBotHelperFunctions, TelegramBotResponses):
         USERNAME_LENGTH_MAX = 20
         USERNAME_ALLOWED_CHARACTERS = set(ascii_letters + digits + '-_')
         self.MY_JOKES_PER_MESSAGE = 5
+        self.MODERATORS = [452678368]
 
         joke_limits = {'min':JOKE_LENGTH_MIN, 'max':JOKE_LENGTH_MAX}
         username_limits = {'min':USERNAME_LENGTH_MIN, 'max':USERNAME_LENGTH_MAX}
@@ -44,6 +43,7 @@ class HahOrNahBot(TelegramBotHelperFunctions, TelegramBotResponses):
         self.updater = Updater(token=token)
         self.dispatcher = self.updater.dispatcher
 
+        menu_handler = CommandHandler('menu', self.menu, pass_user_data=True)
         start_handler = CommandHandler('start', self.menu, pass_user_data=True)
         help_handler = CommandHandler('help', self.help)
         cancel_handler = CommandHandler('cancel', self.cancel_conversation)
@@ -91,13 +91,20 @@ class HahOrNahBot(TelegramBotHelperFunctions, TelegramBotResponses):
             },
             fallbacks=[cancel_handler])
 
+        approve_jokes_handler = ConversationHandler(
+            entry_points=[CommandHandler('approve_jokes', self.approve_jokes_show, pass_user_data=True)],
+            states={
+                AJ_VOTED: [RegexHandler('^(/approve|/remove)$', self.approve_jokes_voted, pass_user_data=True)],
+                AJ_NEXT: [CommandHandler('next', self.approve_jokes_show, pass_user_data=True)]},
+            fallbacks=[cancel_handler])
 
-        menu_handler = CommandHandler('menu', self.menu, pass_user_data=True) # any message
         handlers = [start_handler,
+                    menu_handler,
                     help_handler,
                     new_user_handler,
                     new_joke_handler,
                     remove_joke_handler,
+                    approve_jokes_handler,
 
                     random_joke_handler,
                     random_favorite_joke_handler,
@@ -106,7 +113,7 @@ class HahOrNahBot(TelegramBotHelperFunctions, TelegramBotResponses):
                     my_jokes_handler,
                     profile_handler,
 
-                    menu_handler]
+                    ]
 
         for handler in handlers:
             self.dispatcher.add_handler(handler)
@@ -173,6 +180,23 @@ class HahOrNahBot(TelegramBotHelperFunctions, TelegramBotResponses):
                          text=self.get_random_response('hah_or_nah'),
                          reply_markup=vote_options_keyboard)
         return
+
+    def display_approval_keyboard(self, bot, update):
+        """
+        /approve | /remove
+        """
+        vote_options = [
+            [KeyboardButton('/approve')],
+            [KeyboardButton('/remove')],
+            [KeyboardButton('/cancel')],
+        ]
+
+        vote_options_keyboard = ReplyKeyboardMarkup(vote_options, one_time_keyboard=True)
+        bot.send_message(chat_id=update.message.chat.id,
+                         text=self.get_random_response('approval_keyboard'),
+                         reply_markup=vote_options_keyboard)
+        return
+
 
     def display_confirmation_keyboard(self, bot, update):
         """
@@ -437,7 +461,7 @@ class HahOrNahBot(TelegramBotHelperFunctions, TelegramBotResponses):
             return
 
         # Check if database is not empty
-        all_jokes = self.session.query(Joke).all()
+        all_jokes = self.session.query(Joke).filter_by(approved=True).all()
         try:
             joke = all_jokes[0]
         except IndexError:
@@ -450,7 +474,7 @@ class HahOrNahBot(TelegramBotHelperFunctions, TelegramBotResponses):
             voted_already = random_joke in user.jokes_voted_for
             user_is_author = random_joke in user.jokes_submitted
             if not voted_already and not user_is_author:
-                # Remember last joke displayn - used in self.vote_for_joke to vote for right joke
+                # Remember last joke displayed - used in self.vote_for_joke to vote for right joke
                 user_data['last_joke'] = random_joke
                 # Display joke
                 message.reply_text(random_joke.get_body())
@@ -620,6 +644,50 @@ class HahOrNahBot(TelegramBotHelperFunctions, TelegramBotResponses):
         user_info = '\n'.join([username_line, rank_line, jokes_submitted_line])
         message.reply_markdown(user_info)
         return
+
+    def approve_jokes_show(self, bot, update, user_data):
+        """
+        Display joke, display keyboard to approve/not approve
+
+        Entry point in ConversationHandler, next is approve_joke_voted.
+        /cancel cancels the conversation
+        """
+        message = update.message
+        user_id = message.from_user.id
+        if user_id not in self.MODERATORS:
+            message.reply_text(self.get_random_response('permisson_denied'))
+            return ConversationHandler.END
+
+        unapproved_joke = self.session.query(Joke).filter_by(approved=False).order_by(Joke.id).first()
+        if unapproved_joke is None:
+            message.reply_text(self.get_random_response('no_new_jokes'))
+            return ConversationHandler.END
+
+        user_data['unapproved_joke'] = unapproved_joke
+        message.reply_text('{joke}  ({author})'.format(joke=unapproved_joke.get_body(), author=unapproved_joke.get_author().username))
+        self.display_approval_keyboard(bot, update)
+        return AJ_VOTED
+
+    def approve_jokes_voted(self, bot, update, user_data):
+        """
+        Approve or remove joke, depending on the user's response. Display next/cancel keyboard, continue to approve_jokes_show if /next is called, exit CH if /cancel
+
+        Second point in CH, previous is approve_jokes_voted
+        """
+        message = update.message
+        assert '/approve' in message.text or '/remove' in message.text
+
+        unapproved_joke = user_data['unapproved_joke']
+        if '/approve' in message.text:
+            unapproved_joke.approve()
+            reply_text = self.get_random_response('approve_jokes_approved')
+        elif '/remove' in message.text:
+            self.session.delete(unapproved_joke)
+            reply_text = self.get_random_response('approve_jokes_removed')
+
+        self.remove_keyboard(bot, update, reply_text)
+        self.display_confirmation_keyboard(bot, update)
+        return AJ_NEXT
 
     def start_webhook(self, url, port):
         self.updater.start_webhook(listen="0.0.0.0",

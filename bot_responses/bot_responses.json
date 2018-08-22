@@ -119,5 +119,17 @@
     ],
   "remove_joke_invalid_id": [
     "Oops! You definitely didn't tell me that one! Try again"
+    ],
+  "approval_keyboard": [
+    "What about this?"
+    ],
+  "approve_jokes_approved": [
+  "Thank you!"
+  ],
+  "approve_jokes_removed" : [
+  "Thank you!"
+    ],
+  "permission_denied" : [
+    "You don't have permission to do this"
     ]
 }
