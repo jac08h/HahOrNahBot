@@ -154,6 +154,7 @@ class HahOrNahBot(TelegramBotHelperFunctions, TelegramBotResponses):
             [KeyboardButton('/random_joke')],
             [KeyboardButton('/random_favorite_joke')],
             [KeyboardButton('/add_joke')],
+            [KeyboardButton('/remove_joke')],
             [KeyboardButton('/my_jokes')],
             [KeyboardButton('/profile')],
             [KeyboardButton('/help')],
