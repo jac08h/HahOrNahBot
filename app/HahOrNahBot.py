@@ -98,6 +98,7 @@ class HahOrNahBot(TelegramBotHelperFunctions, TelegramBotResponses):
                 AJ_NEXT: [CommandHandler('next', self.approve_jokes_show, pass_user_data=True)]},
             fallbacks=[cancel_handler])
 
+        invalid_command_handler = RegexHandler('/.*', self.invalid_command_handler)
         handlers = [start_handler,
                     menu_handler,
                     help_handler,
@@ -112,7 +113,7 @@ class HahOrNahBot(TelegramBotHelperFunctions, TelegramBotResponses):
 
                     my_jokes_handler,
                     profile_handler,
-
+                    invalid_command_handler,
                     ]
 
         for handler in handlers:
@@ -688,6 +689,11 @@ class HahOrNahBot(TelegramBotHelperFunctions, TelegramBotResponses):
         self.remove_keyboard(bot, update, reply_text)
         self.display_confirmation_keyboard(bot, update)
         return AJ_NEXT
+
+    def invalid_command_handler(self, bot, update):
+        message = update.message
+        self.display_menu_keyboard(bot, update, self.get_random_response('invalid_command'))
+        return
 
     def start_webhook(self, url, port):
         self.updater.start_webhook(listen="0.0.0.0",

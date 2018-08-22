@@ -23,5 +23,5 @@ if __name__ == '__main__':
     port = int(os.environ.get('PORT', 8443))
 
     bot = HahOrNahBot(token, database_url)
-    bot.start_webhook("https://hah-or-nah-bot.herokuapp.com/", port)
-    #bot.start_local()
+    #bot.start_webhook("https://hah-or-nah-bot.herokuapp.com/", port)
+    bot.start_local()

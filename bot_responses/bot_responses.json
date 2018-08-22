@@ -131,5 +131,10 @@
     ],
   "permission_denied" : [
     "You don't have permission to do this"
+    ],
+  "invalid_command" : [
+    "Sorry?",
+    "What was that?",
+    "Huh?"
     ]
 }
