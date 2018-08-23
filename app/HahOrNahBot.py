@@ -662,7 +662,7 @@ class HahOrNahBot(TelegramBotHelperFunctions, TelegramBotResponses):
 
         unapproved_joke = self.session.query(Joke).filter_by(approved=False).order_by(Joke.id).first()
         if unapproved_joke is None:
-            message.reply_text(self.get_random_response('no_new_jokes'))
+            self.remove_keyboard(bot, update, self.get_random_response('no_new_jokes'))
             return ConversationHandler.END
 
         user_data['unapproved_joke'] = unapproved_joke
@@ -686,6 +686,7 @@ class HahOrNahBot(TelegramBotHelperFunctions, TelegramBotResponses):
         elif '/remove' in message.text:
             self.session.delete(unapproved_joke)
             reply_text = self.get_random_response('approve_jokes_removed')
+            self.session.commit()
 
         self.remove_keyboard(bot, update, reply_text)
         self.display_confirmation_keyboard(bot, update)
