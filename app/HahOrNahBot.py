@@ -431,8 +431,6 @@ class HahOrNahBot(TelegramBotHelperFunctions, TelegramBotResponses):
             message.reply_text(self.get_random_response('my_jokes_invalid_choice'))
             return
 
-        logger.info(proceed)
-
         if proceed:
             self.remove_joke_remove(bot, update, user_data)
         return ConversationHandler.END
@@ -686,7 +684,8 @@ class HahOrNahBot(TelegramBotHelperFunctions, TelegramBotResponses):
         elif '/remove' in message.text:
             self.session.delete(unapproved_joke)
             reply_text = self.get_random_response('approve_jokes_removed')
-            self.session.commit()
+
+        self.session.commit()
 
         self.remove_keyboard(bot, update, reply_text)
         self.display_confirmation_keyboard(bot, update)
