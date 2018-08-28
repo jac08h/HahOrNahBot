@@ -7,9 +7,9 @@ from app.exceptions import *
 
 logger = logging.getLogger(__name__)
 
-class TelegramBotHelperFunctions():
+class HahOrNahBotHelper():
     """
-    Class to provide helper functions to be used by Telegram bot.
+    Class to provide helper methods for HahOrNahBot.
     """
 
     def __init__(self, database_url, joke_limits, user_limits, user_allowed_characters):
@@ -125,6 +125,20 @@ class TelegramBotHelperFunctions():
         self.session.commit()
         return
 
+    def get_message(self, update):
+        """
+        Depending on the type of response, message object can be located in update.message or update.message.callback_query.
+
+        Returns:
+            Message
+        """
+        try:
+            message = update.callback_query.message
+        except AttributeError:
+            message = update.message  # this line returns None if a callback is used so it wouldn't work vice-versa
+
+        return message
+
     def format_jokes(self, joke_list, start_index, end_index):
         """
         Return string from jokes
@@ -147,24 +161,12 @@ class TelegramBotHelperFunctions():
                 all_jokes_shown = True
                 break
 
-            joke_message = "{vote_count} votes(id={id})\n{joke_body}".format(
-                vote_count=joke.get_vote_count(), id=joke.get_id(), joke_body=joke.get_body()
+            joke_message = "{vote_count} votes(id={id})\n{joke_body}\napproved: {approved}".format(
+                vote_count=joke.get_vote_count(), id=joke.get_id(), joke_body=joke.get_body(), approved=joke.is_approved()
             )
             jokes_string.append(joke_message)
 
         reply_message = '\n\n'.join(jokes_string)
         return reply_message, all_jokes_shown
 
-    def get_message(self, update):
-        """
-        Depending on the type of response, message object can be located in update.message or update.message.callback_query.
 
-        Returns:
-            Message
-        """
-        try:
-            message = update.callback_query.message
-        except AttributeError:
-            message = update.message  # this line returns None if a callback is used so it wouldn't work vice-versa
-
-        return message

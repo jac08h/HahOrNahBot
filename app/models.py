@@ -138,6 +138,9 @@ class Joke(Base):
     def approve(self):
         self.approved = True
 
+    def is_approved(self):
+        return self.approved
+
     def register_vote(self, user, positive):
         """
         Register vote for joke.

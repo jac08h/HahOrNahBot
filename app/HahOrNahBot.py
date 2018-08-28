@@ -5,7 +5,7 @@ import logging
 from random import choice, shuffle
 from string import ascii_letters, digits
 
-from app.TelegramBotHelperMethods import TelegramBotHelperFunctions
+from app.TelegramBotHelper import HahOrNahBotHelper
 from app.TelegramBotResponses import TelegramBotResponses
 from app.models import Joke, User
 from app.exceptions import *
@@ -20,7 +20,7 @@ MJ_CHOOSING, MJ_NEXT, MJ_CANCEL = range(3)
 RJ_RECEIVED, RJ_CONFIRM, RJ_REMOVE = range(3)
 AJ_VOTED, AJ_NEXT = range(2)
 
-class HahOrNahBot(TelegramBotHelperFunctions, TelegramBotResponses):
+class HahOrNahBot(HahOrNahBotHelper, TelegramBotResponses):
     def __init__(self, token, database_url):
         # Configuration variables
         BOT_RESPONSES_FILENAME = 'bot_responses/bot_responses.json'
@@ -36,7 +36,7 @@ class HahOrNahBot(TelegramBotHelperFunctions, TelegramBotResponses):
         username_limits = {'min':USERNAME_LENGTH_MIN, 'max':USERNAME_LENGTH_MAX}
 
         TelegramBotResponses.__init__(self, BOT_RESPONSES_FILENAME)
-        TelegramBotHelperFunctions.__init__(self, database_url, joke_limits, username_limits, USERNAME_ALLOWED_CHARACTERS)
+        HahOrNahBotHelper.__init__(self, database_url, joke_limits, username_limits, USERNAME_ALLOWED_CHARACTERS)
 
         self.token = token
         self.database_url = database_url
