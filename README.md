@@ -8,6 +8,7 @@ Telegram bot to display random jokes. And much more.
 | Command | Description |
 | :---:              |                   :--- |
 | **/help** | Display commands with their description |
+| **/stats** | Display bot's stats
 | **/menu** | Display commands keyboard|
 | **/random_joke** | Display random joke |
 | **/random_favorite_joke** | Display random joke from favorites | 

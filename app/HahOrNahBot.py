@@ -46,6 +46,7 @@ class HahOrNahBot(HahOrNahBotHelper, TelegramBotResponses):
         menu_handler = CommandHandler('menu', self.menu, pass_user_data=True)
         start_handler = CommandHandler('start', self.menu, pass_user_data=True)
         help_handler = CommandHandler('help', self.help)
+        stats_handler = CommandHandler('stats', self.stats)
         cancel_handler = CommandHandler('cancel', self.cancel_conversation)
         random_joke_handler = CommandHandler('random_joke', self.display_random_joke, pass_user_data=True)
         random_favorite_joke_handler = CommandHandler('random_favorite_joke', self.display_random_favorite_joke, pass_user_data=True)
@@ -102,6 +103,7 @@ class HahOrNahBot(HahOrNahBotHelper, TelegramBotResponses):
         handlers = [start_handler,
                     menu_handler,
                     help_handler,
+                    stats_handler,
                     new_user_handler,
                     new_joke_handler,
                     remove_joke_handler,
@@ -157,6 +159,7 @@ class HahOrNahBot(HahOrNahBotHelper, TelegramBotResponses):
             [KeyboardButton('/remove_joke')],
             [KeyboardButton('/my_jokes')],
             [KeyboardButton('/profile')],
+            [KeyboardButton('/stats')],
             [KeyboardButton('/help')],
         ]
 
@@ -253,6 +256,7 @@ class HahOrNahBot(HahOrNahBotHelper, TelegramBotResponses):
         help_message = '''
         *Commands*
         /help - Display this message
+        /stats - Display bot's stats
         /menu - Display commands keyboard
         /random\_joke - Display random joke
         /random\_favorite\_joke - Display random joke from favorites
@@ -262,6 +266,17 @@ class HahOrNahBot(HahOrNahBotHelper, TelegramBotResponses):
         /cancel - Cancel current action (adding joke/registering user)
         '''
         message.reply_markdown(help_message)
+        return
+
+    def stats(self, bot, update):
+        message = update.message
+        all_jokes_count = len(self.session.query(Joke).filter_by(approved=True).all())
+        all_users_count = len(self.session.query(User).all())
+
+        stats_message = "Jokes = {all_jokes_count}\nUsers = {all_users_count}".\
+            format(all_jokes_count=all_jokes_count, all_users_count=all_users_count)
+
+        message.reply_markdown(stats_message)
         return
 
     def cancel_conversation(self, bot, update):
