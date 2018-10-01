@@ -58,7 +58,8 @@
     ],
 
     "joke_new_ask" : [
-      "You've got something new?"
+      "You've got something new?",
+      "Hit me with your best shot!"
     ],
 
     "joke_too_short" : [
@@ -81,7 +82,8 @@
     ],
     "no_new_jokes" : [
       "I told you all of them!",
-      "Nothing new, sorry!"
+      "Nothing new, sorry!",
+      "I am out of jokes. Maybe you got some for me?"
     ],
     "hah_or_nah" : [
       "Hah or nah?",
@@ -124,10 +126,10 @@
     "What about this?"
     ],
   "approve_jokes_approved": [
-  "Thank you!"
+  "Approved it, Thank you!"
   ],
   "approve_jokes_removed" : [
-  "Thank you!"
+  "Removed it, Thank you!"
     ],
   "permission_denied" : [
     "You don't have permission to do this"
@@ -135,6 +137,6 @@
   "invalid_command" : [
     "Sorry?",
     "What was that?",
-    "Huh?"
+    "Huh?",
     ]
 }
