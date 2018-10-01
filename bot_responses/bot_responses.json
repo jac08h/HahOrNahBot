@@ -1,10 +1,12 @@
 {
     "user_not_registered" : [
       "You are new, aren't you?"
+      "I see you're new around the block here."
     ],
 
     "user_new_keyboard_button": [
       "I'd like to introduce myself"
+      "Let me introduce myself!"
     ],
     "user_new_prompt":[
       "What's your name?",
@@ -12,23 +14,27 @@
     ],
     "user_register_success" : [
       "That's a nice name. Welcome!",
+      "Hey there, welcome!"
       "Welcome!"
     ],
     "user_register_try_again" : [
       "Try again, please."
+      "Please try again."
     ],
     "user_registered_already" : [
       "No need for that, I remember you!"
+      "Silly you! You've already registered!"
     ],
     "username_too_short" : [
       "Oh, that's too short.",
-      "I'm sorry, I have trouble remembering short names! Try again please"
+      "I'm sorry, I have trouble remembering short names! Try again please!"
     ],
     "username_too_long" : [
       "No way I can remember that! You have to come up with something shorter!"
+      "Oops, that's really long! Make it shorter please."
     ],
     "username_invalid_characters" : [
-      "Could you drop those weird charaters, please? It makes my head hurt!"
+      "Could you drop those weird characters, please? It makes my head hurt!"
     ],
 
 
