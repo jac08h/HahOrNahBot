@@ -2,7 +2,8 @@
   "user_not_registered": [
     "You are new, aren't you?",
     "I see you're new around the block here.",
-    "I don't think I've seen you here before."
+    "I don't think I've seen you here before.",
+    "Nice to see a new face around these parts!"
   ],
   "user_new_keyboard_button": [
     "I'd like to introduce myself",
@@ -11,7 +12,8 @@
   ],
   "user_new_prompt": [
     "What's your name?",
-    "How should I call you?"
+    "How should I call you?",
+    "What do you go by, friend?"
   ],
   "user_register_success": [
     "That's a nice name. Welcome!",
@@ -37,7 +39,8 @@
   "username_too_long": [
     "No way I can remember that! You have to come up with something shorter!",
     "Oops, that's really long! Make it shorter please.",
-    "Ok, stop characters."
+    "Ok, stop characters.",
+    "Your username is too long! Please shorten it, it's too much."
   ],
   "username_invalid_characters": [
     "Could you drop those weird characters, please? It makes my head hurt!",
@@ -68,7 +71,8 @@
   ],
   "joke_new_ask": [
     "You've got something new?",
-    "Hit me with your best shot!"
+    "Hit me with your best shot!",
+    "Make me laugh!"
   ],
   "joke_too_short": [
     "Huh?",
@@ -121,7 +125,8 @@
   ],
   "my_jokes_all_jokes_shown": [
     "That's it!",
-    "Sorry, I don't have any more jokes"
+    "Sorry, I don't have any more jokes",
+    "I'm all out of jokes!"
   ],
   "my_jokes_invalid_choice": [
     "Please select either next or cancel."
@@ -141,7 +146,8 @@
   ],
   "remove_joke_success": [
     "That wasn't a good one, anyway.",
-    "Don't worry, next one will be better."
+    "Don't worry, next one will be better.",
+    "There's much funnier jokes to tell."
   ],
   "remove_joke_invalid_id": [
     "Oops! You definitely didn't tell me that one! Try again"
@@ -157,13 +163,15 @@
     "Removed it, Thank you!"
   ],
   "permission_denied": [
-    "You don't have permission to do this"
+    "You don't have permission to do this",
+    "Sorry, you need permission to do that."
   ],
   "invalid_command": [
     "Sorry?",
     "What was that?",
     "Huh?",
     "I don't get this",
-    "Didn't quite catch that"
+    "Didn't quite catch that",
+    "Excuse me?"
   ]
 }
