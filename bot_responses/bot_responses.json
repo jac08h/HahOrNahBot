@@ -134,6 +134,7 @@
   "invalid_command": [
     "Sorry?",
     "What was that?",
-    "Huh?"
+    "Huh?",
+    "I'd like you to try again, because I did not understand the command"
   ]
 }
