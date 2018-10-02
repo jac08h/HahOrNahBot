@@ -64,6 +64,7 @@
   "joke_new_keyboard_button": [
     "Listen up!",
     "I'm sure you haven't heard this one before!",
+    "Well, this is something new!",
     "Sure, listen!"
   ],
   "joke_new_ask": [
@@ -101,6 +102,7 @@
   "no_new_jokes": [
     "I told you all of them!",
     "Nothing new, sorry!",
+    "Don't have anything new for you,maybe come back later!",
     "I am out of jokes. Maybe you got some for me?",
     "Can't think of anything else, sorry!"
   ],
@@ -110,11 +112,12 @@
   ],
   "after_vote": [
     "Thank you!",
+    "Thanks for vote!",
     "Yaay, you voted!"
   ],
   "cancel": [
     "Cancelling!",
-    "Aborting mission!"
+    "Abort! Abort!"
   ],
   "next_cancel_keyboard": [
     "Continue?"
