@@ -2,7 +2,8 @@
   "user_not_registered": [
     "You are new, aren't you?",
     "I see you're new around the block here.",
-    "I don't think I've seen you here before."
+    "I don't think I've seen you here before.",
+    "I think we haven't met yet."
   ],
   "user_new_keyboard_button": [
     "I'd like to introduce myself",
@@ -93,7 +94,10 @@
     "That's a keeper!",
     "Lol, thanks!",
     "That's a good one!",
-    "Haven't heard that one before - nice!"
+    "Haven't heard that one before - nice!",
+    "Hilarious!",
+    "Wow, this was a good one!",
+    "Awesome joke, buddy!"
   ],
   "menu": [
     "😄"
@@ -164,6 +168,7 @@
     "What was that?",
     "Huh?",
     "I don't get this",
-    "Didn't quite catch that"
+    "Didn't quite catch that",
+    "Pardon?"
   ]
 }
