@@ -61,10 +61,12 @@
   ],
   "joke_too_short": [
     "Huh?",
-    "Once again, please. That was too short."
+    "Once again, please. That was too short.",
+    "I know you can make a joke longer than that."
   ],
   "joke_too_long": [
-    "I already forgot the first part! Try again, but you have to cut it short!"
+    "I already forgot the first part! Try again, but you have to cut it short!",
+    "Thats a really long joke! Mind cutting it a bit short?"
   ],
   "joke_submitted": [
     "Thank you!",
@@ -85,7 +87,8 @@
     "What do you think?"
   ],
   "after_vote": [
-    "Thank you!"
+    "Thank you!",
+    "Yaay, you voted!"
   ],
   "cancel": [
     "Cancelling!"
@@ -94,7 +97,8 @@
     "Continue?"
   ],
   "my_jokes_all_jokes_shown": [
-    "That's it!"
+    "That's it!",
+    "Sorry, I don't have any more jokes"
   ],
   "my_jokes_invalid_choice": [
     "Please select either next or cancel."
@@ -103,7 +107,8 @@
     "You didn't tell me any joke yet!"
   ],
   "remove_joke_select": [
-    "Please enter the ID of the joke to be deleted"
+    "Please enter the ID of the joke to be deleted",
+
   ],
   "remove_joke_received_not_integer": [
     "That's not a number! Try again"
@@ -121,7 +126,8 @@
     "What about this?"
   ],
   "approve_jokes_approved": [
-    "Approved it, Thank you!"
+    "Approved it, Thank you!",
+    "Nice joke, Approved!"
   ],
   "approve_jokes_removed": [
     "Removed it, Thank you!"
@@ -132,6 +138,7 @@
   "invalid_command": [
     "Sorry?",
     "What was that?",
-    "Huh?"
+    "Huh?",
+    "I don't get this"
   ]
 }
