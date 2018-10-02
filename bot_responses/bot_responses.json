@@ -129,7 +129,8 @@
     "Removed it, Thank you!"
   ],
   "permission_denied": [
-    "You don't have permission to do this"
+    "You don't have permission to do this",
+    "Oops... you can't do that. ACCESS DENIED."
   ],
   "invalid_command": [
     "Sorry?",
