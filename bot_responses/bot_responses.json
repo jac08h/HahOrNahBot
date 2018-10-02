@@ -1,11 +1,13 @@
 {
   "user_not_registered": [
     "You are new, aren't you?",
-    "I see you're new around the block here."
+    "I see you're new around the block here.",
+    "I don't think I've seen you here before."
   ],
   "user_new_keyboard_button": [
     "I'd like to introduce myself",
-    "Let me introduce myself!"
+    "Let me introduce myself!",
+    "Let me tell you something about myself."
   ],
   "user_new_prompt": [
     "What's your name?",
@@ -22,19 +24,25 @@
   ],
   "user_registered_already": [
     "No need for that, I remember you!",
-    "Silly you! You've already registered!"
+    "Silly you! You've already registered!",
+    "But... You're already here."
+    "I have seen you around here before!"
   ],
   "username_too_short": [
     "Oh, that's too short.",
-    "I'm sorry, I have trouble remembering short names! Try again please!"
+    "I'm sorry, I have trouble remembering short names! Try again please!",
+    "More characters."
   ],
   "username_too_long": [
     "No way I can remember that! You have to come up with something shorter!",
-    "Oops, that's really long! Make it shorter please."
+    "Oops, that's really long! Make it shorter please.",
+    "Ok, stop characters."
   ],
   "username_invalid_characters": [
     "Could you drop those weird characters, please? It makes my head hurt!",
     "The symbols, what do they mean?"
+    "I don't know what those characters mean, can you please tell me again without them?"
+    "I am unable to process some of these characters."
   ],
   "joke_no_current": [
     "I wasn't telling anything!",
@@ -69,6 +77,8 @@
   "joke_too_long": [
     "I already forgot the first part! Try again, but you have to cut it short!",
     "I have trouble remembering something that long, could you cut it shorter next time?"
+    "I lost you there at the end... Please tell me again, but try to keep it shorter."
+    "Haha! Wait, how did it start?"
   ],
   "joke_submitted": [
     "Thank you!",
@@ -76,6 +86,9 @@
     "Haha, thanks!",
     "I don't get it, but thank you!",
     "Lol, thanks!"
+=======
+    "That's a good one!"
+    "Haven't heard that one before - nice!"
   ],
   "menu": [
     "😄"
@@ -115,10 +128,12 @@
     "That's not a number! Try again"
   ],
   "remove_joke_confirm": [
-    "Are you sure?"
+    "Are you sure?",
+    "There's no going back after this."
   ],
   "remove_joke_success": [
-    "That wasn't a good one, anyway."
+    "That wasn't a good one, anyway.",
+    "Don't worry, next one will be better."
   ],
   "remove_joke_invalid_id": [
     "Oops! You definitely didn't tell me that one! Try again"
