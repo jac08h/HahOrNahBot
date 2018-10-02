@@ -22,7 +22,8 @@
   ],
   "user_registered_already": [
     "No need for that, I remember you!",
-    "Silly you! You've already registered!"
+    "Silly you! You've already registered!",
+    "I see you're already in my books"
   ],
   "username_too_short": [
     "Oh, that's too short.",
@@ -64,13 +65,15 @@
     "Once again, please. That was too short."
   ],
   "joke_too_long": [
-    "I already forgot the first part! Try again, but you have to cut it short!"
+    "I already forgot the first part! Try again, but you have to cut it short!",
+    "I thought this joke would never end! Give me a shorter one please!"
   ],
   "joke_submitted": [
     "Thank you!",
     "Not bad!",
     "Haha, thanks!",
-    "I don't get it, but thank you!"
+    "I don't get it, but thank you!",
+    "That's a keeper!"
   ],
   "menu": [
     "😄"
@@ -88,7 +91,8 @@
     "Thank you!"
   ],
   "cancel": [
-    "Cancelling!"
+    "Cancelling!",
+    "Aborting mission!"
   ],
   "next_cancel_keyboard": [
     "Continue?"
@@ -132,6 +136,7 @@
   "invalid_command": [
     "Sorry?",
     "What was that?",
-    "Huh?"
+    "Huh?",
+    "Didn't quite catch that"
   ]
 }
