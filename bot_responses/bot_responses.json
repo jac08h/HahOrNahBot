@@ -25,6 +25,7 @@
     "No need for that, I remember you!",
     "Silly you! You've already registered!",
     "But... You're already here."
+    "I have seen you around here before!"
   ],
   "username_too_short": [
     "Oh, that's too short.",
@@ -76,7 +77,8 @@
     "Thank you!",
     "Not bad!",
     "Haha, thanks!",
-    "I don't get it, but thank you!"
+    "I don't get it, but thank you!",
+    "Haven't heard that one before - nice!"
   ],
   "menu": [
     "😄"
