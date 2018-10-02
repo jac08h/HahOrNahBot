@@ -32,12 +32,14 @@
   "username_too_short": [
     "Oh, that's too short.",
     "I'm sorry, I have trouble remembering short names! Try again please!",
-    "More characters."
+    "More characters.",
+    "That's a really short name you got there"
   ],
   "username_too_long": [
     "No way I can remember that! You have to come up with something shorter!",
     "Oops, that's really long! Make it shorter please.",
-    "Ok, stop characters."
+    "Ok, stop characters.",
+    "Too long to fit in my bytes, let's try something shorter."
   ],
   "username_invalid_characters": [
     "Could you drop those weird characters, please? It makes my head hurt!",
@@ -56,7 +58,8 @@
   "joke_new_prompt": [
     "I'm listening!",
     "Bring it on!",
-    "I'm ready!"
+    "I'm ready!",
+    "Shoot it!"
   ],
   "joke_new_try_again": [
     "Try again, please."
@@ -68,12 +71,14 @@
   ],
   "joke_new_ask": [
     "You've got something new?",
-    "Hit me with your best shot!"
+    "Hit me with your best shot!",
+    "Let's see what you got there."
   ],
   "joke_too_short": [
     "Huh?",
     "Once again, please. That was too short.",
-    "I know you can make a joke longer than that."
+    "I know you can make a joke longer than that.",
+    "That's a really short one to laugh a little longer."
   ],
   "joke_too_long": [
     "I already forgot the first part! Try again, but you have to cut it short!",
@@ -93,7 +98,8 @@
     "That's a keeper!",
     "Lol, thanks!",
     "That's a good one!",
-    "Haven't heard that one before - nice!"
+    "Haven't heard that one before - nice!",
+    "Holy buckets! that's a good one"
   ],
   "menu": [
     "😄"
@@ -110,7 +116,8 @@
   ],
   "after_vote": [
     "Thank you!",
-    "Yaay, you voted!"
+    "Yaay, you voted!",
+    "Roger that!"
   ],
   "cancel": [
     "Cancelling!",
@@ -164,6 +171,7 @@
     "What was that?",
     "Huh?",
     "I don't get this",
-    "Didn't quite catch that"
+    "Didn't quite catch that",
+    "Pardon me, didn't get that"
   ]
 }
