@@ -25,6 +25,7 @@
   "user_registered_already": [
     "No need for that, I remember you!",
     "Silly you! You've already registered!",
+    "I see you're already in my books!"
     "But... You're already here."
     "I have seen you around here before!"
   ],
@@ -76,6 +77,7 @@
   ],
   "joke_too_long": [
     "I already forgot the first part! Try again, but you have to cut it short!",
+    "I thought this joke would never end! Give me a shorter one please!"
     "I have trouble remembering something that long, could you cut it shorter next time?"
     "I lost you there at the end... Please tell me again, but try to keep it shorter."
     "Haha! Wait, how did it start?"
@@ -85,8 +87,8 @@
     "Not bad!",
     "Haha, thanks!",
     "I don't get it, but thank you!",
+    "That's a keeper!"
     "Lol, thanks!"
-=======
     "That's a good one!"
     "Haven't heard that one before - nice!"
   ],
@@ -107,7 +109,8 @@
     "Thank you!"
   ],
   "cancel": [
-    "Cancelling!"
+    "Cancelling!",
+    "Aborting mission!"
   ],
   "next_cancel_keyboard": [
     "Continue?"
@@ -153,6 +156,7 @@
   "invalid_command": [
     "Sorry?",
     "What was that?",
-    "Huh?"
+    "Huh?",
+    "Didn't quite catch that"
   ]
 }
