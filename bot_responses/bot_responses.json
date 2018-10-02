@@ -47,16 +47,17 @@
   ],
   "joke_no_current": [
     "I wasn't telling anything!",
-    "That's weird, I didn't say nothing!"
+    "That's weird, I didn't say anything!"
   ],
   "joke_no_favorite": [
     "As much as I hate to admit it, you have never laughed at my joke. And that's kind of sad when you think about it.",
-    "That's not possible. You don't find my jokes funny 😔"
+    "That's not possible. You don't find my jokes funny. 😔"
   ],
   "joke_new_prompt": [
     "I'm listening!",
     "Bring it on!",
-    "I'm ready!"
+    "I'm ready!",
+    "Come at me!"
   ],
   "joke_new_try_again": [
     "Try again, please."
@@ -64,7 +65,8 @@
   "joke_new_keyboard_button": [
     "Listen up!",
     "I'm sure you haven't heard this one before!",
-    "Sure, listen!"
+    "Sure, listen!",
+    "Okay then, let's do this..."
   ],
   "joke_new_ask": [
     "You've got something new?",
@@ -73,7 +75,8 @@
   "joke_too_short": [
     "Huh?",
     "Once again, please. That was too short.",
-    "I know you can make a joke longer than that."
+    "I know you can make a joke longer than that.",
+    "Is that all you have?"
   ],
   "joke_too_long": [
     "I already forgot the first part! Try again, but you have to cut it short!",
@@ -93,7 +96,8 @@
     "That's a keeper!",
     "Lol, thanks!",
     "That's a good one!",
-    "Haven't heard that one before - nice!"
+    "Haven't heard that one before - nice!",
+    "Oho... well done!"
   ],
   "menu": [
     "😄"
@@ -107,6 +111,7 @@
   "hah_or_nah": [
     "Hah or nah?",
     "What do you think?"
+    "Was it any good?"
   ],
   "after_vote": [
     "Thank you!",
@@ -121,7 +126,7 @@
   ],
   "my_jokes_all_jokes_shown": [
     "That's it!",
-    "Sorry, I don't have any more jokes"
+    "Sorry, I don't have any more jokes."
   ],
   "my_jokes_invalid_choice": [
     "Please select either next or cancel."
@@ -130,14 +135,16 @@
     "You didn't tell me any joke yet!"
   ],
   "remove_joke_select": [
-    "Please enter the ID of the joke to be deleted"
+    "Please enter the ID of the joke to be deleted."
   ],
   "remove_joke_received_not_integer": [
-    "That's not a number! Try again"
+    "That's not a number! Try again.",
+    "Not a valid ID, please use numbers only."
   ],
   "remove_joke_confirm": [
     "Are you sure?",
-    "There's no going back after this."
+    "There's no going back after this.",
+    "[Bot will remember that]"
   ],
   "remove_joke_success": [
     "That wasn't a good one, anyway.",
