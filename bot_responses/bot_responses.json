@@ -6,7 +6,8 @@
   ],
   "user_new_keyboard_button": [
     "I'd like to introduce myself",
-    "Let me introduce myself!"
+    "Let me introduce myself!",
+    "Let me tell you something about myself."
   ],
   "user_new_prompt": [
     "What's your name?",
@@ -39,6 +40,7 @@
   ],
   "username_invalid_characters": [
     "Could you drop those weird characters, please? It makes my head hurt!",
+    "I don't know what those characters mean, can you please tell me again without them?"
     "I am unable to process some of these characters."
   ],
   "joke_no_current": [
@@ -71,6 +73,7 @@
   ],
   "joke_too_long": [
     "I already forgot the first part! Try again, but you have to cut it short!",
+    "I lost you there at the end... Please tell me again, but try to keep it shorter."
     "Haha! Wait, how did it start?"
   ],
   "joke_submitted": [
@@ -78,6 +81,7 @@
     "Not bad!",
     "Haha, thanks!",
     "I don't get it, but thank you!",
+    "That's a good one!"
     "Haven't heard that one before - nice!"
   ],
   "menu": [
