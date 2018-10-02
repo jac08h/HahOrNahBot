@@ -40,6 +40,7 @@
   ],
   "username_invalid_characters": [
     "Could you drop those weird characters, please? It makes my head hurt!",
+    "The symbols, what do they mean?"
     "I don't know what those characters mean, can you please tell me again without them?"
     "I am unable to process some of these characters."
   ],
@@ -53,7 +54,8 @@
   ],
   "joke_new_prompt": [
     "I'm listening!",
-    "Bring it on!"
+    "Bring it on!",
+    "I'm ready!"
   ],
   "joke_new_try_again": [
     "Try again, please."
@@ -69,10 +71,12 @@
   ],
   "joke_too_short": [
     "Huh?",
-    "Once again, please. That was too short."
+    "Once again, please. That was too short.",
+    "Wait, is it already over?"
   ],
   "joke_too_long": [
     "I already forgot the first part! Try again, but you have to cut it short!",
+    "I have trouble remembering something that long, could you cut it shorter next time?"
     "I lost you there at the end... Please tell me again, but try to keep it shorter."
     "Haha! Wait, how did it start?"
   ],
@@ -81,6 +85,8 @@
     "Not bad!",
     "Haha, thanks!",
     "I don't get it, but thank you!",
+    "Lol, thanks!"
+=======
     "That's a good one!"
     "Haven't heard that one before - nice!"
   ],
@@ -90,7 +96,8 @@
   "no_new_jokes": [
     "I told you all of them!",
     "Nothing new, sorry!",
-    "I am out of jokes. Maybe you got some for me?"
+    "I am out of jokes. Maybe you got some for me?",
+    "Can't think of anything else, sorry!"
   ],
   "hah_or_nah": [
     "Hah or nah?",
