@@ -127,7 +127,8 @@
     "Please select either next or cancel."
   ],
   "my_jokes_no_jokes": [
-    "You didn't tell me any joke yet!"
+    "You didn't tell me any jokes yet!",
+    "First you have to tell me at least one joke"
   ],
   "remove_joke_select": [
     "Please enter the ID of the joke to be deleted"
