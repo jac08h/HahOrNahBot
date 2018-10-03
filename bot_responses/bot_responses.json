@@ -17,7 +17,8 @@
   "user_register_success": [
     "That's a nice name. Welcome!",
     "Hey there, welcome!",
-    "Welcome!"
+    "Welcome!",
+    "Nice to see you, welcome!"
   ],
   "user_register_try_again": [
     "Try again, please.",
@@ -30,7 +31,8 @@
     "Silly you! You've already registered!",
     "I see you're already in my books!",
     "But... You're already here.",
-    "I have seen you around here before!"
+    "I have seen you around here before!",
+    "You look familiar, pretty sure you've been around already!"
   ],
   "username_too_short": [
     "Oh, that's too short.",
@@ -47,7 +49,8 @@
     "Could you drop those weird characters, please? It makes my head hurt!",
     "The symbols, what do they mean?",
     "I don't know what those characters mean, can you please tell me again without them?",
-    "I am unable to process some of these characters."
+    "I am unable to process some of these characters.",
+    "Some of these characters confuse me, could you try without them?"
   ],
   "joke_no_current": [
     "I wasn't telling anything!",
@@ -60,10 +63,12 @@
   "joke_new_prompt": [
     "I'm listening!",
     "Bring it on!",
-    "I'm ready!"
+    "I'm ready!",
+    "I'm all ears!"
   ],
   "joke_new_try_again": [
     "Try again, please.",
+    "Please, try again.",
     "Oops, can you retry?"
   ],
   "joke_new_keyboard_button": [
@@ -74,7 +79,8 @@
   ],
   "joke_new_ask": [
     "You've got something new?",
-    "Hit me with your best shot!"
+    "Hit me with your best shot!",
+    "Something new? Bring it on!"
   ],
   "joke_too_short": [
     "Huh?",
@@ -117,11 +123,13 @@
   "after_vote": [
     "Thank you!",
     "Yaay, you voted!",
+    "Thanks for voting!",
     "Thanks for your vote!"
   ],
   "cancel": [
     "Cancelling!",
-    "Aborting mission!"
+    "Aborting mission!",
+    "Abort!"
   ],
   "next_cancel_keyboard": [
     "Continue?"
@@ -163,7 +171,8 @@
     "Nice joke, Approved!"
   ],
   "approve_jokes_removed": [
-    "Removed it, Thank you!"
+    "Removed it, Thank you!",
+    "Got rid of that one, thanks!"
   ],
   "permission_denied": [
     "You don't have permission to do this",
@@ -174,6 +183,7 @@
     "What was that?",
     "Huh?",
     "I don't get this",
-    "Didn't quite catch that"
+    "Didn't quite catch that",
+    "Sorry i didn't understand, could you try again?"
   ]
 }
