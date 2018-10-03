@@ -117,14 +117,16 @@
     "Aborting mission!"
   ],
   "next_cancel_keyboard": [
-    "Continue?"
+    "Continue?",
+    "Shall I proceed?"
   ],
   "my_jokes_all_jokes_shown": [
     "That's it!",
     "Sorry, I don't have any more jokes"
   ],
   "my_jokes_invalid_choice": [
-    "Please select either next or cancel."
+    "Please select either next or cancel.",
+    "You can cancel or select next."
   ],
   "my_jokes_no_jokes": [
     "You didn't tell me any joke yet!"
@@ -133,7 +135,8 @@
     "Please enter the ID of the joke to be deleted"
   ],
   "remove_joke_received_not_integer": [
-    "That's not a number! Try again"
+    "That's not a number! Try again.",
+    "I'll only accept digits for this one."
   ],
   "remove_joke_confirm": [
     "Are you sure?",
@@ -157,7 +160,8 @@
     "Removed it, Thank you!"
   ],
   "permission_denied": [
-    "You don't have permission to do this"
+    "You don't have permission to do this",
+    "Sorry, you are not allowed to do that."
   ],
   "invalid_command": [
     "Sorry?",
