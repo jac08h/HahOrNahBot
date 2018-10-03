@@ -65,12 +65,20 @@
   ],
   "joke_no_favorite": [
     "As much as I hate to admit it, you have never laughed at my joke. And that's kind of sad when you think about it.",
+    "That's not possible. You don't find my jokes funny 😔",
+    "I’ve been trying to be funny. Unfortunately it's not working with you 😔"
     "That's not possible. You don't find my jokes funny. 😔"
   ],
   "joke_new_prompt": [
     "I'm listening!",
     "Bring it on!",
     "I'm ready!",
+    "Go for it!"
+  ],
+  "joke_new_try_again": [
+    "Try again, please.",
+    "Give it another shot!",
+    "Please retry."
     "Come at me!"
     "Shoot it!",
     "I'm all ears!",
@@ -92,6 +100,7 @@
   "joke_new_ask": [
     "You've got something new?",
     "Hit me with your best shot!",
+    "You wanna give it a shot?"
     "Make me laugh!"
     "Let's see what you got there.",
     "Something new? Bring it on!"
@@ -214,6 +223,7 @@
     "Huh?",
     "I don't get this",
     "Didn't quite catch that",
+    "Not quite sure what you meant"
     "Excuse me?"
     "Pardon me, didn't get that",
     "Pardon?",
