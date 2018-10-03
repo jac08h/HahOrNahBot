@@ -3,6 +3,7 @@
     "You are new, aren't you?",
     "I see you're new around the block here.",
     "I don't think I've seen you here before.",
+    "I think we haven't met yet.",
     "Sorry but I have no idea who you are"
   ],
   "user_new_keyboard_button": [
@@ -105,7 +106,10 @@
     "That's a keeper!",
     "Lol, thanks!",
     "That's a good one!",
-    "Haven't heard that one before - nice!"
+    "Haven't heard that one before - nice!",
+    "Hilarious!",
+    "Wow, this was a good one!",
+    "Awesome joke, buddy!"
   ],
   "menu": [
     "😄"
@@ -184,6 +188,7 @@
     "Huh?",
     "I don't get this",
     "Didn't quite catch that",
+    "Pardon?",
     "Sorry i didn't understand, could you try again?"
   ]
 }
