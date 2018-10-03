@@ -78,24 +78,24 @@
   "joke_no_favorite": [
     "As much as I hate to admit it, you have never laughed at my joke. And that's kind of sad when you think about it.",
     "That's not possible. You don't find my jokes funny 😔",
-    "I guess I'll have to borrow some laughing gas from Joker for you to laugh a my jokes..."
-    "I’ve been trying to be funny. Unfortunately it's not working with you 😔"
+    "I guess I'll have to borrow some laughing gas from Joker for you to laugh a my jokes...",
+    "I’ve been trying to be funny. Unfortunately it's not working with you 😔",
     "That's not possible. You don't find my jokes funny. 😔"
   ],
   "joke_new_prompt": [
     "I'm listening!",
     "Bring it on!",
     "I'm ready!",
-    "Spare no details!"
+    "Spare no details!",
     "Go for it!"
   ],
   "joke_new_try_again": [
     "Try again, please.",
     "Give it another shot!",
-    "Please retry."
-    "Come at me!"
+    "Please retry.",
+    "Come at me!",
     "Shoot it!",
-    "I'm all ears!",
+    "I'm all ears!"
   ],
   "joke_new_try_again": [
     "Try again, please.",
@@ -106,7 +106,7 @@
     "Listen up!",
     "I'm sure you haven't heard this one before!",
     "Sure, listen!",
-    "Okay then, let's do this..."
+    "Okay then, let's do this...",
     "Well, this is something new!",
     "Sure, listen!",
     "Brace yourself for this one!"
@@ -114,8 +114,8 @@
   "joke_new_ask": [
     "You've got something new?",
     "Hit me with your best shot!",
-    "You wanna give it a shot?"
-    "Make me laugh!"
+    "You wanna give it a shot?",
+    "Make me laugh!",
     "Let's see what you got there.",
     "Something new? Bring it on!"
   ],
@@ -123,7 +123,7 @@
     "Huh?",
     "Once again, please. That was too short.",
     "I know you can make a joke longer than that.",
-    "Is that all you have?"
+    "Is that all you have?",
     "That's a really short one to laugh a little longer."
   ],
   "joke_too_long": [
@@ -163,7 +163,7 @@
   ],
   "hah_or_nah": [
     "Hah or nah?",
-    "What do you think?"
+    "What do you think?",
     "Was it any good?"
   ],
   "after_vote": [
@@ -173,24 +173,25 @@
   ],
   "cancel": [
     "Cancelling!",
-    "Abort! Abort!"
-    "Roger that!"
+    "Abort! Abort!",
+    "Roger that!",
     "Aborting mission!",
     "Abort!"
   ],
   "next_cancel_keyboard": [
-    "Continue?"
+    "Continue?",
+    "Shall I proceed?"
   ],
   "my_jokes_all_jokes_shown": [
     "That's it!",
     "Sorry, I don't have any more jokes",
-    "I'm all out, and bots aren't really good at improv!"
-    "Sorry, I don't have any more jokes."
-    "Sorry, I don't have any more jokes",
+    "I'm all out, and bots aren't really good at improv!",
+    "Sorry, I don't have any more jokes.",
     "I'm all out of jokes!"
   ],
   "my_jokes_invalid_choice": [
-    "Please select either next or cancel."
+    "Please select either next or cancel.",
+    "You can cancel or select next."
   ],
   "my_jokes_no_jokes": [
     "You didn't tell me any joke yet!",
@@ -200,17 +201,18 @@
   ],
   "remove_joke_select": [
     "Please enter the ID of the joke to be deleted",
-    "The joke with the said ID will be deleted, ID please?"
+    "The joke with the said ID will be deleted, ID please?",
     "Please enter the ID of the joke to be deleted."
   ],
   "remove_joke_received_not_integer": [
     "That's not a number! Try again.",
-    "Not a valid ID, please use numbers only."
+    "Not a valid ID, please use numbers only.",
+    "I'll only accept digits for this one."
   ],
   "remove_joke_confirm": [
     "Are you sure?",
     "There's no going back after this.",
-    "[Bot will remember that]"
+    "[Bot will remember that]",
     "Do you really want to remove that masterpiece?"
   ],
   "remove_joke_success": [
@@ -234,12 +236,13 @@
   ],
   "permission_denied": [
     "You don't have permission to do this",
-    "Looks like you aren't allowed to do that!"
-    "Got rid of that one, thanks!"
+    "Looks like you aren't allowed to do that!",
+    "Got rid of that one, thanks!",
+    "Sorry, you are not allowed to do that."
   ],
   "permission_denied": [
     "You don't have permission to do this",
-    "Sorry, you need permission to do that."
+    "Sorry, you need permission to do that.",
     "ACCESS DENIED, ACCESS DENIED"
   ],
   "invalid_command": [
@@ -248,8 +251,8 @@
     "Huh?",
     "I don't get this",
     "Didn't quite catch that",
-    "Not quite sure what you meant"
-    "Excuse me?"
+    "Not quite sure what you meant",
+    "Excuse me?",
     "Pardon me, didn't get that",
     "Pardon?",
     "Sorry i didn't understand, could you try again?"
