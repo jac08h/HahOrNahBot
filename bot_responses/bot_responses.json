@@ -4,6 +4,8 @@
     "I see you're new around the block here.",
     "I don't think I've seen you here before.",
     "Nice to see a new face around these parts!"
+    "I think we haven't met yet.",
+    "Sorry but I have no idea who you are"
   ],
   "user_new_keyboard_button": [
     "I'd like to introduce myself",
@@ -18,35 +20,43 @@
   "user_register_success": [
     "That's a nice name. Welcome!",
     "Hey there, welcome!",
-    "Welcome!"
+    "Welcome!",
+    "Nice to see you, welcome!"
   ],
   "user_register_try_again": [
     "Try again, please.",
-    "Please try again."
+    "Please try again.",
+    "I would love, if you would try again.",
+    "Whoops! Can you redo that?"
   ],
   "user_registered_already": [
     "No need for that, I remember you!",
     "Silly you! You've already registered!",
     "I see you're already in my books!",
     "But... You're already here.",
-    "I have seen you around here before!"
+    "I have seen you around here before!",
+    "You look familiar, pretty sure you've been around already!"
   ],
   "username_too_short": [
     "Oh, that's too short.",
     "I'm sorry, I have trouble remembering short names! Try again please!",
-    "More characters."
+    "More characters.",
+    "That's a really short name you got there",
+    "I need more characters in your username."
   ],
   "username_too_long": [
     "No way I can remember that! You have to come up with something shorter!",
     "Oops, that's really long! Make it shorter please.",
     "Ok, stop characters.",
     "Your username is too long! Please shorten it, it's too much."
+    "Too long to fit in my bytes, let's try something shorter."
   ],
   "username_invalid_characters": [
     "Could you drop those weird characters, please? It makes my head hurt!",
     "The symbols, what do they mean?",
     "I don't know what those characters mean, can you please tell me again without them?",
-    "I am unable to process some of these characters."
+    "I am unable to process some of these characters.",
+    "Some of these characters confuse me, could you try without them?"
   ],
   "joke_no_current": [
     "I wasn't telling anything!",
@@ -59,25 +69,34 @@
   "joke_new_prompt": [
     "I'm listening!",
     "Bring it on!",
-    "I'm ready!"
+    "I'm ready!",
+    "Shoot it!",
+    "I'm all ears!",
   ],
   "joke_new_try_again": [
-    "Try again, please."
+    "Try again, please.",
+    "Please, try again.",
+    "Oops, can you retry?"
   ],
   "joke_new_keyboard_button": [
     "Listen up!",
     "I'm sure you haven't heard this one before!",
-    "Sure, listen!"
+    "Well, this is something new!",
+    "Sure, listen!",
+    "Brace yourself for this one!"
   ],
   "joke_new_ask": [
     "You've got something new?",
     "Hit me with your best shot!",
     "Make me laugh!"
+    "Let's see what you got there.",
+    "Something new? Bring it on!"
   ],
   "joke_too_short": [
     "Huh?",
     "Once again, please. That was too short.",
-    "I know you can make a joke longer than that."
+    "I know you can make a joke longer than that.",
+    "That's a really short one to laugh a little longer."
   ],
   "joke_too_long": [
     "I already forgot the first part! Try again, but you have to cut it short!",
@@ -97,7 +116,11 @@
     "That's a keeper!",
     "Lol, thanks!",
     "That's a good one!",
-    "Haven't heard that one before - nice!"
+    "Haven't heard that one before - nice!",
+    "Holy buckets! that's a good one",
+    "Hilarious!",
+    "Wow, this was a good one!",
+    "Awesome joke, buddy!"
   ],
   "menu": [
     "😄"
@@ -105,6 +128,7 @@
   "no_new_jokes": [
     "I told you all of them!",
     "Nothing new, sorry!",
+    "Don't have anything new for you,maybe come back later!",
     "I am out of jokes. Maybe you got some for me?",
     "Can't think of anything else, sorry!"
   ],
@@ -114,11 +138,15 @@
   ],
   "after_vote": [
     "Thank you!",
+    "Thanks for vote!",
     "Yaay, you voted!"
   ],
   "cancel": [
     "Cancelling!",
-    "Aborting mission!"
+    "Abort! Abort!"
+    "Roger that!"
+    "Aborting mission!",
+    "Abort!"
   ],
   "next_cancel_keyboard": [
     "Continue?"
@@ -132,7 +160,8 @@
     "Please select either next or cancel."
   ],
   "my_jokes_no_jokes": [
-    "You didn't tell me any joke yet!"
+    "You didn't tell me any jokes yet!",
+    "First you have to tell me at least one joke"
   ],
   "remove_joke_select": [
     "Please enter the ID of the joke to be deleted"
@@ -142,7 +171,8 @@
   ],
   "remove_joke_confirm": [
     "Are you sure?",
-    "There's no going back after this."
+    "There's no going back after this.",
+    "Do you really want to remove that masterpiece?"
   ],
   "remove_joke_success": [
     "That wasn't a good one, anyway.",
@@ -160,11 +190,13 @@
     "Nice joke, Approved!"
   ],
   "approve_jokes_removed": [
-    "Removed it, Thank you!"
+    "Removed it, Thank you!",
+    "Got rid of that one, thanks!"
   ],
   "permission_denied": [
     "You don't have permission to do this",
     "Sorry, you need permission to do that."
+    "ACCESS DENIED, ACCESS DENIED"
   ],
   "invalid_command": [
     "Sorry?",
@@ -173,5 +205,8 @@
     "I don't get this",
     "Didn't quite catch that",
     "Excuse me?"
+    "Pardon me, didn't get that",
+    "Pardon?",
+    "Sorry i didn't understand, could you try again?"
   ]
 }
