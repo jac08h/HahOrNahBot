@@ -41,7 +41,8 @@
   "username_too_long": [
     "No way I can remember that! You have to come up with something shorter!",
     "Oops, that's really long! Make it shorter please.",
-    "Ok, stop characters."
+    "Ok, stop characters.",
+    "I can't handle that many characters in your username."
   ],
   "username_invalid_characters": [
     "Could you drop those weird characters, please? It makes my head hurt!",
