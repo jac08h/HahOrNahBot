@@ -2,7 +2,8 @@
   "user_not_registered": [
     "You are new, aren't you?",
     "I see you're new around the block here.",
-    "I don't think I've seen you here before."
+    "I don't think I've seen you here before.",
+    "Sorry but I have no idea who you are"
   ],
   "user_new_keyboard_button": [
     "I'd like to introduce myself",
@@ -21,7 +22,8 @@
   "user_register_try_again": [
     "Try again, please.",
     "Please try again.",
-    "I would love, if you would try again."
+    "I would love, if you would try again.",
+    "Whoops! Can you redo that?"
   ],
   "user_registered_already": [
     "No need for that, I remember you!",
@@ -61,12 +63,14 @@
     "I'm ready!"
   ],
   "joke_new_try_again": [
-    "Try again, please."
+    "Try again, please.",
+    "Oops, can you retry?"
   ],
   "joke_new_keyboard_button": [
     "Listen up!",
     "I'm sure you haven't heard this one before!",
-    "Sure, listen!"
+    "Sure, listen!",
+    "Brace yourself for this one!"
   ],
   "joke_new_ask": [
     "You've got something new?",
@@ -112,7 +116,8 @@
   ],
   "after_vote": [
     "Thank you!",
-    "Yaay, you voted!"
+    "Yaay, you voted!",
+    "Thanks for your vote!"
   ],
   "cancel": [
     "Cancelling!",
@@ -139,7 +144,8 @@
   ],
   "remove_joke_confirm": [
     "Are you sure?",
-    "There's no going back after this."
+    "There's no going back after this.",
+    "Do you really want to remove that masterpiece?"
   ],
   "remove_joke_success": [
     "That wasn't a good one, anyway.",
@@ -159,7 +165,8 @@
     "Removed it, Thank you!"
   ],
   "permission_denied": [
-    "You don't have permission to do this"
+    "You don't have permission to do this",
+    "ACCESS DENIED, ACCESS DENIED"
   ],
   "invalid_command": [
     "Sorry?",
