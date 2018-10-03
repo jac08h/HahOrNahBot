@@ -17,7 +17,8 @@
   "user_register_success": [
     "That's a nice name. Welcome!",
     "Hey there, welcome!",
-    "Welcome!"
+    "Welcome!",
+    "You are welcome here!"
   ],
   "user_register_try_again": [
     "Try again, please.",
