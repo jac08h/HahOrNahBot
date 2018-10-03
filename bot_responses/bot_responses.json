@@ -21,7 +21,8 @@
   ],
   "user_register_try_again": [
     "Try again, please.",
-    "Please try again."
+    "Please try again.",
+    "Give it another try."
   ],
   "user_registered_already": [
     "No need for that, I remember you!",
@@ -33,7 +34,8 @@
   "username_too_short": [
     "Oh, that's too short.",
     "I'm sorry, I have trouble remembering short names! Try again please!",
-    "More characters."
+    "More characters.",
+    "Your name has to be a little longer than that."
   ],
   "username_too_long": [
     "No way I can remember that! You have to come up with something shorter!",
