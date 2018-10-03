@@ -3,6 +3,7 @@
     "You are new, aren't you?",
     "I see you're new around the block here.",
     "I don't think I've seen you here before.",
+    "Your face doesn't ring a bell... Then again, I can't really see you."
     "Nice to see a new face around these parts!"
     "I think we haven't met yet.",
     "Sorry but I have no idea who you are"
@@ -15,6 +16,7 @@
   "user_new_prompt": [
     "What's your name?",
     "How should I call you?",
+    "You got a name?"
     "How would you like to be called?"
     "What do you go by, friend?"
   ],
@@ -58,6 +60,12 @@
     "The symbols, what do they mean?",
     "I don't know what those characters mean, can you please tell me again without them?",
     "I am unable to process some of these characters.",
+    "My processing unit can understand division by 0 better than those weird symbols! Change them so I won't combust into flames please"
+  ],
+  "joke_no_current": [
+    "I wasn't telling anything!",
+    "That's weird, I didn't say nothing!",
+    "The only sound coming out of me was the sound of silence."
     "Some of these characters confuse me, could you try without them?"
   ],
   "joke_no_current": [
@@ -67,6 +75,7 @@
   "joke_no_favorite": [
     "As much as I hate to admit it, you have never laughed at my joke. And that's kind of sad when you think about it.",
     "That's not possible. You don't find my jokes funny 😔",
+    "I guess I'll have to borrow some laughing gas from Joker for you to laugh a my jokes..."
     "I’ve been trying to be funny. Unfortunately it's not working with you 😔"
     "That's not possible. You don't find my jokes funny. 😔"
   ],
@@ -74,6 +83,7 @@
     "I'm listening!",
     "Bring it on!",
     "I'm ready!",
+    "Spare no details!"
     "Go for it!"
   ],
   "joke_new_try_again": [
@@ -170,6 +180,8 @@
   ],
   "my_jokes_all_jokes_shown": [
     "That's it!",
+    "Sorry, I don't have any more jokes",
+    "I'm all out, and bots aren't really good at improv!"
     "Sorry, I don't have any more jokes."
     "Sorry, I don't have any more jokes",
     "I'm all out of jokes!"
@@ -178,6 +190,8 @@
     "Please select either next or cancel."
   ],
   "my_jokes_no_jokes": [
+    "You didn't tell me any joke yet!",
+    "You've yet to make me laugh at a joke of yours!"
     "You didn't tell me any jokes yet!",
     "First you have to tell me at least one joke"
   ],
