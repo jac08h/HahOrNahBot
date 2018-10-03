@@ -24,11 +24,13 @@
     "That's a nice name. Welcome!",
     "Hey there, welcome!",
     "Welcome!",
+    "Nice to have you onboard!"
     "Nice to see you, welcome!"
   ],
   "user_register_try_again": [
     "Try again, please.",
     "Please try again.",
+    "Give it another try."
     "I would love, if you would try again.",
     "Whoops! Can you redo that?"
   ],
@@ -44,6 +46,7 @@
     "Oh, that's too short.",
     "I'm sorry, I have trouble remembering short names! Try again please!",
     "More characters.",
+    "Your name has to be a little longer than that."
     "Just a few characters more and we're good to go!"
     "That's a really short name you got there",
     "I need more characters in your username."
