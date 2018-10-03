@@ -2,7 +2,8 @@
   "user_not_registered": [
     "You are new, aren't you?",
     "I see you're new around the block here.",
-    "I don't think I've seen you here before."
+    "I don't think I've seen you here before.",
+    "Sorry but I have no idea who you are"
   ],
   "user_new_keyboard_button": [
     "I'd like to introduce myself",
@@ -21,7 +22,9 @@
   ],
   "user_register_try_again": [
     "Try again, please.",
-    "Please try again."
+    "Please try again.",
+    "I would love, if you would try again.",
+    "Whoops! Can you redo that?"
   ],
   "user_registered_already": [
     "No need for that, I remember you!",
@@ -34,7 +37,8 @@
   "username_too_short": [
     "Oh, that's too short.",
     "I'm sorry, I have trouble remembering short names! Try again please!",
-    "More characters."
+    "More characters.",
+    "I need more characters in your username."
   ],
   "username_too_long": [
     "No way I can remember that! You have to come up with something shorter!",
@@ -64,12 +68,14 @@
   ],
   "joke_new_try_again": [
     "Try again, please.",
-    "Please, try again."
+    "Please, try again.",
+    "Oops, can you retry?"
   ],
   "joke_new_keyboard_button": [
     "Listen up!",
     "I'm sure you haven't heard this one before!",
-    "Sure, listen!"
+    "Sure, listen!",
+    "Brace yourself for this one!"
   ],
   "joke_new_ask": [
     "You've got something new?",
@@ -117,7 +123,8 @@
   "after_vote": [
     "Thank you!",
     "Yaay, you voted!",
-    "Thanks for voting!"
+    "Thanks for voting!",
+    "Thanks for your vote!"
   ],
   "cancel": [
     "Cancelling!",
@@ -135,7 +142,8 @@
     "Please select either next or cancel."
   ],
   "my_jokes_no_jokes": [
-    "You didn't tell me any joke yet!"
+    "You didn't tell me any jokes yet!",
+    "First you have to tell me at least one joke"
   ],
   "remove_joke_select": [
     "Please enter the ID of the joke to be deleted"
@@ -145,7 +153,8 @@
   ],
   "remove_joke_confirm": [
     "Are you sure?",
-    "There's no going back after this."
+    "There's no going back after this.",
+    "Do you really want to remove that masterpiece?"
   ],
   "remove_joke_success": [
     "That wasn't a good one, anyway.",
@@ -166,7 +175,8 @@
     "Got rid of that one, thanks!"
   ],
   "permission_denied": [
-    "You don't have permission to do this"
+    "You don't have permission to do this",
+    "ACCESS DENIED, ACCESS DENIED"
   ],
   "invalid_command": [
     "Sorry?",
