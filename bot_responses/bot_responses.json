@@ -3,6 +3,7 @@
     "You are new, aren't you?",
     "I see you're new around the block here.",
     "I don't think I've seen you here before.",
+    "Nice to see a new face around these parts!"
     "I think we haven't met yet.",
     "Sorry but I have no idea who you are"
   ],
@@ -13,7 +14,8 @@
   ],
   "user_new_prompt": [
     "What's your name?",
-    "How should I call you?"
+    "How should I call you?",
+    "What do you go by, friend?"
   ],
   "user_register_success": [
     "That's a nice name. Welcome!",
@@ -46,6 +48,7 @@
     "No way I can remember that! You have to come up with something shorter!",
     "Oops, that's really long! Make it shorter please.",
     "Ok, stop characters.",
+    "Your username is too long! Please shorten it, it's too much."
     "Too long to fit in my bytes, let's try something shorter."
   ],
   "username_invalid_characters": [
@@ -85,6 +88,7 @@
   "joke_new_ask": [
     "You've got something new?",
     "Hit me with your best shot!",
+    "Make me laugh!"
     "Let's see what you got there.",
     "Something new? Bring it on!"
   ],
@@ -149,7 +153,8 @@
   ],
   "my_jokes_all_jokes_shown": [
     "That's it!",
-    "Sorry, I don't have any more jokes"
+    "Sorry, I don't have any more jokes",
+    "I'm all out of jokes!"
   ],
   "my_jokes_invalid_choice": [
     "Please select either next or cancel."
@@ -171,7 +176,8 @@
   ],
   "remove_joke_success": [
     "That wasn't a good one, anyway.",
-    "Don't worry, next one will be better."
+    "Don't worry, next one will be better.",
+    "There's much funnier jokes to tell."
   ],
   "remove_joke_invalid_id": [
     "Oops! You definitely didn't tell me that one! Try again"
@@ -189,6 +195,7 @@
   ],
   "permission_denied": [
     "You don't have permission to do this",
+    "Sorry, you need permission to do that."
     "ACCESS DENIED, ACCESS DENIED"
   ],
   "invalid_command": [
@@ -197,6 +204,7 @@
     "Huh?",
     "I don't get this",
     "Didn't quite catch that",
+    "Excuse me?"
     "Pardon me, didn't get that",
     "Pardon?",
     "Sorry i didn't understand, could you try again?"
