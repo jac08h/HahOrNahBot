@@ -51,15 +51,19 @@
   ],
   "joke_no_favorite": [
     "As much as I hate to admit it, you have never laughed at my joke. And that's kind of sad when you think about it.",
-    "That's not possible. You don't find my jokes funny 😔"
+    "That's not possible. You don't find my jokes funny 😔",
+    "I’ve been trying to be funny. Unfortunately it's not working with you 😔"
   ],
   "joke_new_prompt": [
     "I'm listening!",
     "Bring it on!",
-    "I'm ready!"
+    "I'm ready!",
+    "Go for it!"
   ],
   "joke_new_try_again": [
-    "Try again, please."
+    "Try again, please.",
+    "Give it another shot!",
+    "Please retry."
   ],
   "joke_new_keyboard_button": [
     "Listen up!",
@@ -68,7 +72,8 @@
   ],
   "joke_new_ask": [
     "You've got something new?",
-    "Hit me with your best shot!"
+    "Hit me with your best shot!",
+    "You wanna give it a shot?"
   ],
   "joke_too_short": [
     "Huh?",
@@ -164,6 +169,7 @@
     "What was that?",
     "Huh?",
     "I don't get this",
-    "Didn't quite catch that"
+    "Didn't quite catch that",
+    "Not quite sure what you meant"
   ]
 }
