@@ -32,7 +32,8 @@
   "username_too_short": [
     "Oh, that's too short.",
     "I'm sorry, I have trouble remembering short names! Try again please!",
-    "More characters."
+    "More characters.",
+    "Just a few characters more and we're good to go!"
   ],
   "username_too_long": [
     "No way I can remember that! You have to come up with something shorter!",
@@ -130,7 +131,8 @@
     "You didn't tell me any joke yet!"
   ],
   "remove_joke_select": [
-    "Please enter the ID of the joke to be deleted"
+    "Please enter the ID of the joke to be deleted",
+    "The joke with the said ID will be deleted, ID please?"
   ],
   "remove_joke_received_not_integer": [
     "That's not a number! Try again"
@@ -154,10 +156,12 @@
     "Nice joke, Approved!"
   ],
   "approve_jokes_removed": [
-    "Removed it, Thank you!"
+    "Removed it, Thank you!",
+    "And it is now gone..."
   ],
   "permission_denied": [
-    "You don't have permission to do this"
+    "You don't have permission to do this",
+    "Looks like you aren't allowed to do that!"
   ],
   "invalid_command": [
     "Sorry?",
