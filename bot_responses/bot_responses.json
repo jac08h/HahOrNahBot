@@ -3,8 +3,8 @@
     "You are new, aren't you?",
     "I see you're new around the block here.",
     "I don't think I've seen you here before.",
-    "Your face doesn't ring a bell... Then again, I can't really see you."
-    "Nice to see a new face around these parts!"
+    "Your face doesn't ring a bell... Then again, I can't really see you.",
+    "Nice to see a new face around these parts!",
     "I think we haven't met yet.",
     "Sorry but I have no idea who you are"
   ],
@@ -16,21 +16,21 @@
   "user_new_prompt": [
     "What's your name?",
     "How should I call you?",
-    "You got a name?"
-    "How would you like to be called?"
+    "You got a name?",
+    "How would you like to be called?",
     "What do you go by, friend?"
   ],
   "user_register_success": [
     "That's a nice name. Welcome!",
     "Hey there, welcome!",
     "Welcome!",
-    "Nice to have you onboard!"
+    "Nice to have you onboard!",
     "Nice to see you, welcome!"
   ],
   "user_register_try_again": [
     "Try again, please.",
     "Please try again.",
-    "Give it another try."
+    "Give it another try.",
     "I would love, if you would try again.",
     "Whoops! Can you redo that?"
   ],
@@ -46,8 +46,8 @@
     "Oh, that's too short.",
     "I'm sorry, I have trouble remembering short names! Try again please!",
     "More characters.",
-    "Your name has to be a little longer than that."
-    "Just a few characters more and we're good to go!"
+    "Your name has to be a little longer than that.",
+    "Just a few characters more and we're good to go!",
     "That's a really short name you got there",
     "I need more characters in your username."
   ],
@@ -55,7 +55,7 @@
     "No way I can remember that! You have to come up with something shorter!",
     "Oops, that's really long! Make it shorter please.",
     "Ok, stop characters.",
-    "Your username is too long! Please shorten it, it's too much."
+    "Your username is too long! Please shorten it, it's too much.",
     "Too long to fit in my bytes, let's try something shorter."
   ],
   "username_invalid_characters": [
@@ -68,12 +68,8 @@
   "joke_no_current": [
     "I wasn't telling anything!",
     "That's weird, I didn't say nothing!",
-    "The only sound coming out of me was the sound of silence."
+    "The only sound coming out of me was the sound of silence.",
     "Some of these characters confuse me, could you try without them?"
-  ],
-  "joke_no_current": [
-    "I wasn't telling anything!",
-    "That's weird, I didn't say anything!"
   ],
   "joke_no_favorite": [
     "As much as I hate to admit it, you have never laughed at my joke. And that's kind of sad when you think about it.",
@@ -96,11 +92,6 @@
     "Come at me!",
     "Shoot it!",
     "I'm all ears!"
-  ],
-  "joke_new_try_again": [
-    "Try again, please.",
-    "Please, try again.",
-    "Oops, can you retry?"
   ],
   "joke_new_keyboard_button": [
     "Listen up!",
@@ -145,7 +136,7 @@
     "Lol, thanks!",
     "That's a good one!",
     "Haven't heard that one before - nice!",
-    "Oho... well done!"
+    "Oho... well done!",
     "Holy buckets! that's a good one",
     "Hilarious!",
     "Wow, this was a good one!",
@@ -195,7 +186,7 @@
   ],
   "my_jokes_no_jokes": [
     "You didn't tell me any joke yet!",
-    "You've yet to make me laugh at a joke of yours!"
+    "You've yet to make me laugh at a joke of yours!",
     "You didn't tell me any jokes yet!",
     "First you have to tell me at least one joke"
   ],
@@ -238,9 +229,7 @@
     "You don't have permission to do this",
     "Looks like you aren't allowed to do that!",
     "Got rid of that one, thanks!",
-    "Sorry, you are not allowed to do that."
-  ],
-  "permission_denied": [
+    "Sorry, you are not allowed to do that.",
     "You don't have permission to do this",
     "Sorry, you need permission to do that.",
     "ACCESS DENIED, ACCESS DENIED"
