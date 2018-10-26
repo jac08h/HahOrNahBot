@@ -11,6 +11,7 @@
   "user_new_keyboard_button": [
     "I'd like to introduce myself",
     "Let me introduce myself!",
+    "It is me, let me show myself!",
     "Let me tell you something about myself."
   ],
   "user_new_prompt": [
@@ -112,6 +113,7 @@
   ],
   "joke_too_short": [
     "Huh?",
+    "A bit more would be nice.",
     "Once again, please. That was too short.",
     "I know you can make a joke longer than that.",
     "Is that all you have?",
